@@ -1,0 +1,210 @@
+@charset "utf-8";
+/* 세계의 도시 메인페이지 CSS - main.css */
+
+ @import url('https://fonts.googleapis.com/css?family=Black+And+White+Picture|East+Sea+Dokdo|Jua&display=swap');
+/*
+    font-family: 'Black And White Picture', sans-serif;
+    font-family: 'East Sea Dokdo', cursive;
+    font-family: 'Jua', sans-serif;
+
+*/
+
+
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body{
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #777 30%, #ccc 70%);
+}
+
+/*1. 전체제목*/
+.tit{
+    text-align: center;
+    padding-top: 50px;font-family: 'Black And White Picture', sans-serif;
+    font-size: 50px;
+    color: #fff;
+    background: url(../images/citybg.png) no-repeat center/auto 100%;
+}
+
+/*2. 메뉴*/
+.city{
+    position: fixed;
+    top: 50px;
+    right: 50px;
+}
+.city ul{
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    
+    /*원근설정(원근대상의 부모에 준다!*/
+    perspective: 480px;
+}
+.city li{
+    height: 100px;
+    background-image: linear-gradient(to right, transparent, blue);
+    /*transparent는 투명을 지칭하는 키워드(만약 이 키워드대신 쓸수 있는것은 rgba로 투명만들기를 할 수 있음)*/
+    
+    /*트랜스폼 회전축 기준변경*/
+    transform-origin: right;
+    
+    /*트랜지션:속시이지*/
+    transition: transform .4s ease-out;
+    /*트랜스폼만 애니적용!*/
+}
+
+/*마우스오버시*/
+.city li:nth-child(1):hover{
+    background-image: linear-gradient(to right, transparent, red);
+    transform: rotateY(15deg);
+}
+.city li:nth-child(2):hover{
+    background-image: linear-gradient(to right, transparent, orange);
+    transform: rotateY(30deg);
+}
+.city li:nth-child(3):hover{
+    background-image: linear-gradient(to right, transparent, yellow);
+    transform: rotateY(-35deg);
+}
+.city li:nth-child(4):hover{
+    background-image: linear-gradient(to right, transparent, orangered);
+    transform: rotateY(55deg);
+}
+.city li:nth-child(5):hover{
+    background-image: linear-gradient(to right, transparent, cyan);
+    transform: rotateY(-55deg);
+}
+.city li:nth-child(6):hover{
+    background-image: linear-gradient(to right, transparent, #00ffb1);
+    transform: rotateY(20deg);
+}
+
+
+.city a{
+    display: block;
+    /*디자인적용위해*/
+    width: 100%;
+    height: 100%;
+    font: bold 52px/100px 'East Sea Dokdo', cursive;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+/*3.큐브박스*/
+.cube{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%,-50%) rotateX(0deg) rotateY(0deg);
+    
+    /*입체설정*/
+    transform-style: preserve-3d;
+    
+    
+    /*outline: 2px solid #000;*/
+}
+
+/*큐브 각면 공통*/
+.cube>span{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: .8;
+}
+/*앞면: 시작면*/
+.cube>span:nth-child(1){
+    background: url(../images/cityMain.jpg) no-repeat center/cover;
+    transform: translateZ(200px);
+}
+/*오른쪽면: 런던*/
+.cube>span:nth-child(2){
+    background: url(../images/London_city.jpg) no-repeat center/cover;
+    transform: rotateY(90deg) translateZ(200px);
+}
+/*뒷면: 파리*/
+.cube>span:nth-child(3){
+    background: url(../images/parisCity.jpg) no-repeat center/cover;
+    transform: rotateY(180deg) translateZ(200px);
+}
+/*왼쪽면: 베를린*/
+.cube>span:nth-child(4){
+    background: url(../images/berlin_city.jpg) no-repeat center/cover;
+    transform: rotateY(-90deg) translateZ(200px);
+}
+/*윗면: 서울*/
+.cube>span:nth-child(5){
+    background: url(../images/seoulCity.jpg) no-repeat center/cover;
+    transform: rotateX(90deg) translateZ(200px);
+}
+/*아랫면: 뉴욕*/
+.cube>span:nth-child(6){
+    background: url(../images/newyorkCity.jpg) no-repeat right/auto 110%;
+    transform: rotateX(-90deg) translateZ(200px);
+}
+
+/*도시설명박스*/
+.cbox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 400px;
+    
+    /*글자설정*/
+    font-family: 'Jua',sans-serif;
+    color: #fff;
+    text-shadow: 0 0 1px #000;
+    
+    opacity: 0;
+    /*처음에 안보이게*/
+}
+/*개별도시 박스*/
+.ctxt{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 3px solid #fff;
+}
+/*도시명*/
+.ctxt h2{
+    margin: 0;
+    padding: 0;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 50px;
+}
+/*도시설명*/
+.ctxt p{
+    width: 100%;
+    height: calc(100% - 100px);
+    /*
+        높이값 계산해서 넣기
+        calc(%수치 - px수치)
+        -주의: 빼기기호 앞뒤에 띄어쓰기
+    */
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 28px;
+    
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+

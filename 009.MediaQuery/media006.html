@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--뷰포트는 미디어쿼리 필수!-->
+    <title>비율유지박스2(Ratio Box) - 두개의 박스 정렬</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+    
+        /*비율유지박스 공통클래스*/
+        .rbx{
+            position: relative;
+            /*비율유지박스의 속박스부모*/
+            /*outline: 3px dotted red;*/
+            
+            float: left;
+            /*옆으로 흐르게*/
+            width: 49%;
+            margin: .5%;
+        }
+        .rbx::before{
+            content: "";
+            display: block;
+            padding-top: 80%;
+            /*가로크기에 대한 80%크기 - 박스의 높이값*/
+        }
+        /*내부밀착 속박스*/
+        .ibx{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        /*개별박스 설정*/
+        .bx1{
+            background: url(images/jeong3.jpg) no-repeat top/cover;
+        }
+        .bx2{
+            background: url(images/jeong4.jpg) no-repeat top/cover;
+        }
+        
+        /*타이틀 디자인*/
+        /*정중앙에 오는 글자 셋팅하기!*/
+        .tit{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            /*세로중앙이동*/
+            color: #fff;
+            font-size: 42px;
+            text-align: center;
+            text-shadow: 1px 0 #000,-1px 0 #000,
+                0 1px #000, 0 -1px #000;
+            /*글자그림자로 테두리만들기*/
+            
+            /*h1태그 기본없앰!*/
+            margin: 0;
+            padding: 0;
+        }
+        /*
+            [ 비율유지박스 구성하기 ]
+            1. 가로사이즈만 있는 block박스에 부모자격줌
+            2. 이 박스에 가상요소 before로 block설정 후 
+                padding-top값을 퍼센트 단위로 설정
+            3. 이 박스의 자식요소 박스를 absolute로 밀착
+        */
+        
+        /* 미디어쿼리 */
+        /* 1024px 이하에서 글자크기 24px로 변경, 글자색은 aqua */
+        @media only screen and (max-width: 1024px){
+            /*css재정의*/
+            /*글자크기변경*/
+            .tit{
+                font-size: 24px;
+                color: aqua;
+            }
+        }/*미디어쿼리 - 1024px이하*/
+        
+        /*800px 이하에서 가로크기 100%, 글자크기 30px*/
+        @media only screen and (max-width: 800px){
+            /*css재정의*/
+            .rbx{
+                width: 100%;
+                margin: 0;
+            }
+            
+            /*글자크기변경*/
+            .tit{
+                font-size: 30px;
+            }
+        }/*미디어쿼리 - 800px이하*/
+        
+        /*화면의 가로크기 세로에 비해 클 경우 디자인변경*/
+        /*목적: 모바일에서 화면을 옆으로 할 경우와 구분*/
+        /*모바일에서만 적용하려면 크기제한 조건을 넣어준다!*/
+        @media only screen and (orientation:landscape) and 
+            (max-width:800px){
+            .tit{
+                color: red;
+            }
+        }/*미디어쿼리 - 랜드스케이프*/
+        
+        
+        
+        
+        
+        
+        
+        /*
+        [ 미디어쿼리로 디자인 재정의 시에 중요한 점 ]
+        - 이미 설정된 선택자를 동일하게 사용하여 셋팅한다!
+        - 선택을 다른방식으로 하게 되면 우선순위에 따라 적용 안될 수 있음
+        */
+        
+    </style>
+</head>
+<body>
+  
+  <div class="rbx bx1">
+      <div class="ibx">
+          <h1 class="tit">이정재 스타일1</h1>
+      </div>
+  </div>
+  
+  <div class="rbx bx2">
+      <div class="ibx">
+          <h1 class="tit">이정재 스타일2</h1>
+      </div>
+  </div>
+  
+  
+  
+  
+   
+   
+    
+</body>
+</html>

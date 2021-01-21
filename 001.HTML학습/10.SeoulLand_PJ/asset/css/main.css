@@ -1,0 +1,484 @@
+@charset "utf-8";
+/* 서울랜드 메인페이지 CSS - main.css */
+/* 메인페이지에만 나오는 요소를 코딩한다! */
+
+/*외부파일 불러오기*/
+@import url(gridSet.css);
+@import url(gridView.css);
+@import url(reset.css);
+@import url(core.css);
+@import url(common.css);
+
+/*메인페이지 전체 디자인보기*/
+body {
+    position: relative;
+    /*가상요소의 부모*/
+}
+
+body::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*크기는 부모를 기준함
+    (body에 relative가 없으면 보이는 화면기준)*/
+    background-image: url(../images/SeoulLand_main.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    z-index: -1;
+    opacity: .5;
+}
+
+/*********** 2.배너영역 **************/
+/*배너영역 파티션높이*/
+.b1 {
+    height: 419px;
+}
+
+/*배너 겉박스*/
+#ban {
+    position: relative;
+    /*부모자격*/
+}
+
+/*배너슬라이드*/
+/*ul,li모두 absolute로 겹치게!*/
+.slider,
+.slider li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*슬라이드 리스트 공통*/
+.slider li {
+    opacity: 0;
+
+    /*트랜지션:속시이지*/
+    transition: opacity .8s ease-in-out;
+}
+
+/*보이는 리스트 class*/
+/*on이라는 클래스를 설정한 li 디자인*/
+.slider li.on {
+    opacity: 1;
+    z-index: 1;
+    /*현재 보이는 슬라이드가 맨위로 오게함!
+    클릭가능!*/
+}
+
+
+/*슬라이드 개별셋팅*/
+.slider li:nth-child(1) {
+    background: url(../images/ban00.jpg) no-repeat center;
+}
+
+.slider li:nth-child(2) {
+    background: url(../images/ban01.jpg) no-repeat center;
+}
+
+.slider li:nth-child(3) {
+    background: url(../images/ban02.jpg) no-repeat center;
+}
+
+.slider li:nth-child(4) {
+    background: url(../images/ban03.jpg) no-repeat center;
+}
+
+.slider li:nth-child(5) {
+    background: url(../images/ban04.jpg) no-repeat center;
+}
+
+.slider li:nth-child(6) {
+    background: url(../images/ban05.jpg) no-repeat center;
+}
+
+/*배너 중앙속박스*/
+.ban {
+    position: relative;
+    /*부모자격*/
+}
+
+/*배너이동버튼*/
+.abtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /*세로중앙이동*/
+    width: 25px;
+    height: 49px;
+    z-index: 2;
+    /*배너리스트보다 위에 옴!*/
+    /*outline: 2px solid red;*/
+}
+
+/*왼쪽이동버튼*/
+.lb {
+    left: -25px;
+    background: url(../images/btn_shop_bn_left.png) no-repeat;
+}
+
+/*오른쪽이동버튼*/
+.rb {
+    right: -25px;
+    background: url(../images/btn_shop_bn_right.png) no-repeat;
+}
+
+/*이동버튼 공통 마우스 오버시 배경이미지 위치변경하기*/
+.abtn:hover {
+    background-position: 0 -49px;
+}
+
+/*블릿버튼*/
+.indic {
+    position: absolute;
+    /*부모는?  싸고있는 파티션박스(.prt줌)*/
+    bottom: 13px;
+    right: 27px;
+    z-index: 2;
+    /*포지션있어야적용!*/
+}
+
+/*사이드배너 영역*/
+#sideBan {
+    position: relative;
+    z-index: 2;
+    /*z-index는 포지션이 겹칠 수 있어야 적용된다!*/
+    padding: 0;
+    padding-left: 10px;
+}
+
+/*사이드배너 박스*/
+.sideBan {
+    width: 136px;
+    height: 410px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/*1.타이틀*/
+.sideBan h2 {
+    padding: 7px 0 6px 10px;
+    /*패딩: 위 오른 아래 왼*/
+}
+
+/*타이틀글자-할인배너, 컨텐츠타이틀 공통*/
+.tit {
+    font-family: Nanum;
+    color: #222;
+}
+
+/*타이틀 뒷글자색*/
+.tit b {
+    color: #ff4e00;
+}
+
+/*더보기버튼*/
+.more {
+    float: right;
+    margin-right: 5px;
+    margin-top: -2px;
+}
+
+/*2.할인배너박스*/
+.halban {
+    width: 116px;
+    height: 356px;
+    margin: 0 auto;
+    overflow: hidden;
+    /*넘치는 자식요소 숨기기*/
+    /*outline: 2px dotted blue;*/
+}
+
+/*할인배너 이동할 ul*/
+.halban ul {
+    position: relative;
+    top: 0;
+}
+
+/*배너 하나당 크기 정하기*/
+.halban li {
+    width: 116px;
+    height: 81px;
+    margin-bottom: 11px;
+    border: 1px solid #d7d7d7;
+    box-sizing: border-box;
+}
+
+/*첫번째 li는 보더색 빨간색*/
+.halban li:first-child {
+    border-color: red;
+}
+
+/*배너이미지는 li에 맞춤*/
+.halban li img {
+    width: 100%;
+    height: 100%;
+}
+
+/*3.이동버튼*/
+.halbtn {
+    text-align: center;
+    /*inline-block도 텍스트 중앙이 적용된다!*/
+}
+
+.halbtn a {
+    display: inline-block;
+    /*한줄에 오면서 크기디자인 적용위해!*/
+    width: 21px;
+    height: 11px;
+    vertical-align: 5px;
+    /*outline: 1px solid red;*/
+}
+
+/*마우스오버시 배경이동*/
+.halbtn a:hover {
+    background-position: 0 -11px;
+}
+
+/*위로버튼*/
+.upb {
+    background: url(../images/btn_up.png) no-repeat;
+}
+
+/*아래로버튼*/
+.dwb {
+    background: url(../images/btn_down.png) no-repeat;
+}
+
+
+
+
+
+/*********** 3.컨텐츠영역 **************/
+/*컨텐츠영역 파티션높이*/
+.c1 {
+    height: 256px;
+    /*컨텐츠영역 패딩조정*/
+    padding: 10px;
+}
+
+/*1.운영시간 파트*/
+/*1-1.타이틀*/
+.tpart h2 {
+    padding-top: 12px;
+    margin-left: -2px;
+}
+
+/*더보기 버튼 조정*/
+.tpart .more {
+    margin-right: -1px;
+}
+
+/*1-2.운영시간박스*/
+.time {
+    width: 140px;
+    height: 65px;
+    background: url(../images/timebg.png) no-repeat;
+    text-align: center;
+    margin-top: 5px;
+    letter-spacing: -1px
+}
+
+/*날짜*/
+.today {
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 16px 0 5px 0;
+}
+
+/*날짜숫자*/
+.today strong {
+    font-size: 21px;
+    color: #ff0;
+    font-family: arial;
+}
+
+/*개장시간*/
+.timesec {
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: arial;
+}
+
+/*가이드박스*/
+.guide {
+    width: 140px;
+}
+
+/*2. 다이나믹 서울랜드*/
+/*2-1.타이틀*/
+.dpart h2 {
+    padding-top: 12px;
+    padding-bottom: 7px;
+    margin-left: -2px;
+    border-bottom: 1px solid #ccc;
+}
+
+/*2-2.유튜브박스*/
+.ubox {
+    width: 220px;
+    height: 165px;
+    margin-top: 10px;
+    margin-left: -2px;
+}
+
+.ubox iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/*3.뉴스와 공지*/
+/*3-1.타이틀*/
+.npart h2 {
+    padding-top: 12px;
+    padding-bottom: 7px;
+    font-size: 13px;
+    border-bottom: 1px solid #ccc;
+}
+
+/*더보기조정*/
+.npart .more {
+    margin-right: 0;
+}
+
+/*3-2.뉴스리스트*/
+.nlist{
+    width: 100%;
+    margin-top: 8px;
+    /*outline: 1px solid blue;*/
+    background-color: #fff;
+}
+.nlist li{
+    /*넘치는 글자 숨기기 설정-한줄*/
+    /*1.가로크기설정*/
+    width: 100%;
+    /*2.줄바꿈방지*/
+    white-space: nowrap;
+    /*3.넘치는 자식요소 숨기기*/
+    overflow: hidden;
+    /*4.글자 말줄임표 설정*/
+    text-overflow: ellipsis;
+}
+/*가상요소로 아이콘 넣기*/
+.nlist li::before{
+    content: url(../images/ico_news.png);
+    vertical-align: -3px;
+}
+/*뉴스 a링크*/
+.nlist a{
+    color: #555;
+    line-height: 21px;
+}
+
+/*3-3.FAQ박스*/
+.faq{
+    width: 220px;
+    margin-top: 20px;
+    margin-left: -2px;
+}
+
+/*4.SNS 박스*/
+.sns{
+    width: 300px;
+    height: 196px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    background-color: #fff;
+}
+/*탭메뉴*/
+.tabTit{
+    width: 100%;
+    height: 31px;
+    /*outline: 1px solid blue;*/
+}
+.tabTit li{
+    width: 25%;
+    height: 100%;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+/*li사이구분선*/
+.tabTit li+li{
+    border-left: 1px solid #ccc;
+}
+/*탭메뉴 a링크*/
+.tabTit a{
+    display: block;
+    /*디자인 적용위해*/
+    width: 100%;
+    height: 100%;
+    font-size: 11px;
+    text-align: center;
+    line-height: 32px;
+    background-color: #f0f0f0;
+}
+
+/*선택된 탭메뉴에 클래스 "on"으로 설정하기*/
+.tabTit li.on{
+    border-bottom: none;
+}
+.tabTit li.on a{
+    color: #3345a9;
+    background-color: #fff;
+}
+
+/*탭메뉴 내용박스*/
+.tabCont{
+    width: 100%;
+    height: 165px;
+}
+/*li공통*/
+.tabCont li{
+    width: 100%;
+    height: 100%;
+    display: none;/*모두안보임*/
+}
+
+/*페이스북*/
+.tabCont li:nth-child(1){
+    /*background-color: #ffacac;*/
+}
+/*블로그*/
+.tabCont li:nth-child(2){
+    /*background-color: #acbfff;*/
+}
+/*트위터*/
+.tabCont li:nth-child(3){
+    /*background-color: #fff5ac;*/
+    overflow-y: scroll;
+}
+/*인스타그램*/
+.tabCont li:nth-child(4){
+    /*background-color: #acffbf;*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+/*인스타 아이프레임*/
+.tabCont li:nth-child(4) iframe{
+    border: none;
+    width: 100%;
+    height: auto;
+}
+
+
+/*선택된 탭 내용 li만 보이는 클래스 "on"*/
+.tabCont li.on{
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+

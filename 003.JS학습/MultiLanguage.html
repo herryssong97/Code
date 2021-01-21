@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>다국어 메뉴(객체의 활용)</title>
+    <style>
+        html,
+        body,
+        h1,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*탑영역*/
+        #top {
+            position: relative;
+            /*부모자격*/
+            width: 1000px;
+            margin: 0 auto;
+            /*outline: 1px dashed red;*/
+        }
+
+        /*로고*/
+        #logo {
+            text-align: center;
+        }
+
+        #logo img {
+            height: 40px;
+            margin-top: 50px;
+        }
+
+        /*선택박스*/
+        .sel {
+            position: absolute;
+            right: 0;
+        }
+
+        /*GNB메뉴*/
+        #gnb {
+            width: 1000px;
+            margin-top: 30px;
+            border: 2px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #gnb ul {
+            list-style: none;
+            /*블릿없앰*/
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        #gnb ul::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #gnb li {
+            float: left;
+            width: 200px;
+        }
+
+        #gnb a {
+            display: block;
+            width: 100%;
+            color: #333;
+            text-decoration: none;
+            text-align: center;
+            font: bold 32px/80px Verdana, "맑은 고딕";
+        }
+
+        #gnb a:hover {
+            color: #f00;
+            text-decoration: overline;
+        }
+
+        /*컨텐츠 영역*/
+        #cont {
+            width: 1000px;
+            margin: 0 auto;
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        #cont img {
+            width: 800px;
+        }
+
+        /*회사정보*/
+        #info {
+            width: 1000px;
+            margin: 10px auto;
+            border: 2px solid #ccc;
+            color: #333;
+            text-align: center;
+            font: bold 18px/80px Verdana, "맑은 고딕";
+        }
+
+        #info address {
+            font-style: normal;
+            /*주소요소 기본 이탤릭 해제*/
+        }
+    </style>
+
+    <script>
+        ///// 전역변수 구역 ///////
+        // 언어별 메뉴 글자 셋팅하기 ///
+        var lang = {
+            //한국어
+            "ko": ["홈", "남성용", "여성용", "게시판", "서울시 강남구 청담동 34-22 JJ빌딩 94호, 대표: 제임스 홍"],
+            //영어
+            "en": ["Home", "Men", "Women", "Board", "94, JJ Building, 34-22, Cheongdam-dong, Gangnam-gu, Seoul, Representative: James Hong"],
+            //일본어
+            "ja": ["ホーム", "男性用", "女性", "掲示板", "ソウル市江南区清潭洞34-22 JJビル94号、代表：ジェームズホン"],
+            //중국어
+            "ch": ["家", "对于男人", "女用", "公告栏", "首尔特别市江南区清潭洞34-22 JJ大厦94"],
+            //스페인어
+            "es": ["Casa", "Hombres", "Mujeres", "Anuncios", "94, JJ Building, 34-22, Cheongdam-dong, Gangnam-gu, Seúl, Representante: James Hong"]
+        }; ///////// lang 객체 ///////
+
+
+        /*////////////////////////////////////////////////////////
+            함수명: chgLang
+            기능: 선택박스의 언어선택이 변경될때 각 요소의 언어를 바꿔준다
+        */ ////////////////////////////////////////////////////////
+        function chgLang(obj) { // obj - select요소 자신(this로 보냄)
+
+            // 0.전달값에서 선택한 option 의 value속성값 읽기
+            var sv = obj.value;
+
+            // 1.호출여부확인
+            console.log("나야나!" + sv);
+
+            // 2. 언어설정 객체의 값 가져오기
+            var lcode = lang[sv];
+            console.log("선택언어코드:" + lcode);
+
+            // 3. 가져온 값으로 메뉴와 하단 정보 바꾸기
+            // (1)변경대상(메뉴): #gnb a
+            var tg = document.getElementById("gnb")
+                .getElementsByTagName("a");
+
+            // a의 개수는 몇개?
+            console.log("a의 개수:" + tg.length);
+            // a의 개수 만큼 for문을 돌아준다!
+
+            // for(시;한;증){}
+            for (var i = 0; i < tg.length; i++) {
+                tg[i].innerHTML = lcode[i];
+                // 해당순번 a요소에 해당순번 배열값 넣기
+            } ///// for ///////
+            
+            // (2)변경대상(하단정보): #info address
+            document.getElementById("info")
+            .getElementsByTagName("address")
+            .item(0).innerHTML = lcode[4];
+            
+            // (3)변경대상(중앙이미지): #cont img
+            // 코드명과 똑같은 이미지를 src에 넣어준다!
+            document.getElementById("cont")
+            .getElementsByTagName("img")
+            .item(0).setAttribute("src","images/"+sv+".jpg");
+            
+            /*
+            [ 선택요소의 속성변경하기 2가지 방법 ]
+            
+            1. 선택요소.속성명 = 속성값
+            2. 선택요소.setAttribute(속성명,속성값)
+            
+            1번은 속성에 직접 할당하는 방법
+            2번은 JS내장함수로 속성을 DOM객체를 사용하여 변경하는 방법
+            
+            (참고: 속성값을 가져오는 JS내장함수는 getAttribute(속성명) 이다!)
+            */
+            
+
+
+        } ////// chgLang 함수 /////////////////////////////////////
+        //////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////
+    </script>
+
+
+</head>
+
+<body>
+    <!--탑영역-->
+    <header id="top">
+        <!--로고-->
+        <h1 id="logo">
+            <img src="images/logoM.png" alt="로고">
+        </h1>
+        <!--다국어선택옵션박스-->
+        <select class="sel" onchange="chgLang(this)">
+            <option value="ko">Korea</option>
+            <option value="en">English</option>
+            <option value="ja">Japanese</option>
+            <option value="ch">Chinese</option>
+            <option value="es">Spanish</option>
+        </select>
+        <!--GNB메뉴-->
+        <nav id="gnb">
+            <ul>
+                <li>
+                    <a href="">홈</a>
+                </li>
+                <li>
+                    <a href="">남성용</a>
+                </li>
+                <li>
+                    <a href="">여성용</a>
+                </li>
+                <li>
+                    <a href="">게시판</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!--컨텐츠영역-->
+    <section id="cont">
+        <img src="images/ko.jpg" alt="fashion">
+    </section>
+    <!--회사정보영역-->
+    <footer id="info">
+        <address>
+            서울시 강남구 청담동 34-22 JJ빌딩 94호, 대표: 제임스 홍
+        </address>
+    </footer>
+
+
+
+
+</body></html>

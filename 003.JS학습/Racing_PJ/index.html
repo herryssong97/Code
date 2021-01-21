@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Racing PJ</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <style>
+        html,
+        body,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            overflow-x: hidden;
+            /*가로스크롤 없앰*/
+        }
+
+        /*1.타이틀*/
+        #mtit {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 60px;
+            color: #0347ff;
+            text-align: center;
+            text-shadow: 2px 2px 3px #777;
+            /*애니메이션:이시이지반방마*/
+            animation: mov 1s ease-in-out infinite alternate;
+        }
+
+        /*타이틀 키프레임*/
+        @keyframes mov {
+            from {
+                transform: rotate(-5deg) scale(1);
+            }
+
+            to {
+                transform: rotate(5deg) scale(1.2);
+            }
+        }
+
+        /*키프레임*/
+
+        /*2.메인스테이지*/
+        #bgi {
+            position: relative;
+            /*부모자격*/
+            width: 800px;
+            height: 600px;
+            background: url(images/bg.jpg) no-repeat;
+        }
+
+        /*메인하위 공통*/
+        #bgi>div {
+            position: absolute;
+        }
+
+        /*2-1.출발선*/
+        #f1 {
+            top: 243px;
+        }
+
+        /*2-2.도착선*/
+        #f2 {
+            top: 243px;
+            left: 650px;
+        }
+
+        /*2-3.토끼*/
+        #r1 {
+            top: 400px;
+            left: 0;
+        }
+
+        /*2-4.거북*/
+        #t1 {
+            top: 600px;
+            left: 0;
+        }
+
+        /*3.게임조작버튼*/
+        #btns {
+            position: fixed;
+            top: 10%;
+            right: 5%;
+            width: 150px;
+            height: 480px;
+            list-style: none;
+        }
+
+        #btns li {
+            width: 150px;
+            height: 150px;
+            border: 5px solid #ccc;
+            border-radius: 50%;
+            text-align: center;
+            font: bold 30px/150px "맑은 고딕", Verdana;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        #btns a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+        }
+
+        /*버튼에 마우스 오버시*/
+        #btns li:hover {
+            background-color: lime;
+            transform: scale(1.1);
+        }
+
+        /*버튼 a요소를 누르고 있을때(:active)*/
+        #btns a:active {
+            color: red;
+        }
+
+        /*4.게임레벨*/
+        .levbox {
+            position: absolute;
+            top: 3%;
+            right: 5%;
+        }
+
+        #level {
+            width: 150px;
+            height: 40px;
+            font: 24px "맑은 고딕", "굴림";
+        }
+
+        /*5.결과 메시지창*/
+        #msg {
+            position: fixed;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            top: 40%;
+            font-size: 52px;
+            text-align: center;
+            color: #ceff00;
+            text-shadow: 0 0 10px #000;
+            display: none;
+            /*처음에 안보임!*/
+        }
+    </style>
+    <script>
+        //////////////// 전역변수구역 /////////////////
+        // 토끼, 거북, 메시지 변수
+        var rabbit, turtle, msg;
+        // 토끼의 위치값(left) 변수
+        var rbpos = 0;
+        // 거북의 위치값(left)
+        var ttpos = 0;
+        // 인터발용변수
+        var autoI;
+        // 게임레벨용변수
+        var level;
+        // 거북동작상태(0-허용,1불허용)
+        var ttsts = 0;
+        //////////////////////////////////////////////
+
+        /////// 로드구역 ///////////////////////////////////
+        // DOMContentLoaded : html 태그가 모두 로딩된 후 발생
+        window.addEventListener("DOMContentLoaded",
+            function() {
+
+                // 로딩확인
+                console.log("로딩완료!");
+
+                // 1. 게임 조작버튼 클릭시 이벤트 연결하기 ////
+                // 이벤트 종류: click 
+                // 이벤트 대상: #btns a
+                var btns = document.querySelectorAll('#btns a');
+                //console.log("버튼개수:"+btns.length);
+
+                // 1-1. 토끼 버튼 클릭시 ////////
+                btns[0].onclick = function() {
+                    //호출확인
+                    //console.log("나,토끼!");
+
+                    // 토끼이동함수 호출
+                    //goR1();
+
+                    // 직접 goR1함수를 호출하지 않고
+                    // 인터발 자동호출 함수를 호출함!
+                    autoRun();
+
+                    // a요소의 기본이동 속성 막기!
+                    return false;
+                    // 함수를 끝내고 돌아갈때 어떤 값을 보낼 수 있다
+                    // 이때 fasle를 보내면 신호를 보내지 말라는 표현이므로
+                    // 브라우저 코드 해석기가 함수 실행 후 다른 동작을
+                    // 하지 않게된다! 여기서는 a태그의 href 이동속성이
+                    // 무효와 된다!!!!
+                }; /////// click 함수 ///////////
+
+                // 1-2. 거북 버튼 클릭시 ////////
+                btns[1].onclick = function() {
+                    //호출확인
+                    //console.log("나,거북!");
+
+                    // 거북달림 함수호출
+                    goT1();
+
+                    // a요소의 기본이동 속성 막기!
+                    return false;
+                }; /////// click 함수 ///////////
+
+                // 1-3. 처음으로 버튼 클릭시 ////////
+                btns[2].onclick = function() {
+                    //호출확인
+                    //console.log("처음으로!");
+
+                    // 새로고침(페이지리로드!)
+                    window.location.reload();
+                    // window객체는 생략가능!
+
+                    // a요소의 기본이동 속성 막기!
+                    return false;
+                }; /////// click 함수 ///////////
+
+
+                // 2. 전역변수의 요소를 위한 변수에 할당하기!
+                // 2-1. 토끼
+                rabbit = document.querySelector('#r1');
+                // 2-2. 거북
+                turtle = document.querySelector('#t1');
+                // 2-3. 메시지
+                msg = document.querySelector('#msg');
+                // 2-4. 레벨
+                level = document.querySelector('#level');
+
+
+
+            }); ////////// 로드구역 /////////////////////////
+        ///////////////////////////////////////////////////
+
+        /*///////////////////////////////////////////////////
+            함수명: goR1
+            기능: 토끼의 left값을 변경하여 토끼를 오른쪽으로 이동함
+        */ ///////////////////////////////////////////////////
+        function goR1() {
+            // 1. 함수호출확인
+            //console.log("토끼달림!!!");
+
+            // 2. 변경대상: rabbit 변수의 토끼
+            // 3. 변경내용: 토끼의 left값을 1씩증가
+            // 토끼의 위치는 rbpos를 이용함!
+            //3-1. 위치값 변경(1씩증가)
+            rbpos++;
+            //3-2. 토끼요소의 left값 변경하기
+            rabbit.style.left = rbpos + "px";
+
+            // 4. 승자판별함수 호출!!
+            whoWinner();
+
+
+        } ////// goR1 함수 /////////////////////////////
+        /////////////////////////////////////////////////
+        /////////////////////////////////////////////////
+
+        /*//////////////////////////////////////////////
+            함수명: autoRun
+            기능: 토끼이동함수를 자동으로 인터발호출
+        */ //////////////////////////////////////////////
+        function autoRun() {
+            //1. 함수호출확인
+            //console.log("자동뛰어!");
+
+            //2.선택된 level값 가져오기
+            var lv = level.value;
+            //console.log("현재레벨시간값:"+lv);
+            // 호출시간이 짧아질수록 속도가 빨라짐!
+
+            //3.토끼이동함수 인터발호출
+            if (!autoI) { // autoI가 false가 날때 들어감!
+                autoI = setInterval(goR1, lv);
+                //console.log("자동실행!");
+            } ///// if //////////////////////
+            // setInterval(함수명,시간)
+            // 함수명에 넘기는 값이 없다면 바로 함수이름만 사용가능
+            // 시간은 1/1000초 단위 : 레벨시간이 10이면 0.01초임
+
+            // autoI변수가 false가 나는 경우는
+            // 1. 값이 false일때
+            // 2. 값이 undefined일때(변수에 값이 할당안되었을때)
+            // 3. 값이 null일때
+
+            // autoI가 인터발함수로 할당되고 나면 true가 되므로
+            // if문 !(NOT) 을 사용하여 반대로 결과를 뒤집어줌
+            // 결과적으로 한번만 실행됨!
+
+
+        } ////// autoRun 함수 /////////////////////////////
+        /////////////////////////////////////////////////
+        /////////////////////////////////////////////////
+
+        /*//////////////////////////////////////////////
+            함수명: goT1
+            기능: 거북의 left값을 변경하여 오른쪽으로 이동!
+        */ //////////////////////////////////////////////
+        function goT1() {
+
+            // 거북작동막기(토끼나 거북이 결승선통과시)
+            if (ttsts) return false; //아무것도 하지말고 돌아가!
+
+            //1. 함수호출확인
+            //console.log("거북달림!!!");
+
+            //2. 대상선정: turtle변수에 담긴 거북
+
+            //3. 변경내용: 거북의 left값을 20px씩 증가
+            // 거북의 위치값은 ttpos를 사용함
+            ttpos += 16;
+            // 20씩 기존값에 증가(+=대입연산자)
+
+            //4. 거북의 left값 변경하기
+            turtle.style.left = ttpos + "px";
+            console.log("거북위치:"+ttpos);
+
+            //5. 거북 출발시 토끼 자동출발!
+            autoRun();
+
+        } ////// goT1 함수 /////////////////////////////
+        /////////////////////////////////////////////////
+        /////////////////////////////////////////////////
+
+        /*//////////////////////////////////////////////
+            함수명: whoWinner
+            기능: 도착점 통과시 토끼와 거북의 left값을 비교하여
+                    더 큰 값을 승자로 메시지 띄우기
+        */ //////////////////////////////////////////////
+        function whoWinner() {
+
+            // 1. 함수호출 확인(토끼에게 호출권을 준다!)
+            //console.log("누가승자?");
+
+            // 2. 대상선정: rabbit, turtle, msg 변수
+            // 3. 구현내용: 계속 업데이트되는 토끼와 거북이의 left값
+            // 을 비교하여 결승선위값인 650px을 넘는 순가 경기를 종료
+            // 승자를 판별하여 해당 메시지를 띄운다!
+            if (rbpos > 650 || ttpos > 650) {
+                // 토끼나 거북이 결승선 통과시
+
+                // 1.토끼멈춤
+                clearInterval(autoI);
+
+                // 2.거북멈춤
+                ttsts = 1; //goT1함수에서 막기!
+
+                // 3.승자 메시지 띄우기
+                if (rbpos > ttpos) { // 토끼승!
+                    msg.innerText =
+                        "토끼가 승리하였군요! 역쉬! 나이쓰!!!";
+                } ///// if //////////////////
+                else if (ttpos > rbpos) { // 거북승!
+                    msg.innerText =
+                        "거북이 이기다아아아아아니!!!! 기적이양!!!";
+                } ////// else if /////////////
+                else { // 비겼을때
+                    msg.innerText =
+                        "다시해~!!!";
+                } ////// else ////////////////
+
+                // 4. 메시지 보이게하기
+                msg.style.display = "block";
+
+
+            } /////////// if 문 //////////////////////
+
+
+        } ////// whoWinner 함수 /////////////////////////////
+        /////////////////////////////////////////////////
+        /////////////////////////////////////////////////
+    </script>
+</head>
+
+<body>
+
+    <!--1.타이틀-->
+    <h1 id="mtit">Racing Game</h1>
+    <!--2.메인스테이지-->
+    <div id="bgi">
+        <!--2-1.출발선-->
+        <div id="f1">
+            <img src="images/flag_03.jpg" alt="출발선">
+        </div>
+        <!--2-2.도착선-->
+        <div id="f2">
+            <img src="images/flag_07.jpg" alt="도착선">
+        </div>
+        <!--2-3.토끼-->
+        <div id="r1">
+            <img src="images/racer_03.jpg" alt="토끼">
+        </div>
+        <!--2-4.거북-->
+        <div id="t1">
+            <img src="images/racer_06.png" alt="거북">
+        </div>
+    </div>
+
+    <!--3.게임조작버튼-->
+    <ul id="btns">
+        <li>
+            <a href="">토끼출발</a>
+        </li>
+        <li>
+            <a href="">거북출발</a>
+        </li>
+        <li>
+            <a href="">처음으로</a>
+        </li>
+    </ul>
+
+    <!--4.게임레벨-->
+    <div class="levbox">
+        <select name="level" id="level">
+            <option value="10">레벨1</option>
+            <option value="9">레벨2</option>
+            <option value="8">레벨3</option>
+            <option value="7">레벨4</option>
+            <option value="6">레벨5</option>
+            <option value="5">레벨6</option>
+            <option value="4">레벨7</option>
+        </select>
+    </div>
+
+    <!--5.결과 메시지창-->
+    <h2 id="msg">테스트 테스트 테스트!!!</h2>
+
+
+
+
+
+</body></html>

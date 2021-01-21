@@ -1,0 +1,482 @@
+@charset "utf-8";
+/*VOGUE PJ 메인 페이지 CSS - main.css */
+
+/*공통외부css*/
+@import url(core.css);
+@import url(reset.css);
+@import url(grid_bg.css);
+@import url(grid_set.css);
+
+/*각 영역별 셋팅*/
+/***********1.상단영역***********/
+.t1{
+    height: 100px;
+}
+/*1-1.로고*/
+#logo{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+/*로고이미지*/
+#logo img{
+    max-width: 100%;
+    /*이미지크기보다 싸고 있는 박스가 작아지면 박스크기에 100% 맞춘다!*/
+}
+/*큰빨간로고이미지-처음에 숨기기:미디어쿼리에서 나타남*/
+.blogo{
+    display: none;
+}
+
+/*1-2.GNB메뉴*/
+.gnb{
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    /*나의부모? 싸고있는 파티션박스(prt클래스부여!)*/
+}
+.gnb li{
+    padding: 0 13px;
+    font-family: 'Play';
+    font-size: 1.25rem;
+    /*rem계산: 20px/16px=1.25rem*/
+    font-weight: bold;
+}
+/*오버시 글자색*/
+.gnb a:hover{
+    color: #f00;
+    text-decoration: overline;
+}
+
+/*1-3.햄버거버튼*/
+#ham{
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    /*부모는?*/
+    transform: translateY(-50%) scaleX(1.5);
+    
+    width: 75px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    font: 48px arial;
+    
+    display: none;/*처음에 안보임*/
+}
+
+/*1-4. 검색버튼*/
+#magni{
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    transform: translateY(-50%);
+    
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    background-image: url(../images/ico.png);
+    background-position: -200px 0;
+    border: 0;
+    
+    display: none;/*처음에 안보임*/
+    
+}
+
+/*햄버거, 검색버튼 포커스 아웃라인 없애기*/
+#ham:focus, #magni:focus{
+    outline: none;
+}
+
+/**********모바일 메뉴박스************/
+/*전체보여주기박스*/
+.moshow{
+    height: 0;
+    overflow: hidden;
+    /*JS에서 본 박스의 높이값을 속의
+    모든 요소를 싸고 있는 .mognb박스의
+    높이값만 구해와서 설정해 주면 된다!*/
+    /*쉽게 유동적인 높이값을 구하기위해!*/
+    transition: height .8s ease-out;
+}
+/*전체부모박스*/
+.mognb{
+    background-color: #fff;
+}
+.mognb *{
+    box-sizing: border-box;
+}
+
+/*모바일 네비박스*/
+#mognb{
+    padding: 30px;
+}
+#mognb li{
+    width: 100%;
+    padding: 4px 0;
+}
+/*모바일 네비 링크*/
+#mognb a{
+    color: #000;
+    font: 1.5rem/3rem 'Play';
+}
+
+/*sns아이콘*/
+.snsico{
+    padding: 0 30px;
+}
+
+.snsico li{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background: url(../images/ico.png) no-repeat;
+}
+
+/*첫번째 li만 빼고 li에 왼쪽마진주기*/
+.snsico li+li{
+    margin-left: 10px;
+}
+/*아이콘 스프라이트 셋팅*/
+.snsico li:nth-child(1){
+    background-position: 0 0;
+}
+.snsico li:nth-child(2){
+    background-position: -40px 0;
+}
+.snsico li:nth-child(3){
+    background-position: -80px 0;
+}
+.snsico li:nth-child(4){
+    background-position: -120px 0;
+}
+.snsico li:nth-child(5){
+    background-position: -160px 0;
+}
+
+/*sns a링크*/
+.snsico li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*매거진박스*/
+.magbox{
+    padding: 30px;
+    padding-bottom: 10px;
+}
+/*매거진이미지*/
+.mag{
+    width: 100%;
+}
+/*매거진 메시지*/
+.magbox figcaption{
+    font-size: 11px;
+    /*최소글자크기는 9px*/
+    line-height: 35px;
+    color: #555;
+}
+/*정기구독버튼*/
+.magbtn{
+    width: 100%;
+    background-color: #000;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: bold;
+}
+/*하단링크박스*/
+.moblink{
+    padding: 0 0 50px 30px;
+    /*padding: 위 오른쪽 아래 왼쪽*/
+}
+.moblink li{
+    width: 100%;
+    /*한줄에 li하나만 오게함*/
+}
+.moblink a{
+    color: #333;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+/***********모바일 검색박스***********/
+.mos{
+    padding: 15px 30px;
+    background-color: #fff;
+    display: none;
+}
+/*검색속박스*/
+.mwrap{
+    position: relative;
+    width: 100%;
+    height: 35px;
+    background: #000;
+}
+/*검색입력창*/
+#search{
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 50px;
+    bottom: 9px;
+    /*사방으로 당겨서 크기만들기*/
+}
+#search input{
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+}
+/*
+    input 박스는 일반 div박스와 다르기 때문에
+    겉박스를 하나 만들어서 채우기형식으로 디자인한다!
+*/
+
+/*검색버튼*/
+#sbtn{
+    position: absolute;
+    top: -4px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    background-image: url(../images/ico.png);
+    background-repeat: no-repeat;
+    background-position: -240px 0;
+    border: none;
+}
+
+
+
+/***********2.배너영역**************/
+.b1{
+    height: 100%;
+    /*비율유지속박스의 높이값 만큼 채우기*/
+}
+
+/*배너슬라이드*/
+.slide,.slide>li{
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*부모는?.slide>li는 .slide가 부모
+    .slide의 부모는? 비율유지박스의 속박스가 부모가됨(absolute)*/
+    width: 100%;
+    height: 100%;
+}
+
+/*슬라이드 공통*/
+.slide li{
+    opacity: 0;
+    /*안보이게함*/
+    transition: opacity .8s ease-in-out;
+}
+/*선택슬라이드 class*/
+.slide li.on{
+    opacity: 1;
+    /*보이게함*/
+    z-index: 1;
+    /*맨위로 올라옴*/
+}
+
+
+/*슬라이드별 셋팅*/
+.slide li:nth-child(1){
+    background: url(../images/ban01.jpg) no-repeat center/cover;
+}
+.slide li:nth-child(2){
+    background: url(../images/ban02.png) no-repeat center/cover;
+}
+.slide li:nth-child(3){
+    background: url(../images/ban03.png) no-repeat center/cover;
+}
+.slide li:nth-child(4){
+    background: url(../images/ban04.png) no-repeat center/cover;
+}
+
+/***********3.컨텐츠영역***********/
+.c1{
+    height: 100%;
+    /*비율유지속박스의 높이값 만큼 채우기*/
+}
+
+/*3-1.뉴스파트*/
+#news{
+    width: 100%;
+    height: 100%;
+}
+#news li{
+    position: relative;
+    /*부모자격*/
+    width: 100%;
+    height: 50%;
+    box-sizing: border-box;
+}
+
+/*사이간격 미세조정*/
+#news li:first-child{
+    padding-bottom: 5px;
+}
+#news li:first-child .atit{
+    bottom: 5px;
+    /*기존값은 0인데 5px떨어지게함!*/
+}
+#news li:last-child{
+    padding-top: 5px;
+    /*사이간격을 옆의 mban과 맞춤!*/
+}
+
+/*뉴스이미지*/
+#news img{
+    width: 100%;
+    height: 100%;
+}
+/*기사제목박스*/
+.atit{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /*부모? #news li*/
+    color: #fff;
+    font: 1.2rem/1.5rem 'Sunflower';
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;/*패딩포함*/
+    
+    /*******************************/
+    /* [ 넘치는 글자 말줄임 표시하기 ] */
+    /*한줄말줄임처리는 1,2,3,4번을 사용함!*/
+    /*
+        여러줄처리하기(2줄짜리)
+        줄바꿈방지(2번)를 하지 않는다!
+        그리고 5,6,7,8번을 적용해 준다!
+    */
+    /*1.넘치는 요소 숨기기-공통*/
+    overflow: hidden;
+    /*2.줄바꿈방지-한줄일때만*/
+    /*white-space: nowrap;*/
+    /*3.박스가로크기를 지정해야 숨겨진다!-공통*/
+    width: 100%;
+    /*4.말줄임표-입술에 손대며 말하지마...!-공통*/
+    text-overflow: ellipsis;
+    
+    /*
+        [밴더사접두어:vender prefix]
+        - 브라우저 밴더사들 : 크롬,사파리,파이어폭스,익스플로러,오페라....
+        -webkit- 크롬, 사파리 (크롱과 사파리로 웹킷을 가지고 놀러간다!)
+        -o- 오페라
+        -ms- 익스플로러
+        -moz- 파이어폭스(뭐가 그리 모질라 불여우!)
+    
+        -> 여러줄용 접두어 속성은 다른 최신브라우저에서 모두 적용된다!
+    */
+    
+    /*5.display설정을 변경-여러줄용*/
+    display: -webkit-box;
+    /*6.처리할 라인수를 지정-여러줄용*/
+    -webkit-line-clamp: 2;
+    /*7.여러줄 처리 진행방향설정-주로세로방진행(vertical)-여러줄용*/
+    -webkit-box-orient: vertical;
+    /*8.단어단위로 떨어져서 생기는 공백없애기 위해 글자단위로 부수기!*/
+    word-break: break-all;
+    
+    /*만일 아래쪽에 글자 일부가 보일 경우 높이값을 설정해준다!*/
+    height: 3.4rem;
+    
+    
+}
+
+/*3-2.메뉴배너*/
+.mban{
+    padding: 5px;
+    /*기존 col-박스에 10px패딩을 변경하여 뉴스파트와 맞춤*/
+}
+#mban{
+    width: 100%;
+    height: 100%;
+}
+#mban li{
+    width: 33.333%;
+    /*3등분*/
+    height: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+    
+    /*배경공통*/
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    background-clip: content-box;
+    /*배경이미지를 보더와 패딩을 제외한 컨텐트에만 보이게함*/
+}
+
+/*각 li에 배경설정*/
+#mban li:nth-child(1){
+    background-image: url(../images/nars_3.jpg);
+}
+#mban li:nth-child(2){
+    background-image: url(../images/jeong5.jpg);
+}
+#mban li:nth-child(3){
+    background-image: url(../images/nars4.jpg);
+}
+#mban li:nth-child(4){
+    background-image: url(../images/tommy.png);
+}
+
+/*마지막 li만 width:100%*/
+#mban li:last-child{
+    width: 100%;
+}
+
+/*바로가기 박스 링크*/
+#mban li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+/*a링크 글자*/
+#mban li a span{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    /*세로방향 중앙이동*/
+    display: block;
+    text-align: center;
+    color: #fff;
+    font: bold 2rem 'Play';
+    text-shadow: 1px 0 #000,-1px 0 #000,0 1px #000,0 -1px #000;
+    /*글자그림자4개로 테두리만들기*/
+}
+
+/***********4.하단영역***********/
+.i1{
+    height: 275px;
+}
+
+#info{
+    position: relative;
+    /*부모자격*/
+    background: #000 url(../images/vogue2.png) no-repeat center/313px;
+}
+
+/*주소박스*/
+#info address{
+    position: absolute;
+    /*부모? #info*/
+    bottom: 35px;
+    color: #fff;
+    font: .8rem 'Play';
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
+
+

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--뷰포트는 미디어쿼리 필수!-->
+    <title>비율유지박스1(Ratio Box)</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        
+        /*비율유지박스 공통class*/
+        .rbx{
+            position: relative;
+            /*비율유지박스의 속박스부모*/
+            outline: 3px dotted red;
+        }
+        .rbx::before{
+            content: "";
+            display: block;
+            padding-top: 80%;
+            /*가로크기에 대한 80%크기 - 박스의 높이값*/
+        }
+        /*내부밀착 속박스*/
+        .ibx{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        /*개별박스 설정*/
+        .bx1{
+            width: 50%;
+            margin: 0 auto;
+            background: url(images/jeong3.jpg) no-repeat
+                top/cover;
+        }
+        
+        /*타이틀 디자인*/
+        .tit{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            /*세로중앙이동*/
+            color: #fff;
+            font-size: 42px;
+            text-align: center;
+            text-shadow: 1px 0 #000,-1px 0 #000,0 1px #000,0 -1px #000;
+            /*글자그림자로 테두리만들기*/
+            
+            /*h1 기본없앰!*/
+            margin: 0;
+            padding: 0;
+        }
+        /*
+        [ 비율유지박스 구성하기 ]
+        1. 가로사이즈만 있는 block박스에 부모자격줌(relative)
+        2. 이 박스에 가상요소 before로 block설정 후 padding-top값을 %으로 설정
+        3. 이 박스의 자식요소 박스를 absolute로 밀착
+        */
+        
+        /*미디어쿼리*/
+        /*1024px 이하에서 가로크기 100%, 글자크기 20px로 변경*/
+        @media only screen and (max-width: 1024px){
+            /*css재정의*/
+            .bx1{
+                width: 100%;
+            }
+            /*글자크기변경*/
+            .tit{
+                font-size: 30px;
+            }
+        }/*미디어쿼리 - 1024px이하*/
+        
+        [ 미디어쿼리로 디자인 재정의 시에 중요한 점 ]
+        - 이미 설정된 선택자를 동일하게 사용하여 셋팅한다!
+        - 선택을 다른방식으로 하게되면 우선순위에 따라 적용 안될 수 있음
+        
+        
+        
+        
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="rbx bx1">
+        <div class="ibx">
+            <h1 class="tit">이정재 스타일1</h1>
+        </div>
+    </div>
+
+
+
+</body></html>

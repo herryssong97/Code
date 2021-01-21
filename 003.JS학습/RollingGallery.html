@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Rolling Gallery</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            /*세로화면기준*/
+            overflow: hidden;
+        }
+
+        body {
+            background: url(images/space.jpg) no-repeat center/auto 200%;
+        }
+
+        img {
+            border: none;
+            /*이미지링크시 보더 없앰*/
+            vertical-align: middle;
+            /*인라인요소간 오른쪽요소의 세로정렬*/
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /*갤러리부모박스*/
+        #wrap {
+            width: 520px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 20px;
+            /*outline: 2px dotted red;*/
+        }
+
+        /*메인이미지박스*/
+        #mbox {
+            display: inline-block;
+            /*block처럼 디자인적용되며
+            inline처럼 한줄에 온다!*/
+        }
+
+        /*이미지텍스트박스*/
+        .imgtxt {
+            text-align: center;
+            color: red;
+            text-shadow: 1px 1px 1px #777;
+        }
+
+        /*자동넘김 버튼박스*/
+        .btns {
+            text-align: center;
+        }
+    </style>
+    <script>
+        ////// 전역변수구역 //////////////
+        /// 배열에 이미지 순서에 맞게 메시지를 셋팅함!
+        var txt = [
+            "노랑잉꼬가 먹이를 꼭꼭 찍어먹어요~",
+            "분홍장미가 머리칼을 너풀너풀 날려요~",
+            "백조같은 거위가 뚱하니 바라보아요~",
+            "바이킹이 너무 어지러워 토가 나와요~",
+            "눈사람이 가짜인데 진짜같아 보여요~",
+            "이 양은 보통양이 아니고 복제양 돌리예요~",
+            "잉꼬 한쌍이 영화를 찍어요~"
+        ]; ///// 이미지 문구 배열 ///////
+
+        /// 메시지별 글자색상 셋팅! ////
+        var tcolor = [
+            "red", "orange", "yellow", "green",
+            "blue", "navy", "purple"
+        ]; //// 메시지 글자 색상 //////
+
+
+        /*//////////////////////////////////////////////
+            함수명: chgImg
+            기능: 이동버튼 클릭시 해당순번의 이미지가 연속나옴
+            전달값: dir - 버튼구분용 변수
+            전역변수: num - 이미지번호 변경용 변수
+            
+            [기능정의]
+            
+            1. 버튼 클릭시 오른쪽/왼쪽을 구분한다.(dir)
+            2. 구분에 따라 이미지 순번을 증가/감소 시킨다.(num)
+            3. 이미지 변경 대상에게 src속성의 이미지번호를 
+                변경하여 반영시킨다.
+                
+        */ //////////////////////////////////////////////
+
+        // 이미지번호 변수
+        //(전역변수로 있어야 한번 생성해서 값을 바꿔서 사용가능!)
+        var num = 1; //처음이미지가 1번이므로
+
+        function chgImg(dir) { // dir-방향(0-왼쪽,1-오른쪽)
+
+            // 1.함수호출,전달값 확인
+            console.log("나야나!" + dir);
+
+            // 2. 방향분기
+            // 오른쪽버튼 ///////////////////////////
+            if (dir) { // dir만 쓰면 1일때, 즉, true임!
+
+                console.log("오른쪽이양!");
+                // 이미지번호 증가
+                num++; //1씩증가
+                // 이미지번호 한계값(처음으로 롤링!)
+                if (num === 8) num = 1;
+
+            } //// if /////////////
+            // 왼쪽버튼 ////////////////////////////
+            else {
+
+                console.log("왼쪽이양!");
+                // 이미지번호 감소
+                num--; //1씩감소
+                // 이미지번호 한계값(마지막으로 롤링!)
+                if (num === 0) num = 7;
+
+            } //// else //////////
+
+            // 이미지번호 찍기
+            console.log("이미지번호:" + num);
+
+            // 3. 이미지변경하기
+            // 대상: #mbox img
+            var tg = document.querySelector('#mbox img');
+            // 이미지 src 변경하기
+            tg.setAttribute("src", "images/img" + num + ".jpg");
+
+            // 4. 추가변경 - 이미지문구넣기
+            // 변경대상: .imgtxt
+            var imgtxt = document.querySelector('.imgtxt');
+
+            // 텍스트 변경하기
+            imgtxt.innerText = txt[num - 1];
+            // 이미지번호보다 1작게 배열번호를 만들어서 넣어준다!
+
+            // 텍스트 색상변경하기
+            imgtxt.style.color = tcolor[num - 1];
+
+
+        } ////// chgImg 함수 /////////////////////////////
+        /////////////////////////////////////////////////
+        /////////////////////////////////////////////////
+
+
+        /*//////////////////////////////////////////////
+            함수명: autoSlide
+            전달변수: gubun(자동넘김:1,멈춤:0)
+            전역변수: autoI(인터발용변수)
+            기능정의: 슬라이드를 자동으로 넘겨준다
+                    1. 버튼을 클릭시 전달값에 따라 자동넘김과 
+                    멈춤 기능으로 분리한다(자동넘김:1,멈춤:0)
+                    2. 자동넘김은 인터발함수를 사용하여
+                    일정시간간격으로 작동되게한다.
+                    (작동원리는 chgImg함수를 호출한다!)
+                    3. 멈춤은 자동넘김을 담은 전역변수를
+                    지워줌으로 멈추게한다.
+                    (clearInterval함수사용, 전역변수 autoI)
+        */ //////////////////////////////////////////////
+
+        // 인터발용변수
+        var autoI;
+
+        function autoSlide(gubun) { // gubun - 자동넘김:1, 멈춤:0
+
+            // 1. 함수호출 확인
+            console.log("자동이야!" + gubun);
+
+            // 2. 버튼 구분하여 작동하기
+            // (1) 자동넘김버튼
+            if (gubun) {
+                // console.log("autoI변수:"+autoI);
+
+                // 만약 변수가 할당되지 않으면 undefined라는 값으로 찍힌다
+                // 이것을 if문에 사용하면 false가 나옴
+                // 따라서 할당되지 않았을때만 실행하면
+                // 여러번 자동넘김 버튼을 클릭해도
+                // 인터발함수를 한번만 실행할 수 있다!
+
+                // 할당되지 않은 변수 autoI에 NOT연산자를 붙이면
+                // !autoI 는 false가 나면 true로 바꾸라는 말
+                // 따라서 if문은 false일때 실행된다는 말!!!
+
+                if (!autoI) // false일때만 아래 문장을 실행해!!
+                    autoI = setInterval("chgImg(1)", 2000);
+                
+                // console.log("autoI변수:"+autoI);
+                // 2초 간격으로 오른쪽으로 넘어가는 값의 함수호출을함
+                // 인터발함수를 변수에 넣는 이유:
+                // 멈추게 하려면 변수에 넣어야함!
+            } ///// if ///////////////////////
+            // (2) 멈춤버튼
+            else {
+                clearInterval(autoI);
+                // 지금 변수에 들어가 활동하는 인터발함수를 지운다!
+                
+                // 인터발함수의 실행을 autoI라는 변수의 할당여부로
+                // 실행되게 해 놨기 때문에 autoI라는 변수를
+                // undefined / null / false
+                // 위의 셋 중 하나로 리셋해줘야한다!
+                
+                autoI = undefined; // null / false
+                
+                // undefined 나 null도 데이터형 중 하나이다
+                // undefined는 정의되지 않은 값이라는 의미의 데이터이다
+                // null은 빈 값이라는 의미의 데이터형이다
+                // 위의 2가지 값은 if문에 들어가면 false로 판단된다!
+                
+                
+            } ////// else ////////////////////
+
+
+        } ////// autoSlide 함수 /////////////////////////////
+        /////////////////////////////////////////////////
+        /////////////////////////////////////////////////
+
+
+
+
+
+
+        /* 
+        [ 요소를 선택하는 새로운 방법! ]
+        - 기존방식: document.getElementById(아이디명)
+                document.getElementsByClassName(클래스명).item(순번)
+                document.getElementsByTagName(태그명).item(순번)
+        - 기존방식의 불변한점
+            1. 너무길다
+            2. 하위요소 선택시 불편하다 
+        - 새로운방식: CSS선택자를 그대로 사용할 수 있는 방식!
+            
+            1. document.querySelector(CSS선택자)
+            - 선택된 요소를 무조건 처음만나는 하나만 선택함
+            - 순번이 필요없음!
+            - 주의사항: CSS선택자 방식을 그대로 씀
+            (#-아이디,.-클래스,띄어쓰기-자손,꺽쇠-직계자식)
+             
+            예) document.querySelector("#my ul li a")
+        
+            -> 기존방식이라면 document.getElementById("my").getElementsByTagName("ul") .item(0).getElementsByTagName("li").item(0).getElementsByTagName("a").item(0) 헉헉헉;;;;;죽음;;;;;
+        
+            2. document.querySelectorAll(CSS선택자)
+            - 선택된 요소가 한개든 여러개든지 컬렉션에 담아온다
+            - .item(순번) 또는 [순번] 으로 구체적인 선택을 함
+            - .length 컬렉션 개수를 가져올 수 있음
+            - 주의사항: CSS선택자를 사용해야함!
+            
+            예) document.querySelectorAll("ul li").item(4) -> 5번째요소
+    
+            참고) 여기서 사용된 query라는 말은 "질의하다"라는 뜻임
+                    - css선택자로 브라우저에게 질의를 해서 요소를 가져옴!
+                selector는 "선택자"라는 뜻(CSS선택자)
+    
+    
+    */
+    </script>
+</head>
+
+<body>
+    <!--갤러리부모박스-->
+    <div id="wrap">
+        <!--타이틀-->
+        <h1>Rolling Gallery</h1>
+        <!--왼쪽버튼-->
+        <a href="" class="btn lb" onclick="chgImg(0);return false;">
+            <img src="images/left_btn.png" alt="왼쪽이동버튼">
+        </a>
+        <!--메인이미지-->
+        <div id="mbox">
+            <img src="images/img1.jpg" alt="메인이미지">
+        </div>
+        <!--오른쪽버튼-->
+        <a href="" class="btn rb" onclick="chgImg(1);return false;">
+            <img src="images/right_btn.png" alt="오른쪽이동버튼">
+        </a>
+    </div>
+
+    <!--이미지별 설명 텍스트 출력박스-->
+    <h2 class="imgtxt">노랑잉꼬가 먹이를 꼭꼭 찍어먹어요~</h2>
+
+    <!--자동넘김 버튼박스-->
+    <div class="btns">
+        <button class="start" onclick="autoSlide(1)">자동넘김</button>
+        <button class="stop" onclick="autoSlide(0)">멈춤</button>
+    </div>
+
+
+
+
+
+</body></html>

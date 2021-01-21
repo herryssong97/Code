@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOGUE PJ</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+    <!--중요!!! 미디어쿼리를 별도의 외부파일로 만든경우 기존 파일에 @import방식으로 호출하면 미디어쿼리가 실행되지 않는다! 따라서 link방식으로 호출해야함! 순서도 아래쪽에 넣어준다!-->
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <!--1.상단영역-->
+    <div class="top">
+        <header id="top" class="inbox clb prt">
+            <div class="col-2 t1 logo">
+                <!--1-1.로고-->
+                <h1 id="logo">
+                    <img src="images/small_logo.png" alt="보그로고" class="slogo">
+                    <img src="images/vogue_logo_red.png" alt="큰빨간보그로고" class="blogo">
+                </h1>
+            </div>
+            <div class="col-10 t1 prt" id="gnb">
+                <!--1-2.GNB메뉴-->
+                <nav class="gnb">
+                    <ul>
+                        <li>
+                            <a href="">FASHION</a>
+                        </li>
+                        <li>
+                            <a href="">BEAUTY</a>
+                        </li>
+                        <li>
+                            <a href="">VOGUE TV</a>
+                        </li>
+                        <li>
+                            <a href="">CELEBRITY</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!--1-3.햄버거메뉴-->
+            <button id="ham">≡</button>
+            <!--1-4.검색버튼-->
+            <button id="magni">
+                <span class="bld">돋보기검색</span>
+            </button>
+
+
+        </header>
+    </div>
+
+    <!--모바일용 검색박스-->
+    <div class="mos">
+        <div class="mwrap">
+            <div id="search">
+                <input type="text">
+            </div>
+            <button id="sbtn">
+                <span class="bld">
+                    돋보기검색실행
+                </span>
+            </button>
+        </div>
+    </div>
+    <!--모바일용 메뉴박스-->
+    <div class="moshow">
+        <div class="mognb">
+            <nav id="mognb">
+                <ul>
+                    <li>
+                        <a href="">FASHION</a>
+                    </li>
+                    <li>
+                        <a href="">BEAUTY</a>
+                    </li>
+                    <li>
+                        <a href="">VOGUE TV</a>
+                    </li>
+                    <li>
+                        <a href="">CELEBRITY</a>
+                    </li>
+                </ul>
+            </nav>
+            <!--sns링크 아이콘 박스-->
+            <ol class="snsico">
+                <li><a href=""><span class="bld">인스타그램</span></a></li>
+                <li><a href=""><span class="bld">페이스북</span></a></li>
+                <li><a href=""><span class="bld">트위터</span></a></li>
+                <li><a href=""><span class="bld">유튜브</span></a></li>
+                <li><a href=""><span class="bld">카카오스토리</span></a></li>
+            </ol>
+            
+            <!--매거진박스-->
+            <figure class="magbox">
+                <a href="">
+                    <img src="images/mobmag.jpg" alt="보그잡지표지" class="mag">
+                </a>
+                <figcaption>
+                    정기구독을 신청하면 최대 30% 할인혜택을 드립니다!
+                </figcaption>
+                <button class="magbtn">정기구독 신청</button>
+            </figure>
+            
+            <!--하단링크박스-->
+            <ul class="moblink">
+                <li>
+                    <a href="">회사소개 /</a>
+                    <a href="">광고 및 제휴 /</a>
+                </li>
+                <li>
+                    <a href="">
+                        <strong>개인정보 처리방침</strong>
+                    </a>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+
+    <!--2.배너영역-->
+    <div class="ban">
+        <section id="ban" class="inbox clb rbx">
+            <div class="ibx">
+                <div class="col-12 b1">
+                    <ul class="slide">
+                        <li class="on"><span class="bld">배너1</span></li>
+                        <li><span class="bld">배너2</span></li>
+                        <li><span class="bld">배너3</span></li>
+                        <li><span class="bld">배너4</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--3.컨텐츠영역-->
+    <div class="cont">
+        <section id="cont" class="inbox clb rbx rbx2">
+            <div class="ibx">
+                <!--3-1.뉴스박스-->
+                <div class="col-3 c1 news">
+                    <ol id="news">
+                        <!--상단뉴스-->
+                        <li>
+                            <!--기사사진-->
+                            <img src="images/side1.jpg" alt="기사내용1">
+                            <!--기사제목-->
+                            <a href="" class="atit">
+                                서울 최초 공개! 버버리의 ‘더 케이프 리이매진드(THE CAPE REIMAGINED)’ 전시
+                            </a>
+                        </li>
+                        <!--하단뉴스-->
+                        <li>
+                            <!--기사사진-->
+                            <img src="images/side2.jpg" alt="기사내용2">
+                            <!--기사제목-->
+                            <a href="" class="atit">
+                                칸예 웨스트, 에이셉 라키, 그리고? FASHION KILLAS!
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+                <!--3-2.메뉴배너-->
+                <div class="col-9 c1 mban">
+                    <ol id="mban">
+                        <li><a href=""><span>FASHION</span></a></li>
+                        <li><a href=""><span>BEAUTY</span></a></li>
+                        <li><a href=""><span>VOGUE TV</span></a></li>
+                        <li><a href=""><span>CELEBRITY</span></a></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--4.하단영역-->
+    <div class="info">
+        <footer id="info" class="inbox clb">
+            <div class="col-12 i1">
+                <address>
+                    WWW.VOGUE.COM Ⓒ CONDÉNAST ASIA PACIFIC. INC. ALL RIGHTS RESERVED.
+                    VOGUE.COM KOREA IS OPERATED BY DOOSAN MAGAZINE.
+                </address>
+            </div>
+        </footer>
+    </div>
+
+    <!--그리드뷰-->
+    <!--<ul class="grid">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>-->
+
+
+</body></html>

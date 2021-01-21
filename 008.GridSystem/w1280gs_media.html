@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!--모바일에 필수 뷰포트!!!-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1280px Grid System - Media Query</title>
+    <link rel="stylesheet" href="css/gridSet.css">
+    <link rel="stylesheet" href="css/gridView.css">
+    <style>
+        html,body,h1,h2{
+            margin: 0;
+            padding: 0;
+        }
+        
+        body{
+            /*사이트 디자인이미지 배경넣기*/
+            /*background: url(images/kita.png) no-repeat center top;*/
+        }
+        
+        
+        /*그리드뷰 재설정*/
+        .grid{
+            width: 1280px;
+            max-width: 100%;
+            /*그리드도 같이 줄어들게!*/
+            z-index: -1;
+        }
+        
+        /*공통class*/
+        
+        /*속박스 class*/
+        .ibx{
+            width: 1280px;
+            max-width: 100%;
+            /*최대가로크기 100%란 
+            화면이 1280px보다 작으면 100%*/
+            margin: 0 auto;
+            outline: 3px dashed blue;
+        }
+        
+        /*각 영역별 파티션 높이값 설정하기*/
+        /*1.상단영역*/
+        #top{
+            background-color: #95ceff;
+        }
+        .t1{
+            height: 100px;
+        }
+        
+        
+        /*2.컨텐츠1영역*/        
+        #cont1{
+            background-color: #ffa5ee;
+            padding-top: 19px;
+        }
+        .c11{
+            height: 305px;
+        }
+        .c12{
+            height: 343px;
+        }
+        .c13{
+            height: 100px;
+        }
+        /*뉴스파트*/
+        .news{
+            margin-top: 21px;
+        }
+        /*서비스파트*/
+        .service{
+            margin-top: 19px;
+        }
+        
+        /*3.컨텐츠2영역*/
+        #cont2{
+            background-color: #dfff5a;
+            padding-top: 102px;
+        }
+        .c21,.c22{
+            height: 219px;
+        }
+        
+        /*4.컨텐츠3영역*/
+        #cont3{
+            background-color: #cd9bff;
+            padding-top: 110px;
+            padding-bottom: 16px;
+        }
+        .c31{
+            height: 295px;
+        }
+        .c32{
+            height: 262px;
+        }
+        /*5.하단영역*/
+        #info{
+            background-color: #8adbff;
+        }
+        .i1{
+            height: 72px;
+        }
+        .i2{
+            height: 117px;
+        }
+        
+        /*숨기기class*/
+        .dn{
+            display: none;
+        }
+        
+        /*미디어쿼리*/
+        /*
+        그리드 시스템의 미디어쿼리는 단순하게 처리할 수 있다!(원칙상)
+        
+        [방법]
+        
+        1. 변경할 크기의 미디어쿼리 구간에 그리드 사이즈 class를 
+            다른이름으로 넣어준다!
+        2. 변경할 레이아웃의 class를 추가적으로 html요소에 넣어준다!
+        
+        3. 모바일 레이아웃에서 100% 로 가로크기를 일괄 변경할 경우
+        "col-"라는 클래스명을 선택하여 width:100%를 설정해 준다
+        */
+        
+        @media only screen and (max-width:1024px){
+            /*12컬럼 %셋팅 class*/
+            .col-2nd-1 {width: 8.33%;}
+            .col-2nd-2 {width: 16.66%;}
+            .col-2nd-3 {width: 25%;}
+            .col-2nd-4 {width: 33.33%;}
+            .col-2nd-5 {width: 41.66%;}
+            .col-2nd-6 {width: 50%;}
+            .col-2nd-7 {width: 58.33%;}
+            .col-2nd-8 {width: 66.66%;}
+            .col-2nd-9 {width: 75%;}
+            .col-2nd-10 {width: 83.33%;}
+            .col-2nd-11 {width: 91.66%;}
+            .col-2nd-12 {width: 100%;}
+            
+        }/*미디어쿼리 - 1024px이하*/
+        
+        /*모바일 미디어쿼리*/
+        @media only screen and (max-width:800px){
+            
+            /* 클래스에 "col-"를 가진 모든 요소에 적용!*/
+            [class*="col-"]{
+                width: 100%;
+            }
+            
+            
+        }/*미디어쿼리 - 800px이하*/
+        
+        
+        
+    </style>
+</head>
+<body>
+  
+  <!--1.상단영역-->
+   <div id="top">
+       <header class="ibx clb top">
+           <h1 class="dn">한국무역협회</h1>
+           <div class="col-2 t1"></div>
+           <div class="col-7 t1"></div>
+           <div class="col-3 t1"></div>
+       </header>
+   </div>
+    <!--2.컨텐츠영역1-->
+    <div id="cont1">
+        <section class="ibx clb cont1">
+            <h2 class="dn">배너,요약정보</h2>
+            <div class="col-8 c11"></div>
+            <div class="col-4 c11"></div>
+            <div class="col-12 c12 news"></div>
+            <div class="col-12 c13 service"></div>
+        </section>
+    </div>
+    <!--3.컨텐츠영역2-->
+    <div id="cont2">
+        <section class="ibx clb cont2">
+            <h2 class="dn">KITA 사업일정</h2>
+            <div class="col-3 c21 col-2nd-6"></div>
+            <div class="col-3 c21 col-2nd-6"></div>
+            <div class="col-3 c21 col-2nd-6"></div>
+            <div class="col-3 c21 col-2nd-6"></div>
+            <div class="col-3 c22 col-2nd-6"></div>
+            <div class="col-3 c22 col-2nd-6"></div>
+            <div class="col-3 c22 col-2nd-6"></div>
+            <div class="col-3 c22 col-2nd-6"></div>
+        </section>
+    </div>
+    <!--4.컨텐츠영역3-->
+    <div id="cont3">
+        <section class="ibx clb cont3">
+            <h2 class="dn">회원/업무지원</h2>
+            <div class="col-2 c31 col-2nd-4"></div>
+            <div class="col-2 c31 col-2nd-4"></div>
+            <div class="col-2 c31 col-2nd-4"></div>
+            <div class="col-2 c31 col-2nd-4"></div>
+            <div class="col-2 c31 col-2nd-4"></div>
+            <div class="col-2 c31 col-2nd-4"></div>
+            <div class="col-3 c32 col-2nd-6"></div>
+            <div class="col-3 c32 col-2nd-6"></div>
+            <div class="col-3 c32 col-2nd-6"></div>
+            <div class="col-3 c32 col-2nd-6"></div>
+        </section>
+    </div>
+    <!--5.하단영역-->
+    <div id="info">
+        <footer class="ibx clb info">
+            <h2 class="dn">하단정보링크</h2>
+            <div class="col-6 i1"></div>
+            <div class="col-6 i1"></div>
+            <div class="col-6 i2"></div>
+            <div class="col-2 i2"></div>
+            <div class="col-4 i2"></div>
+        </footer>
+    </div>
+  
+  
+   
+   <!--그리드뷰:그리드 시스템 비주얼뷰-->
+   <ul class="grid">
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+   </ul>
+   
+   
+   
+    
+</body>
+</html>

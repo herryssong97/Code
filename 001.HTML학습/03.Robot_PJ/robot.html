@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Robot PJ</title>
+    <style>
+        body {
+            /*background: 색이반고윙/크;*/
+            background: url(images/bg.jpg) no-repeat fixed top/cover;
+        }
+
+        div {
+            /*            outline: 2px solid lime;*/
+        }
+        
+        /*로봇페이지 로고*/
+        #logo{
+            position: fixed;
+            top: 0;
+            left: 0;
+            /*fixed 포지션의 부모는 보이는 화면!(window)*/
+            width: 200px;
+            height: 200px;
+            margin: 0;
+            padding: 0;
+            color: white;
+            border: 4px solid #ccc;
+            border-radius: 50%;
+            /*정사각형일 경우 border-radius값을 50%로 설정하면
+                정원이 나옴*/
+            
+            /*글자 정중앙*/
+            text-align: center;
+            line-height: 200px;
+            
+            text-shadow: 2px 2px 2px #003afc;
+            
+            
+            font-family: "vladimir script";
+            font-size: 60px;
+            background: url(images/robot_03.png) no-repeat;
+            background-position: center 2px;
+            background-size: 160px auto;
+        }
+        
+        
+        /*박스 그림자*/
+        
+
+        /*로봇머리*/
+        #head {
+            position: relative;
+            /*부모자격-자식요소가 absolute인 것의 부모*/
+            left: 70%;/*퍼센트기준은 부모박스 크기임*/
+            /*left값으로 머리를 오른쪽 바깥에 나가있게 하고 마우스 오버시 원래 위치로 돌아오게함*/
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            /*마영오 가로중앙*/
+            background: url(images/metal01.jpg) no-repeat 0/100% 100%;
+            margin-top: 100px;
+            
+        }
+
+        /*왼쪽 눈*/
+        #eye1 {
+
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            /*나의 부모? #head*/
+            width: 50px;
+            height: 50px;
+            background: url(images/e1.jpg) no-repeat 0/100% 100%;
+        }
+
+        /*오른쪽 눈*/
+        #eye2 {
+            position: absolute;
+            top: 50px;
+            left: 150px;
+            width: 50px;
+            height: 50px;
+            background: url(images/e2.jpg) no-repeat 0/100% 100%;
+        }
+
+        /*코*/
+        #nose {
+            position: absolute;
+            top: 107px;
+            left: 100px;
+            /*부모? #head*/
+            width: 50px;
+            height: 70px;
+            background: url(images/nose.jpg) no-repeat 0/110% 100%;
+        }
+
+        /*입*/
+        #mouth {
+            position: absolute;
+            bottom: 12px;
+            left: 75px;
+            /*부모? #head*/
+            width: 100px;
+            height: 50px;
+            background: url(images/mouth.png) no-repeat 0/100% 100%;
+        }
+
+        /*귀 공통*/
+        .ear {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background: url(images/metal02.jpg) no-repeat 0/100% 100%;
+        }
+
+        /*왼쪽 귀*/
+        #ear1 {
+            top: 85px;
+            left: -52px;
+        }
+
+        /*오른쪽 귀*/
+        #ear2 {
+            top: 85px;
+            right: -52px;
+        }
+
+
+
+
+        /****로봇몸통****/
+        #body {
+            position: relative;
+            /*부모자격*/
+            left: -70%;
+            width: 250px;
+            height: 300px;
+            margin: 0 auto;
+            /*마영오 - 가로중앙*/
+            background: url(images/metal01.jpg) no-repeat center/cover;
+            top: 50px;
+            /*목길이만큼*/
+        }
+
+        /*목*/
+        #neck {
+            position: relative;
+            top: -48px;
+            left: 100px;
+            width: 50px;
+            height: 46px;
+            background: url(images/metal02.jpg) no-repeat 0/100% 100%;
+        }
+
+        /*팔다리 공통*/
+        .part {
+            position: absolute;
+            width: 50px;
+            height: 250px;
+            background: url(images/metal02.jpg) no-repeat 0/100% 100%;
+        }
+
+        /*왼쪽 팔*/
+        #arm1 {
+            position: relative;
+            top: -46px;
+            right: 52px;
+        }
+
+        /*오른쪽 팔*/
+        #arm2 {
+            position: relative;
+            top: -296px;
+            left: 252px;
+        }
+
+        /*왼쪽 다리*/
+        #leg1 {
+            position: relative;
+            top: -244px;
+        }
+
+        /*오른쪽 다리*/
+        #leg2 {
+            position: relative;
+            top: -494px;
+            left: 200px;
+        }
+
+        /*tv*/
+        #tv {
+            position: absolute;
+            top: 50px;
+            left: 25px;
+            width: 200px;
+            height: 150px;
+            background: url(images/tv.jpg) no-repeat 0/100% 100%;
+        }
+
+        /*스크린*/
+        #screen {
+            position: absolute;
+            top: 20px;
+            left: 13px;
+            /*나의 부모는 #tv*/
+            width: 137px;
+            height: 99px;
+            border-radius: 15px;
+            background-color: #000;
+            overflow: hidden;
+            /*자식요소인 아이프레임을 크게 만들고 위치를 조정할 경우 넘치는 부분을 숨겨준다!*/
+        }
+
+        /*스크린 iframe*/
+        #screen iframe {
+            position: relative;
+            top: ;
+            left: ;
+            /*현재위치로부터 위치이동*/
+            width: 100%;
+            height: 100px;
+            border: none;
+            /*아이프레임 디본 보더 없앰*/
+        }
+
+        /*로봇 설명박스*/
+        #rdesc {
+            width: 800px;
+            margin: 0 auto;
+            /*마영오*/
+            margin-top: 350px;
+            margin-bottom: 100px;
+            /*하단여백*/
+            border: 3px solid #fff;
+            border-radius: 20px;
+            padding: 15px 30px;
+            font-family: Verdana, arial;
+            color: #fff;
+            margin-top: 450px;
+            text-shadow: 1px 1px 1px #000;
+            /*
+            
+                text-shadow 글자그림자 속성
+                : x축이동 y축이동 blur 색;
+            
+            */
+            
+            
+            /*[박스그림자 : box-shadow]
+            
+            box-shadow: 내부 그림자 여부 x축 y축 블러 거리 색;
+            - 내부 그림자 여부 - 내부 그림자는 inset
+            - x축, y축 : 그림자 이동위치
+            - 블러 : 
+            
+            
+            
+            
+            
+            
+            
+            */
+            text-shadow: 10px 10px 10px;
+            box-shadow: 0 0 20px pink;
+            
+            
+        }
+
+            /*로봇설명 타이틀*/
+        #rdesc h2{
+            color: lime;
+            font-size: 35px;
+            text-align: center;
+        }
+        
+        /*로봇설명 작은글자*/
+        #rdesc small{
+            display: block;
+            color: #f5ff00;
+            text-align: center;
+        }
+        
+        /*로봇설명 문단박스*/
+        #rdesc p{
+            font-size: 15px;
+            /*글자크기*/
+            
+            line-height: 25px;
+            /*줄간격*/
+            
+            letter-spacing: 1px;
+            /*글자사이간격*/
+            
+            word-spacing: 3px;
+            /*다중열속성 (Multi Columns)*/
+            
+            column-count: 3;
+            /*다중열개수*/   
+            
+            column-rule: 5px dotted lime;
+            /*다중열 구분선 column-rule:두께 종류 색상*/
+            
+            column-gap: 50px;
+            /*다중열 사이 간격*/
+            
+            /*
+            
+                column-span:all 다단안에 h태그가 포함될 경우 이것을
+                다단에서 제외하는 속성
+            
+                column-width는 다단 하나당 최소크기를 지정함
+            
+            */
+            
+            /*글자양쪽정렬*/
+            text-align: justify;
+            /*
+            
+                text-align 속성
+                - left 왼쪽정렬
+                - right 오른쪽 정렬
+                - center 중앙정렬
+                - justify 양쪽정렬
+            
+            */
+            
+            /*단어단위를 깨주는 속성*/
+            word-break: break-all;
+            /*양쪽 정렬시 중앙에 단어단위로 줄바꿈을 하기 때문에 생기는 빈공간을
+            없애기 위해 단어단위에서 글자단위로 단어를 깨주는 설정*/
+            
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    
+    <!--로봇페이지 로고-->
+    <h1 id="logo">
+        R2D2
+    </h1>
+    
+    
+    
+
+    <!--로봇머리-->
+    <!--#head>#eye1+#eye2+#nose+#mouth+#ear1+#ear2-->
+    <div id="head">
+        <div id="eye1"></div>
+        <div id="eye2"></div>
+        <div id="nose"></div>
+        <div id="mouth"></div>
+        <div id="ear1" class="ear"></div>
+        <div id="ear2" class="ear"></div>
+    </div>
+
+    <!--로봇몸통-->
+    <!--#body>#neck+#arm1+#arm2+#leg1+#leg2-->
+    <div id="body">
+        <div id="neck"></div>
+        <div id="arm1" class="part"></div>
+        <div id="arm2" class="part"></div>
+        <div id="leg1" class="part"></div>
+        <div id="leg2" class="part"></div>
+        <div id="tv">
+            <div id="screen">
+                <iframe src="https://www.youtube.com/embed/dyRsYk0LyA8"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    
+        아이프레임 : iframe요소
+        
+        - 타 시스템의 화면을 웹사이트에 삽입할 경우 사용하는 인라인 프레임이다 
+        (inline frame을 줄여서 iframe으로 명명함)   
+
+        - src 속성 : 동일 시스템의 다른 화면이나 타 시스템의 화면을 불러오는 속성
+        (동일 시스템은 경로만 씀, 타 시스템은 전체 url을 써준당)
+    
+    -->
+
+    <!--로봇 소개글-->
+    <div id="rdesc">
+        <h2>Robot</h2>
+        <small>From Wikipedia, the free encyclopedia</small>
+        <p>
+
+            A robot is a machine—especially one programmable by a computer— capable of carrying out a complex series of actions automatically.[2] Robots can be guided by an external control device or the control may be embedded within. Robots may be constructed on the lines of human form, but most robots are machines designed to perform a task with no regard to their aesthetics. <br><br>
+
+            Robots can be autonomous or semi-autonomous and range from humanoids such as Honda's Advanced Step in Innovative Mobility (ASIMO) and TOSY's TOSY Ping Pong Playing Robot (TOPIO) to industrial robots, medical operating robots, patient assist robots, dog therapy robots, collectively programmed swarm robots, UAV drones such as General Atomics MQ-1 Predator, and even microscopic nano robots. By mimicking a lifelike appearance or automating movements, a robot may convey a sense of intelligence or thought of its own. Autonomous things are expected to proliferate in the coming decade,[3] with home robotics and the autonomous car as some of the main drivers.[4]
+
+            The branch of technology that deals with the design, construction, operation, and application of robots,[5] as well as computer systems for their control, sensory feedback, and information processing is robotics. These technologies deal with automated machines that can take the place of humans in dangerous environments or manufacturing processes, or resemble humans in appearance, behavior, or cognition. Many of today's robots are inspired by nature contributing to the field of bio-inspired robotics. These robots have also created a newer branch of robotics: soft robotics.
+
+            From the time of ancient civilization there have been many accounts of user-configurable automated devices and even automata resembling animals and humans, designed primarily as entertainment. As mechanical techniques developed through the Industrial age, there appeared more practical applications such as automated machines, remote-control and wireless remote-control.
+
+            The term comes from a Slavic root, robot-, with meanings associated with labor. The word 'robot' was first used to denote a fictional humanoid in a 1920 Czech-language play R.U.R. (Rossumovi Univerzální Roboti - Rossum's Universal Robots) by Karel Čapek, though it was Karel's brother Josef Čapek who was the word's true inventor.[6][7][8] Electronics evolved into the driving force of development with the advent of the first electronic autonomous robots created by William Grey Walter in Bristol, England in 1948, as well as Computer Numerical Control (CNC) machine tools in the late 1940s by John T. Parsons and Frank L. Stulen. The first commercial, digital and programmable robot was built by George Devol in 1954 and was named the Unimate. It was sold to General Motors in 1961 where it was used to lift pieces of hot metal from die casting machines at the Inland Fisher Guide Plant in the West Trenton section of Ewing Township, New Jersey.[9]
+
+            Robots have replaced humans[10] in performing repetitive and dangerous tasks which humans prefer not to do, or are unable to do because of size limitations, or which take place in extreme environments such as outer space or the bottom of the sea. There are concerns about the increasing use of robots and their role in society. Robots are blamed for rising technological unemployment as they replace workers in increasing numbers of functions.[11] The use of robots in military combat raises ethical concerns. The possibilities of robot autonomy and potential repercussions have been addressed in fiction and may be a realistic concern in the future.
+
+        </p>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body></html>

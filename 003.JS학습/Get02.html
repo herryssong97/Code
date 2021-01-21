@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JS - Get방식 처리:sub page</title>
+    <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #home,
+        #title {
+            padding: 0;
+            width: 800px;
+            height: 100px;
+            margin: 0 auto;
+            font: bold 28px/100px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+            color: blue;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        #title {
+            color: #fff !important;
+            /*타이틀 글자색 흰색*/
+        }
+
+        #main {
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            background: url(images/shop_red.jpg) no-repeat 0/100% 100%;
+        }
+    </style>
+    <script>
+        // get방식으로 넘어온 파라미터 처리하기!
+        var pm = location.href;
+        console.log(pm);
+        // location.href 의 두얼굴~~~
+        // 1. 이퀄 왼쪽에 쓰면 오른쪽 url값으로 페이지이동
+        // 2. 이퀄 오른쪽에 쓰면 브라우저 url값을 가져옴!
+
+
+        // url가공전 물음표가 있는지 확인하여 없으면 돌려보낸다!
+        // indexOf(문자열) -> 찾는 문자열의 순번을 리턴함!
+        // 만약 찾는 문자열이 없으면 -1을 리턴함!!!!
+        console.log("문자열 찾기:" + pm.indexOf("?"));
+        if (pm.indexOf("?") === -1) {
+            alert("비정상적인 접근입니다!");
+            location.href = "Get01.html";
+        } ////// if //////////////////////
+
+
+        // url문자값 가공처리하기 /////
+
+        // 1. ?(물음표)를 기준으로 잘라서 뒤의 배열값을 사용한다!
+        pm = pm.split("?")[1];
+        // 물음표 뒤쪽 값은 배열번호 1번이다!
+        console.log("물음표로 잘라 뒤에것:" + pm);
+
+        // 2. =(이퀄)로 자르고 뒤엣것!
+        pm = pm.split("=")[1];
+        // 이퀄 뒤쪽 값은 배열번호 1번이다!
+        console.log("이퀄로 잘라 뒤에것:" + pm);
+
+        //3. 한글문자깨짐 방지하여 보낸것 다시 한글로 바꾸기!
+        // escape로 변환된 문자를 unescape로 복원한다
+        pm = unescape(pm);
+        console.log("한글복원:" + pm);
+        
+        
+        // 샵명과 색상명을 연결한 객체
+        var scolor = {
+            "레드샵":"red",
+            "오렌지샵":"orange",
+            "그린샵":"green",
+            "블루샵":"blue",
+            "블랙샵":"black"
+        };
+
+
+        ////////// 로드구역 //////////////////////
+        window.addEventListener("DOMContentLoaded",
+            function() {
+            
+            console.log("로딩완료!");
+            
+            // 타이틀요소
+            var tit = document.querySelector("#title");
+            
+            // 1. 타이틀 넣기
+            tit.innerText = pm;
+            
+            // 2. 배경색 넣기 (scolor객체에 샵명과 연결!)
+            tit.style.backgroundColor = scolor[pm];
+            
+            // 3. 메인박스 배경이미지 변경하기
+            document.querySelector("#main")
+            .style.backgroundImage = 
+                "url(images/shop_"+scolor[pm]+".jpg)";
+            
+            
+        });////////// 로드구역 /////////////////////////
+        ///////////////////////////////////////////////
+        
+    </script>
+
+</head>
+
+<body>
+    <h1 id="home">
+        <a href="Get01.html" title="홈으로">GG Market</a>
+    </h1>
+    <h2 id="title"></h2>
+    <section id="main"></section>
+
+
+
+
+
+
+
+</body></html>
