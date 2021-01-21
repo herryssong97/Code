@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> descendant  선택자 </title>
+<!-- jQuery library -->
+<script src="jquery-1.7.2.min.js"></script>
+<script>
+$(document).ready(function(e) {
+    // 미션: 아래의 각 li에 미니언즈 이미지를 웹으로 찾아서 html로 넣고 이미지크기를 width: 100px로 고정한다. 
+    
+    // JS에서 html 넣기는 innerHTML = "코드"
+    // jQuery에서는  html("코드")
+    $("#first").html('<img src="https://i.pinimg.com/originals/15/26/62/152662373b8c743a65c1ae9f42b8f8a2.jpg" alt="미니언즈">');
+    
+    $("#second").html('<img src="https://cjmart.jp/en/upload/save_image/0126_190824_mp4otl_y_3.jpg" alt="미니언즈">');
+    
+    $("#third").html('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTME5eKD8BxsZwD8zAKQKT3jh6LJxvkLPRccA&usqp=CAU" alt="미니언즈">');
+    
+    /// 이미지 크기 고정
+    $(".list img").css({width:"100px"});
+    
+	// 각 이미지 클릭시 이미지크기각 클릭할때마다 10px씩 커지게함과 동시에 한번은 오른쪽, 한번은 왼쪽으로 10도씩 기울어지게 애니메이션 하시오.
+    
+    var dg = 10; // 각도
+	
+    $(".list img").click(function(){
+        // console.log("나클릭!");
+        
+        // += 대입연산자를 width값에 사용하면 기존값에 더해줌!
+        
+        // 클릭된 이미지 나 자신 -> this 키워드
+        $(this).css({
+            width: "+=10px",
+            transform: "rotate("+dg+"deg)",
+            transition: "all .3s"
+        }); ///////// css //////////////
+        
+        // 각도를 변경해서 다음번에 적용된다!
+        // 비?집:놀이동산; ->조건연산자(삼항연산자)
+        dg === 10 ?dg = -10 : dg = 10;
+        
+    }); //////// click ////////////
+	
+	
+});//jQuery실행구역
+</script>
+</head>
+  
+<body>
+
+<div id="container">
+
+ <header>
+   <h2> Welcome mySite </h2>
+   <p> Lorem Ipsum is simply </p>
+ </header>
+
+ <nav>
+   <ul class="list">
+     <li id="first">One</li>
+     <li id="second">Two</li>
+     <li id="third">Three</li>
+  </ul>
+ </nav>
+ 
+ <p> Lorem Ipsum is simply </p>
+ 
+</div>
+
+<!---------- jQuery code Start ---------->
+<script>
+
+</script>
+
+</body>
+</html>
+

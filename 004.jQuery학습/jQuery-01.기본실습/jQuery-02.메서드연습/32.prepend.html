@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> prepend()  </title>
+<!-- jQuery library -->
+<script src="jquery-1.7.2.min.js"></script>
+	<script>
+	$(function(){// jQB /////////////////////////////
+        /*
+        prepend() 메서드
+        - 선택요소 내부에 자식요소로 맨앞에 추가 또는 기존 요소를
+        선택하면 맨 앞으로 이동함
+        
+        비교) JS 내장함수 : insertBefore(넣을놈,넣을놈전놈)
+		*/
+        
+		//미션: p태그의 글자를 클릭하면 #pic 요소의 내부에 자식요소로 웹 경로 이미지가 번갈아서 앞쪽에 추가되게하시오.
+	
+        // 웹 이미지 주소 배열에 넣기
+        var imgs = [
+            "https://photo.jtbc.joins.com/news/2017/07/20/20170720092407814.jpg",
+            "https://lh3.googleusercontent.com/proxy/p210XHyrN-aDiHCf8TaWgDIUfDSvMOVA1hd8h6xdadP9s4x60zxo9X3NfDdHakD7TBP163IU4MIqDtDq5OAJLa-oVP22XepSNdtJtvyRuISOQQKphlK475DvouaW2cE4MQwBknsUWP3I5R0D0PovSXS2vriQ",
+        ];/// 배열 ////
+        
+        // 배열순번변수
+        var seq = 0;
+        
+        $("p").click(function(){
+            // 이미지넣기
+            $("#pic")
+                .prepend('<img src="'+imgs[seq]+'" alt="이미지">');
+            
+            // 이미지순번 번갈아 변경
+            // 비?집:놀이동산;(조건연산자/삼항연산자)
+            seq === 0 ? seq = 1 : seq = 0;
+            
+            // 이미지 크기조정
+            $("#pic img").css({height:"100px"});
+            
+        });////////// click /////////////
+	
+		
+		
+	});/// jQB //////////////////////////////////////
+	
+	
+	
+	
+	</script>
+</head>
+ 
+<body>
+
+<div id="container">
+	
+ <p>당신이 좋아하는 사진 2장을 번갈아 앞쪽에 추가하기 클릭!!!!!</p>
+	
+	
+	<div id="pic"></div>
+	
+	
+<!--	<img src="https://pbs.twimg.com/profile_images/834793347780796416/FRi2DPZ0_400x400.jpg" alt="이미지">-->
+	
+	
+</div>
+<!---------- jQuery code Start ---------->
+<script>
+
+</script>
+
+</body>
+</html>

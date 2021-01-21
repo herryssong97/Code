@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> html() / html(String)  </title>
+<script src="jquery-1.7.2.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		
+		//미션: #main의 첫번째 p태그를 클릭하면 두번째 p태그 내부에 img태그를 5개 만들고 css설정을 absolute로 하여 차례대로 left이동 애니메이션을 하시오.
+        $("#main p").first().click(function(){
+            console.log("나야 나!");
+            
+            $(this) // 나자신 -> 첫번째 p태그
+            .next() // 두번째 p태그(주인공!)
+            // 주인공 내부에 html 이미지 5개 넣기!
+            .html('<img src="pic1.jpg" alt="이미지"><img src="pic2.jpg" alt="이미지"><img src="pic3.jpg" alt="이미지"><img src="pic4.jpg" alt="이미지"><img src="pic5.jpg" alt="이미지">')
+            .find("img") // 이미지 5개로 주인공 변경
+            // 5개 이미지 모두 css변경하기
+            .css({
+                position:"absolute",
+                left:"0"
+            })
+            .first() // 이미지 중 첫번째 이미지 선택!
+            .css({width:"300px"})
+            .next() // 두번째 이미지
+            .css({width:"250px"})
+            .next() // 세번째 이미지
+            .css({width:"200px"})
+            .next() // 네번째 이미지
+            .css({width:"150px"})
+            .next() // 다섯번째 이미지
+            .css({width:"100px"})
+            
+            ///// 애니매이션 주기 ////////////////
+            /// 마지막 이미지에서 부모로 이동하여
+            /// 각각의 img태그를 순서대로 선택하여
+            /// 애니매이션을 준다!
+            .parent() // 다섯번째 이미지의 부모로 올라감!
+            // #main>p:last 두번째 p태그임!
+            .find("img") // 아래 다섯개의 이미지
+            .eq(1) // 두번째 이미지가 주인공!
+            .delay(1000) // 1초후
+            .animate({left:"300px"},400) // 액션!
+            .next() // 세번째 이미지가 주인공!
+            .delay(1400) // 1.4초후
+            .animate({left:"550px"},300) // 액션!
+            .next() // 네번째 이미지가 주인공!
+            .delay(1700) // 1.7초후
+            .animate({left:"750px"},200) // 액션!
+            .next() // 다섯번째 이미지가 주인공!
+            .delay(1900) // 1.9초후
+            .animate({left:"900px"},100) // 액션!
+            
+            // 추가 짝홀수 이동애니매이션
+            // 마지막 이미지로부터 다시 부모로 이동!
+            .parent().find("img:even") // 짝수 (0부터)
+            .delay(2000) // 위의 총액션 시간 2초를 기다림!
+            .animate({top:"200px"},500) // 액션!
+            .parent().find("img:odd") // 홀수이미지만 선택
+            .eq(0) // 첫번째 홀수 이미지
+            .delay(2000) // 2초후
+            .animate({top:"-50px"},500) // 액션!
+            .parent().find("img:odd")
+            .eq(1)
+            .delay(2000) // 2초후
+            .animate({top:"50px"},500); // 액션!(전체 끝!)
+            
+            
+            
+            
+            
+            
+            
+        }); /////////// click /////////////////////
+		
+	
+		
+	});/////////// jQB ///////////////////////
+	
+	
+	
+	
+	
+	</script>
+</head>
+<body>
+
+ <div id = "intro">
+   <p> intro 입니다.</p>
+ </div>
+ 
+ <div id = "main">
+   <p>여기를 클릭하시면 이미지가 나와요!</p>
+   <p><img src="pic1.jpg" alt="이미지"></p>
+ </div>
+
+<script>
+
+</script>
+
+</body>
+</html>
+
