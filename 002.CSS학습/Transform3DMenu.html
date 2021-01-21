@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Transform 3D Menu</title>
+    <style>
+        /*웹폰트*/
+        @import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+
+        
+        html,body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        body{
+            background-image: linear-gradient(to bottom, #e98bff,#a6ffb0,#ffd6b7);
+        }
+        
+        /*공통*/
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            /*3無*/
+        }
+        ul::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        li{
+            float: left;
+        }
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        /*네비게이션 공통*/
+        nav a{
+            font-family: 'Nerko One', cursive;
+        }
+        
+        /*가로 네비게이션*/
+        .gnb1{
+            width: 800px;
+            margin: 0 auto;
+        }
+        .gnb1 li{
+            position: relative;
+            /*부모자격*/
+            width: 200px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            /*트랜스폼 3D설정하기*/
+            transform-style: preserve-3d;
+/*            transform-origin: top;*/
+            /*회전기준을 상단으로 변경하기*/
+            transition: .4s ease-out;
+            /*트랜지션으로 마우스 오버시 시간 설정하기*/
+        }
+        /*a요소 공통*/
+        .gnb1 a{
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            /*배경이미지넣기*/
+            background: url(images/img1.jpg) no-repeat center/cover;
+        }
+        
+        /*첫번째 a요소를 화면방향(z축)으로 높이값의 절반이동하기*/
+        .gnb1 a:first-child{
+            transform: translateZ(25px);
+        }
+        
+        /*두번째 a요소(한글메뉴) 아래쪽으로 x축회전*/
+        .gnb1 a:last-child{
+            /*미리회전하여 아래쪽에 가있게함!*/
+            background-image: url(images/img2.jpg);
+            /*배경이미지 다른것 넣기*/
+            
+            top: 25px;
+            transform: rotateX(-90deg);
+            
+        }
+        
+        /*마우스 오버시 X축 회전*/
+        .gnb1 li:hover {
+            transform: rotateX(90deg);
+        }
+        
+        /*세로 네비게이션*/
+        .gnb2{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 200px;
+        }
+        .gnb2 li{
+            position: relative;
+            /*부모자격*/
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            /*트랜스폼 3D설정하기*/
+            transform-style: preserve-3d;
+            /*회전기준을 상단으로 변경하기*/
+            transition: .4s ease-out;
+            /*트랜지션으로 마우스 오버시 시간 설정하기*/
+            outline: 5px solid red;
+        }
+        /*a요소 공통*/
+        .gnb2 a{
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            /*배경이미지넣기*/
+            background: url(images/img1.jpg) no-repeat left/cover;
+        }
+        /*첫번째 a요소(영어메뉴)*/
+        .gnb2 a:first-child{     
+            transform: translateZ(100px);
+        }
+        /*두번째 a요소(한글메뉴)*/
+        .gnb2 a:last-child{
+            left: -50%;
+            transform: rotateY(90deg);
+            /*미리회전하여 아래쪽에 가있게함!*/
+            background-image: url(images/img2.jpg);
+            
+        }
+        
+        /*마우스 오버시 X축 회전*/
+        .gnb2 li:hover {
+            transform: rotateY(90deg);
+        }
+    
+    
+    </style>
+</head>
+<body>
+   <nav class="gnb1">
+       <ul>
+           <li>
+               <a href="">HOME</a>
+               <a href="">홈으로</a>
+           </li>
+           <li>
+               <a href="">MEN</a>
+               <a href="">남성용</a>
+           </li>
+           <li>
+               <a href="">WOMEN</a>
+               <a href="">여성용</a>
+           </li>
+           <li>
+               <a href="">BOARD</a>
+               <a href="">게시판</a>
+           </li>
+       </ul>
+   </nav>
+   
+   <nav class="gnb2">
+       <ul>
+           <li>
+               <a href="">홈으로</a>
+               <a href="">HOME</a>
+           </li>
+           <li>
+               <a href="">남성용</a>
+               <a href="">MEN</a>
+           </li>
+           <li>
+               <a href="">여성용</a>
+               <a href="">WOMEN</a>
+           </li>
+           <li>
+               <a href="">게시판</a>
+               <a href="">BOARD</a>
+           </li>
+       </ul>
+   </nav>
+   
+   
+   
+   
+    
+</body>
+</html>

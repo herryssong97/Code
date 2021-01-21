@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Solar System 2D</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+        
+        html,body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            background: url(images/space.jpg) no-repeat 0/cover;
+            overflow: hidden;
+            /*스크롤 없앰*/
+        }
+        
+        /*타이틀*/
+        .tit{
+            position: relative;
+            z-index: 1;
+            /*z-index는 포지션이 static이 아니어야 적용된다!*/
+            text-align: center;
+            font-family: 'Redressed', cursive;
+            color: aliceblue;
+            font-size: 80px;
+            margin: 0;
+            padding: 20px;
+        }
+        /*축소확대버튼*/
+        .tit2{
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+        }
+        .tit2 a{
+            text-decoration: none;
+            color: #fff;
+            margin: 0 20px;
+        }
+        /*마우스오버시*/
+        .tit2 a:hover{
+            color: #ff0;
+        }
+        /*선택된 class*/
+        .tit2 a.on{
+            color: #ff0;
+        }
+        
+        /*태양계박스*/
+        #solar{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            /*중앙이동*/
+            width: 250px;
+            height: 250px;
+            
+        }
+        
+        /*태양*/
+        #sun{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 250px;
+            overflow: hidden;
+            /*커지는 태양 숨기기*/
+            border-radius: 50%;/*원*/
+            box-shadow: 0 0 100px 40px orange;
+            /*box-shadow: x축 y축 경계선흐림(blur) 그림자크기(spread) 색;*/
+        }
+        #sun img{
+            width: 100%;
+            height: 100%;
+            /*애니메이션:이시이지반방마*/
+            animation: flame 40s linear infinite alternate;
+        }
+        
+        /*태양이 이글거리는 느낌애니*/
+        @keyframes flame{
+            from{
+                transform: scale(1);
+            }
+            to{
+                transform: scale(1.5);
+            }
+        }/*키프레임*/
+        
+        /*지구*/
+        #earth{
+            position: absolute;
+            top: 85px;
+            left: 85px;
+            width: 80px;
+            height: 80px;
+            background: url(images/earth.png) no-repeat 0/100% 100%;
+            /*애니메이션:이시이지반방마*/
+            animation: earth 20s linear infinite;
+        }
+        /*지구회전 키프레임*/
+        /*rotate를 뒤에 한번 더 써서 반대방향으로 설정하면 지구가 
+        정립상으로 주변을 회전한다!*/
+        @keyframes earth{
+            from{
+                transform: rotate(0deg) translateX(-250px) rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg) translateX(-250px) rotate(-360deg);
+            }
+        }/*키프레임*/
+        
+        /*달*/
+        #moon{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: url(images/moon.png) no-repeat 0/100% 100%;
+            /*애니메이션:이시이지반방마*/
+            animation: moon 10s linear infinite;
+        }
+        /*목성회전키프레임*/
+        @keyframes moon{
+            from{
+                transform: rotate(0deg) translateY(80px) rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg) translateY(80px) rotate(-360deg);
+            }
+        }/*키프레임*/
+        
+        /*목성*/
+        #jupiter{
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 150px;
+            height: 150px;
+            background: url(images/jupiter.png) no-repeat 0/100% 100%;
+            /*애니메이션:이시이지반방마*/
+            animation: jupiter 25s linear infinite;
+        }
+        /*목성회전키프레임*/
+        @keyframes jupiter{
+            from{
+                transform: rotate(0deg) translateY(400px) rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg) translateY(400px) rotate(-360deg);
+            }
+        }/*키프레임*/
+    
+        /*명왕성*/
+        #pluto{
+            position: absolute;
+            top: 65px;
+            left: 65px;
+            width: 50px;
+            height: 50px;
+            background: url(images/pluto.png) no-repeat 0/100% 100%;
+            /*애니메이션:이시이지반방마*/
+            animation: pluto 30s linear infinite;
+        }
+        /*명왕성회전키프레임*/
+        @keyframes pluto{
+            from{
+                transform: rotate(0deg) translateX(550px) rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg) translateX(550px) rotate(-360deg);
+            }
+        }/*키프레임*/
+        
+        /*토성*/
+        #saturn{
+            position: absolute;
+            top: 70px;
+            left: 70px;
+            width: 375px;
+            height: 150px;
+            background: url(images/saturn.png) no-repeat 0/100% 100%;
+            /*애니메이션:이시이지반방마*/
+            animation: pluto 35s linear infinite;
+        }
+        /*토성회전키프레임*/
+        @keyframes saturn{
+            from{
+                transform: rotate(0deg) translateY(200px) rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg) translateY(200px) rotate(-360deg);
+            }
+        }/*키프레임*/
+    
+    </style>
+    <script>
+    /*//////////////////////////////////////////////////
+        함수명 : scaleView
+        기능 : solar system 부모박스의 크기를 transform으로 축소, 확대한다
+    *///////////////////////////////////////////////////
+        
+        function scaleView(val,obj){// val-축소확대값, obj-a태그자신
+            
+            console.log("축소확대:"+val);
+            
+            // 1. 변경대상 : #solar
+            var tg = document.querySelector('#solar');
+            
+            // 2. 변경내용 : style의 transform의 scale을 변경한다!
+            // 단, 기존의 중앙이동을 살려놔야함! translate(-50%,-50%)
+            tg.style.transform = "translate(-50%,-50%) scale("+val+")";
+            tg.style.transition = "transform 2s ease-in-out";
+            
+            // 3. a요소 class 초기화
+            var link = document.querySelectorAll('.tit2 a');
+            for(var x of link){
+                x.classList.remove("on");            
+            } /////////// for /////////////////
+            
+            // 4. 해당 a요소만 clas="on"넣기
+            obj.classList.add("on");
+            /*
+            classList는 요소에 class속성값을 셋팅하는 객체다!
+                1) classList.add(클래스명) : 클래스추가
+                2) classList.remove(클래스명) : 클래스삭제
+                3) classList.toggle(클래스명) : 클래스 있으면 삭제/없으면 추가
+            */
+            
+            
+                        
+        }; ///// scaleView함수 //////////////////////////
+        ////////////////////////////////////////////////
+    </script>
+    
+    
+</head>
+<body>
+  <!--타이틀-->
+    <h1 class="tit">Solar System</h1>
+    <!--배율버튼-->
+    <h2 class="tit tit2">
+        <a href="" onclick="scaleView(0.3,this);return false;">×  0.3</a> |
+        <a href="" onclick="scaleView(0.5,this);return false;">×  0.5</a> |
+        <a href="" onclick="scaleView(1,this);return false;" class="on">X 1</a> |
+        <a href="" onclick="scaleView(1.5,this);return false;">×  1.5</a>
+    </h2>
+    
+   <!--태양계박스-->
+    <div id="solar">
+        <!--태양-->
+        <div id="sun">
+            <img src="images/sun.png" alt="sun">
+        </div>
+        <!--지구-->
+        <div id="earth">
+           <!--달-->
+            <div id="moon"></div>
+        </div>
+        <!--목성-->
+        <div id="jupiter"></div>
+        <!--명왕성-->
+        <div id="pluto"></div>
+        <!--토성-->
+        <div id="saturn"></div>
+    </div>
+   
+   
+   
+   
+   
+    
+</body>
+</html>
