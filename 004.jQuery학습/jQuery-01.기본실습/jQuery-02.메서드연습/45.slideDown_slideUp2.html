@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> slideDown() slideUp() 마우스 오버시</title>
+<!-- jQuery library -->
+<script src="jquery-1.7.2.min.js"></script>
+	<script>
+		$(function(){/// jQB ////////////
+            
+            // 미션 : 버튼에 마우스 오버시 slideDown
+            // 마우스 아웃시 slideUp 되게 하시오!
+            
+            // 대상을 display:none 시킨다!
+            $("div").hide
+            /*
+            [ 마우스 오버/아웃 관련 이벤트 메서드 ]
+            1. mouseover() / mouseout()
+            - 기준이 요소의 영역
+            2. mouseenter() / mouseleave()
+            - 기준이 요소의 경계선
+            3. hover(함수1, 함수2)
+            마우스 오버시 함수1 실행, 마우스 아웃시 함수2 실행
+            */
+            $("#bar").hover(function(){ // over
+                $("div").slideDown(400);
+                
+            },
+            function(){ // out
+                $("div").stop().slideUp(400);
+                // stop() 메서드로 애니매이션 큐 정리하기!!
+            }); /// hover ///////
+            
+            
+			
+		});/// jQB /////////////////////////////////
+	
+	
+	
+	
+	
+	
+	</script>
+	
+	
+	
+	
+<style>
+
+</style>
+</head>
+<body>
+<button id="bar">마우스 오버시 slideDown / 마우스 오버시 slideUp</button>
+
+<div>
+	<img src="sample1.jpg" alt="" width="300" height="307"/>
+</div>
+
+<!---------- jQuery code Start ---------->
+<script>
+
+
+
+
+
+</script>
+
+</body>
+</html>
