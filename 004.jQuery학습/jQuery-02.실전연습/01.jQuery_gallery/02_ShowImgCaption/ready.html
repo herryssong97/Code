@@ -1,77 +1,145 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<title> Sliding Captions 갤러리 </title>
-<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-<style type="text/css">
+    <meta charset="utf-8">
+    <title> Sliding Captions 갤러리 </title>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script>
+        $(function() { //// jQB //////////////////////////
+
+            // 설명글 숨기기
+            $(".thumbs em").hide();
+
+            //// click 이벤트 대상: .thumbs a
+            /// 변경대상: #largeImg img
+            $(".thumbs a").click(function(e) {
+                // a요소 기본 이동기능 막기!
+                e.preventDefault();
+
+                // 1. 클릭된 a요소의 href값을 읽어오기
+                let isrc = $(this).attr("href");
+                console.log("경로:" + isrc);
+
+                // 2. 큰 이미지의 src속성을 isrc값으로 변경
+                $("#largeImg img").attr("src", isrc);
+
+                // 3. 이미지 설명글 읽어오기
+                // 위치 : 선택된 a요소의 다음(next)형제요소
+                let itxt = $(this).next().text();
+                console.log("설명글:" + itxt);
+
+                // 4. 이미지 설명박스 만들기
+                // 미리 #caption박스 지우기(하나만 남기려고!)
+                $("#caption").remove();
+                
+                $("#largeImg")
+                    .append('<div id="caption"></div>');
+                
+                // 5. 설명박스에 내용넣기
+                $("#caption").text(itxt);
+                
+                // 6. 박스의 높이값 구하기(높이값 만큼 top값 설정)
+                let cH = $("#caption").innerHeight();
+                console.log("높이값:"+cH);
+                
+               /* 
+                [ 선택요소의 높이값 구하는 메서드 ]
+                1) height() -> 순수높이값(패딩,보더 제외한 높이값)
+                2) innerHeight() -> 패딩을 포함한 내부높이값
+                3) outerHeight() -> 보더(마진)포함된 총 높이값
+                    outerHeight(true) -> 마진까지 포함된 높이값
+                    
+                ※ width 도 동일함!
+                    - width(), innerWidth(), outerWidth()
+                */
+                
+                
+                // 7. 설명박스 높이값 만큼 위로 올라오기 애니매이션
+                $("#caption").animate({
+                    top: -cH + "px"
+                },300); ////// animate /////////
 
 
-body {
-	margin:20px auto;
-	padding:0;	
-	width: 620px;
-	background:#192839;
-}
-.thumbs {
-   width:100px;	
-   float:left;
-}
-.thumbs img {
-	border:solid 1px #ccc;
-	padding:5px;
-	margin-bottom:3px;
-}
-.thumbs img:hover {
-	border-color: #EF4018;
-}
 
-#largeImg {
-	border:solid 1px #ccc;
-	width: 500px;
-	height: 280px;
-	padding:5px;
-    margin-left:110px;
-	overflow:hidden;
-	
-}
+            }); ////////// click ///////////////
 
-#caption { background:url(captionBg.png) repeat-y; 
-           border:#CCC 1px thin; 
-		   padding:10px;
-		   position:relative;
-		   color:#FFFFFF; }
-		   
 
-</style>
+
+
+        }); /////////////////////////////////////////////
+    </script>
+
+    <style type="text/css">
+        body {
+            margin: 20px auto;
+            padding: 0;
+            width: 620px;
+            background: #192839;
+        }
+
+        .thumbs {
+            width: 100px;
+            float: left;
+        }
+
+        .thumbs img {
+            border: solid 1px #ccc;
+            padding: 5px;
+            margin-bottom: 3px;
+        }
+
+        .thumbs img:hover {
+            border-color: #EF4018;
+        }
+
+        #largeImg {
+            border: solid 1px #ccc;
+            width: 500px;
+            height: 280px;
+            padding: 5px;
+            margin-left: 110px;
+            overflow: hidden;
+
+        }
+
+        #caption {
+            position: relative;/*위치이동때문에 사용!*/
+            background: url(captionBg.png) repeat-y;
+            border: #CCC 1px thin;
+            padding: 10px;
+            color: #FFFFFF;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="thumbs">
-  
-    	<a href="images/pic1.jpg" title="image1"><img src="images/th_pic1.jpg" /></a>
+    <div class="thumbs">
+
+        <a href="images/pic1.jpg" title="image1"><img src="images/th_pic1.jpg" /></a>
         <em>Lorem Ipsum is simply dummy text of the pdrinting and typesetting industry.</em>
-   
-    
+
+
         <a href="images/pic2.jpg" title="image2"><img src="images/th_pic2.jpg" /></a>
         <em> Lorem Ipsum is simply dummy tely dummy thely dummy tegxt of thely try.
-             Sed facilisis, sem a luctus bibendum, dui risus pellentesque velit, quis tempor magna 
-            sem vel justo. Etiam eget ipsum ante. </em>     
-     
-       	<a href="images/pic3.jpg" title="image3"><img src="images/th_pic3.jpg" /></a>
-       	<em> Lorem Ipsum is simply dummy.</em>
-     
-</div>
-    
-<div id="largeImg"><img src="images/pic1.jpg" alt="image1" /></div>
+            Sed facilisis, sem a luctus bibendum, dui risus pellentesque velit, quis tempor magna
+            sem vel justo. Etiam eget ipsum ante. </em>
+
+        <a href="images/pic3.jpg" title="image3"><img src="images/th_pic3.jpg" /></a>
+        <em> Lorem Ipsum is simply dummy.</em>
+
+    </div>
+
+    <div id="largeImg">
+        <img src="images/pic1.jpg" alt="image1">
+        <div id="caption"></div>
+    </div>
 
 
-<!---------- jQuery code Start ---------->
-<script>
+    <!---------- jQuery code Start ---------->
+    <script>
 
 
-	
-</script>
-</body>
-</html>
+
+    </script>
+</body></html>

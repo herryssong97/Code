@@ -1,46 +1,53 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title> plugIn </title>
-<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-	<script>
-	$(function(){//// jQB ////////////////////////
-		$("h1").click(function(){
-			
-		});////// click //////////////////
-		
-		$("div").click(function(){
-			
-		});////// click //////////////////
-		
-		$("p").click(function(){
-			
-		});////// click //////////////////
-		
-		
-		
-		
-	});///// jQB //////////////////////////////
-	
-	
-	
-	
-	
-	</script>
-	
-	
-	
+    <meta charset="utf-8">
+    <title> plugIn </title>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="jquery.myplugin-1.2.js"></script>
+    <!--내가만든 플러그인을 제이쿼리 라이브러리 아래에 불러온다-->
+    <script>
+        $(function() { //// jQB ////////////////////////
+            $("h1").click(function() {
+                // myAction(배경색, 왼쪽마진, 시간)
+                $(this).myAction("yellow",200,2000);
+                
+                
+            }); ////// click //////////////////
+
+            $("div").click(function() {
+                // myAction(배경색, 왼쪽마진, 시간)
+                $(this).myAction("red",500,3000);
+                
+            }); ////// click //////////////////
+
+            $("p").click(function() {
+                // myAction(배경색, 왼쪽마진, 시간)
+                $(this).myAction("pink",600,1000);
+
+            }); ////// click //////////////////
+
+
+
+
+        }); ///// jQB //////////////////////////////
+
+    </script>
+
+
+
 </head>
 
 <body>
 
-<h1> h1 배경을 바꾸다</h1>
-<div> div 배경을 바꾸다</div>
-<p> p 배경을 바꾸다</p>
+    <h1> h1 배경을 바꾸다</h1>
+    <div> div 배경을 바꾸다</div>
+    <p> p 배경을 바꾸다</p>
 
-<script>
+    <script>
 
-</script>
+    </script>
 </body>
+
 </html>
