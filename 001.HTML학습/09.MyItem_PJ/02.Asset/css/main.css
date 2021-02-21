@@ -1,7 +1,7 @@
 @charset "utf-8";
 /*My Item PJ 메인 CSS - main.css*/
 
-/*외부 css파일 합치기*/
+/*외부css파일 합치기*/
 @import url(core.css);
 @import url(reset.css);
 @import url(common.css);
@@ -24,7 +24,7 @@
     /*width가 50%늘어난 만큼 왼쪽으로 50%의 절반인 25%를 이동함*/
     /*부모자격*/
     width: 150%;
-    /*왜 크기를 키웠는가?
+    /*왜 가로크기를 키웠는가?
     이유는 자식요소 absolute를 left:50%로 밀었을때 기존 부모크기가 좁아서 하나의 아이템이 아래로 떨어지기 때문*/
     height: 100px;
     padding-bottom: 20px;
@@ -32,9 +32,9 @@
 }
 .thumbs ol{
     position: absolute;
-    /*부모는> .thumbs*/
+    /*부모는? .thumbs*/
     left: 50%;
-    transform: translateX(-50%)
+    transform: translateX(-50%);
     /*가로중앙이동*/
     /*width는 설정안하면 자동임!(내용만큼)*/
 }
@@ -48,19 +48,8 @@
 .thumbs img:hover{
     height: 150px;
     margin-top: -50px;
-    /*    높이값이 늘어난 만큼 마진탑을 마이너스로 준다!
-    - 이미지가 윗쪽으로 커짐  */
+    /*높이값이 늘어난만큼 마진탑을 마이너스로 준다!-이미지가 윗쪽으로 커짐!*/
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

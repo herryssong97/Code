@@ -1,14 +1,10 @@
 @charset "utf-8";
-/*My Item PJ 템플릿 CSS - login.css*/
+/*My Item PJ 로그인 페이지 CSS - login.css*/
 
-/*외부 css파일 합치기*/
+/*외부css파일 합치기*/
 @import url(core.css);
 @import url(reset.css);
 @import url(common.css);
-
-
-
-
 
 /*부모박스 상단패딩*/
 #cont{
@@ -35,6 +31,7 @@
 /*로그인박스*/
 #login{
     position: relative;
+    /*부모자격*/
     width: 700px;
     height: 275px;
     margin: 0 auto;
@@ -43,14 +40,14 @@
     border-radius: 10px;
     
     box-sizing: border-box;
-    /*보더, 패딩포함 크기유지*/
+    /*보더,패딩포함 크기유지*/
     padding-top: 60px;
     padding-left: 15px;
 }
 /*입력창 공통*/
 .minput label{
     display: inline-block;
-    /*inline인 label 요소 디자인적용*/
+    /*inline인 label요소 디자인적용*/
     width: 150px;
     padding-top: 9px;
     font-size: 20px;
@@ -59,7 +56,7 @@
     text-align: center;
 }
 .minput input{
-    width: 320px;
+   width: 320px;
     height: 36px;
     border: 1px solid #737373;
     border-radius: 5px;
@@ -67,12 +64,12 @@
     padding-left: 5px;
     color: #666;
 }
-/*두번째 비번박스 마진탑*/
+/*두번째 비번박스 마진탑밀기*/
 .logF div:nth-child(2){
-    padding-top: 20px;
+    margin-top: 20px;
 }
 
-/*크롬브라우저 포커스 아웃라인 제거*/
+/*크롬브라우저 포커스 아웃라인제거*/
 input:focus{
     outline: none;
 }
@@ -84,7 +81,6 @@ input:focus{
     right: 40px;
     /*부모는? #login*/
 }
-
 /*서브밋 버튼*/
 #sbtn{
     width: 113px;
@@ -106,22 +102,17 @@ input:focus{
 /*체크박스영역*/
 .addBox>span{
     margin: 0 15px;
-    /*위아래0px 양쪽15px*/
     color: #666;
 }
 /*체크박스 옆 세로정렬 맞추기*/
-.addBx>span>input{
+.addBox>span>input{
     vertical-align: -2px;
 }
 /*기타링크*/
 .addBox>a{
     margin: 0 15px;
-    /*위아래0px 양쪽15px*/
+    /*마진: 위아래 양쪽*/
 }
-
-
-
-
 
 
 

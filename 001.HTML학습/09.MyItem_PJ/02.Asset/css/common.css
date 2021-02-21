@@ -109,32 +109,30 @@
     left: 77px;
     /*outline: 2px dotted red;*/
     
-    /*애니매이션:이시이지반방마*/
+    /*애니메이션:이시이지반방마*/
     animation: cbAni 1.5s ease-in-out 3.5s,
         rotAni .6s ease-in-out 5s;
 }
 /*카멜레온 박스 애니 키프레임*/
-/*3. 카멜레온박스 왼쪽, 오른쪽 (원위치) 이동*/
+/*3.카멜레온박스 왼쪽,오른쪽(원위치)이동*/
 @keyframes cbAni{
-    30%{
+    0%{
         left: 77px;
-        
     }
     50%{
         left: 10px;
-        
     }
     100%{
         left: 77px;
-        
     }
 }/*키프레임*/
-/*4. 카멜렝론 박스 시계방향 360도 회전하기*/
+/*4.카멜레온박스 반시계방향 360도 회전하기*/
 @keyframes rotAni{
     to{
         transform: rotate(-360deg);
     }
-}
+}/*키프레임*/
+
 
 
 
@@ -431,3 +429,8 @@
     font-style: normal;
     /*address 기본 이탤릭 해제!*/
 }
+
+
+
+
+

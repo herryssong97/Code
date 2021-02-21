@@ -1,52 +1,136 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
 
-<title>어디서나 펼쳐지는 내비게이션</title>
-<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <title>어디서나 펼쳐지는 내비게이션</title>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script>
+        $(function() { /// jQB ///////////////////
 
-<style>
+            /*
+                mousemove 이벤트
+                - 선택영역 내부에 마우스 포인터가 움직일때 마다 
+                    발생하는 이벤트
+                - 제이쿼리 사용 메서드 : mousemove()
+            */
 
-*{	margin:0; padding:0;	}
+            // 마우스 무브 이벤트 대상: #home
+            $("#home").mousemove(function(e) { // e-이벤트전달값
+                // 마우스 포인터 위치 알아내기
+                //e.pageX -> x축 좌표값(단위없는 px값) 리턴
+                //e.pageY -> y축 좌표값(단위없는 px값) 리턴
+                // console.log("x좌표:" + e.pageX);
+                // console.log("y좌표:" + e.pageY);
 
-div#container {
-	width:600px;
-	height:200px;
-	left:0px;
-	top:0px;
-	position:relative;
-}
-				
-div#home {
-	width:50px;
-	height:200px;
-	background:#FF9999;
-	left:0px;
-	top:0px;
-	position:absolute;
-	z-index:2;
-}
-		   
-ul { 
-	width:600px; 
-	height:200px;
-	list-style:none;
-	left:-600px;
-	top:0px;
-	position:absolute;
-	z-index:1;
-}
-	 
-ul li {
-	width:200px;
-	height:200px;
-	float:left;
-	opacity:0.7;
-}
+                // Y축값 (#home박스의 높이값의 절반인 100을 뺀다!)
+                let posY = e.pageY - 100;
+
+                // 컨테이너 박스 움직이기
+                $("#container").css({
+                    top: posY + "px"
+                }); ////// css ////////////
 
 
-</style>
+            }); /////////// mousemove ////////////////
+
+            // #home을 클릭하면 #menu의 left값을 변경하여 나오게 하기
+
+            // left값 변수
+            let mval = 50;
+
+            $("#home").stop().click(function() {
+                $("#menu").animate({
+                    left: mval + "px"
+                }, 500); /// animate ///
+                // stop()으로 큐에 쌓인 애니매이션 지우기
+
+                // 비?집:놀이동산; (조건연산자)
+                mval === 50 ? mval = -600 : mval = 50;
+
+            }); /////////////// click //////////////////
+
+            // #menu의 li에 마우스 오버시 opacity값을 1로 변경
+            // 아웃시에는 다시 0.7로 복귀
+            // hover(함수1,함수2)
+            // fadeTo(시간,오파,이징,함수)
+            $("#menu li").hover(
+                function() { // over
+                    $(this).stop().fadeTo(300, 1);
+                },
+                function() { // out
+                    $(this).stop().fadeTo(300, 0.7);
+                }); ///////// hover /////////////
+
+            // 메뉴 클릭시 페이지 이동하기
+            $("#menu li").click(function() {
+                let idx = $(this).index(); // li순번
+                console.log("순번:" + idx);
+                
+                let url; // 이동주소
+                switch(idx){
+                    case 0: url="http://www.naver.com";break;
+                    case 1: url="http://www.google.com";break;
+                    case 2: url="http://www.daum.net";break;
+                } //// switch case ////////
+                
+                // 페이지 새창열고 사이트 이동하기 //
+                // window.open() 새창열기
+                // location.href = 주소 -> 페이지이동
+                window.open().location().href = url;
+
+            }); /////////// click ///////////////
+
+
+
+
+
+
+
+        }); //// jQB ///////////////////////////
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div#container {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            width: 600px;
+            height: 200px;
+        }
+
+        div#home {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 50px;
+            height: 200px;
+            background: #FF9999;
+            z-index: 2;
+        }
+
+        ul {
+            position: absolute;
+            top: 0px;
+            left: -600px;
+            width: 600px;
+            height: 200px;
+            list-style: none;
+            z-index: 1;
+        }
+
+        ul li {
+            width: 200px;
+            height: 200px;
+            float: left;
+            opacity: 0.7;
+        }
+    </style>
 
 </head>
 
@@ -54,16 +138,15 @@ ul li {
 
 
 
-<div id="container">
-	<div id = "home">HOME </div>
-  
-	<ul id ="menu">     
-		<li><img src="th_bg1.jpg" /></li>
-		<li><img src="th_bg2.jpg" /></li>
-		<li><img src="th_bg3.jpg" /></li>
-	</ul>
-</div>
+    <div id="container">
+        <div id="home">HOME </div>
+
+        <ul id="menu">
+            <li><img src="th_bg1.jpg" /></li>
+            <li><img src="th_bg2.jpg" /></li>
+            <li><img src="th_bg3.jpg" /></li>
+        </ul>
+    </div>
 
 
-</body>
-</html>
+</body></html>
