@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>장면 넘기기 애니메이션</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <style>
+        html,
+        body,
+        ul,
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #8CC63E;
+        }
+
+        /*공통class*/
+        .bld {
+            /*IR(배경이미지 설명)-웹접근성=평등의원칙*/
+            display: block;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /*
+            웹폰트체
+            font-family: 'Gloria Hallelujah', cursive;
+            font-family: 'ZCOOL KuaiLe', cursive;
+        */
+        /*1.타이틀*/
+        .mtit {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            /*가로중앙이동*/
+            font-size: 52px;
+            font-family: 'Gloria Hallelujah', cursive;
+            color: #fff;
+            z-index: 1;
+            /*맨위*/
+        }
+
+        /*2.메뉴*/
+        .gnb {
+            position: absolute;
+            top: 10%;
+            left: 50px;
+            z-index: 1;
+        }
+
+        .gnb ul {
+            list-style: none;
+        }
+
+        /*a요소 디자인*/
+        .gnb a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 32px;
+            line-height: 3;
+            /*단위없는 숫자는 배수(기준은 글자크기)*/
+        }
+
+        /*마우스 오버시*/
+        .gnb a:hover {
+            color: #f00;
+            text-decoration: line-through;
+        }
+
+        /*3.TV셋*/
+        .tvset {
+            position: relative;
+            /*부모자격*/
+            width: 1280px;
+            height: 720px;
+            background: url(images/tvset.png) no-repeat;
+            margin: 0 auto;
+        }
+
+        /*스크린*/
+        .screen {
+            position: absolute;
+            /*나의 부모? .tvset*/
+            top: 213px;
+            left: 449px;
+            width: 456px;
+            height: 227px;
+            background-image: url(images/street.jpg);
+            background-size: auto 100%;/*높이값에 맞추기*/
+            background-repeat: repeat-x;/*x축 반복*/
+            
+            /*애니메이션:이시이지반방마*/
+            animation: street 4s linear infinite;
+        }
+        
+        /*키프레임- 스크린 배경이동*/
+        @keyframes street{
+            from{
+                background-position: 0 0;
+            }
+            to{
+                background-position: -387px 0;
+            }
+        }/*키프레임*/
+        
+        
+        /*3-1.걷는소년존*/
+        .spani1{
+            position: relative;
+            /*마우스 오버시 z-index 적용위해 relative줌!*/
+            width: 100px;
+            height: 176px;
+            margin: 23px auto;
+            background-image: url(images/spAni03.png);
+            background-size: auto 176px;
+            
+            /*애니메이션:이시이지반방마*/
+            animation: spani1 1s steps(8) infinite;
+            
+            /*outline: 2px solid red;*/
+        }
+        /*걷는소년존 키프레임*/
+        @keyframes spani1{
+            from{
+                background-position: 0 0;
+            }
+            to{
+                background-position: -797px 0;
+                /*중요!!! 이동값에 전체이미지 길이값을 쓴다!!!*/
+            }
+        }/*키프레임*/
+        /*
+        [ 스프라이츠를 이용한 장면 넘기기 애니를 하려면? ]
+        1. 배경이미지의 전체 길이를 알아야 한다!
+        -> 왜? 이동셋팅시에 가로 이동일 경우 전체 길이값을 써야함!
+        
+        [기존 이미지를 크기변경할 경우 비율유지되는 이미지 크기구하기]
+        전체길이 / 장면개수 = 하나당 이동길이
+        비례식으로....
+        
+        가로 : 세로 = 1472 : 325 = x : 176
+        x = 1472 * 176 / 325
+        x = 797.14
+        
+        전체 8개의 장면이므로 한장면당 약 100px(99.625px)로 정해진다~!
+        
+        [ 호출시 스프라이츠 애니 장면별 찍는 steps를 정함! ]
+        - 장면을 찍을때는 이징(가속도)을 불필요!!!
+        
+        animation: 이름 시간 steps(장면개수) infinite;
+        
+        [ 주의사항 ]  
+        - x축 이동일 경우 x축 포지션값만 변경하고
+        - y축 이동일 경우 y축 포지션값만 변경한다!
+        */
+        
+        /*3-2.손흔드는 꼬마*/
+        .spani2{
+            position: absolute;
+            /*부모? .screen*/
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 72px;
+            background-image: url(images/spAni01.png);
+            
+            /*애니메이션:이름 시간 steps(n) infinite*/
+            animation: spani2 1s steps(10) infinite;
+            
+            /*outline: 2px solid blue;*/
+        }
+        /*꼬마 키프레임*/
+        @keyframes spani2{
+            from{
+                background-position: 0 0;
+            }
+            to{
+                background-position: -500px 0;
+                /*중요! x축이동의 크기는 이미지 가로크기임!*/
+            }
+        }/*키프레임*/
+        
+        /*3-3.몬스터*/
+        .spani3{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 118px;
+            height: 118px;
+            background-image: url(images/spAni02.png);
+            
+            /*애니메이션 호출*/
+            animation: spani3X 1s steps(6) infinite,
+                spani3Y 3s steps(3) infinite;
+            
+            /*
+                x축이동 : steps(장면수)
+                y축이동 : steps(줄수)
+            */
+            
+            /*outline: 2px solid blue;*/
+        }
+        
+        /*
+            x축은 1초간 6장면을 이동하고
+            y축은 3초간 3줄을 이동한다!
+        
+            배경이미지 위치 축별로 이동할때는 개별축 포지션을 사용한다!
+            background-position-x : 값;
+            background-position-y : 값;
+        */
+        
+        /*몬스터 X축 키프레임*/
+        @keyframes spani3X{
+            from{
+                background-position-x: 0;
+            }
+            to{
+                background-position-x: -710px;
+                /*배경이미지의 width크기를 써준다!(방향은 마이너스)*/
+            }
+        }/*키프레임*/
+        
+        /*몬스터 Y축 키프레임*/
+        @keyframes spani3Y{
+            from{
+                background-position-y: 0;
+            }
+            to{
+                background-position-y: -355px;
+                /*배경이미지의 height크기를 써준다!(방향은 마이너스)*/
+            }
+        }/*키프레임*/
+        
+        /*웃는여자*/
+        .spani4{
+            position: absolute;
+            top: 10%;
+            right: 20px;
+            width: 256px;
+            height: 407px;
+            background-image: url(images/girl_frames.png);
+            border: 20px ridge #a85f15;
+            transform: scale(.5);
+            /*크기에 맞게 만든 후 scale을 축소하면 편리하다!*/
+            
+            /*애니메이션*/
+            animation: spani4X 1s steps(5) infinite,
+                spani4Y 3s steps(3) infinite;
+        }
+        
+        /*웃는여자 X축 키프레임*/
+        @keyframes spani4X{
+            to{
+                background-position-x: -1280px;
+            }
+        }/*키프레임*/
+        
+        /*웃는여자 Y축 키프레임*/
+        @keyframes spani4Y{
+            to{
+                background-position-y: -1222px;
+            }
+        }/*키프레임*/
+        
+        
+        /*확대애니메이션 class*/
+        .big{
+            transition: .8s;
+        }
+        .big:hover{
+            transform: scale(3);
+            animation-play-state: paused;
+            /*애니메이션 멈추기(paused) / 애니메이션 지속(running)*/
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <!--1. 제목-->
+    <h1 class="mtit">John's Television</h1>
+    <!--2. 메뉴-->
+    <nav class="gnb">
+        <ul>
+            <li><a href="#">Watching</a></li>
+            <li><a href="#">Eating</a></li>
+            <li><a href="#">Listening</a></li>
+            <li><a href="#">Sleeping</a></li>
+        </ul>
+    </nav>
+    <!--3. TV박스-->
+    <section class="tvset">
+        <div class="screen">
+            <!--3-1.걷는소년-->
+            <div class="spani1 big">
+                <span class="bld">걷는소년존</span>
+            </div>
+            <!--3-2.꼬마-->
+            <div class="spani2 big">
+                <span class="bld">손흔드는 꼬마</span>
+            </div>
+            <!--3-3.몬스터-->
+            <div class="spani3 big">
+                <span class="bld">몬스터</span>
+            </div>
+        </div>
+    </section>
+    
+    <!--추가애니-->
+    <div class="spani4">
+        <span class="bld">웃는여자</span>
+    </div>
+    
+
+
+</body></html>

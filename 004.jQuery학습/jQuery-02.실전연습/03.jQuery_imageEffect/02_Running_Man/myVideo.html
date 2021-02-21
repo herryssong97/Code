@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Video</title>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        $(function() { /// jQB //////////////////
+            // 애니박스
+            let ani = $("#ani");
+
+            // 이미지 셋업하기 /////
+            for (let i = 0; i < 40; i++) {
+                ani.append('<img src="mymv/seq_' + i + '.jpg" alt="장면">');
+            } //// for문 //////////////////
+
+            // 이미지 첫장면 보이게하기 
+            ani.find("img").first().show();
+
+            //////////////////////////////////
+            // 한장면씩 보이게 하기 /////
+
+            // 장면번호
+            let fnum = 0;
+
+            // 장면 넘기기 함수 //////////////////
+            let nextFrame = function() {
+
+                //장면번호증가
+                fnum++;
+
+                //장면한계설정(끝번호 다음엔 첫번호로!)
+                if (fnum === 40) fnum = 0;
+
+                // 해당장면번호의 이미지를 보이게하기
+                // 나머지는 숨기기!
+                ani.find("img").eq(fnum).show()
+                    .siblings().hide();
+
+            }; //////// nextFrame함수 ////////////
+
+            /// 장면 넘기기함수 인터발 호출! ////
+
+            // 인터발용 변수(지우기용)
+            let autoI;
+
+            // 만약 처음부터 계속 움직게 하려면 바깥에 인터발함수를 셋팅한다!
+            autoI = setInterval(nextFrame, 100);
+
+            //////////////////////////////////
+            //// 글씨체, 글씨색 전환하기 ////////
+            //////////////////////////////////
+
+            // 글씨체 배열변수
+            let ff = ["Dancing Script", "Pangolin", "Permanent Marker"];
+            // 글씨색 배열변수
+            let fc = ["#ff00eb", "#5e2dff", "#22b100"];
+            // 글씨순번 변수
+            let fseq = 0;
+
+            /// 타이틀 글씨체를 3초간격으로 변경한다
+            setInterval(function() {
+
+                //순번증가
+                fseq++;
+                //순번한계
+                if (fseq === 3) fseq = 0;
+
+                //변경적용
+                $(".tit").css({
+                    fontFamily: ff[fseq],
+                    color: fc[fseq]
+                }); //// css //////////
+
+
+
+            }, 3000); //// 인터발함수 /////
+
+
+
+
+
+        }); ////////// jQB //////////////////////
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pangolin&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        /*
+        font-family: 'Dancing Script', cursive;
+        font-family: 'Pangolin', cursive;
+        font-family: 'Permanent Marker', cursive;
+        */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+        }
+
+        #ani {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-60%, -77%);
+            width: 484px;
+            height: 273px;
+            background-color: #000;
+        }
+
+        /*반투명 가림막(가상요소)*/
+        #ani::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: .2;
+        }
+
+
+
+        #ani img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            width: 100%;
+        }
+
+        /*타이틀*/
+        .tit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-60%, -77%);
+            width: 484px;
+            height: 273px;
+            color: #ff00eb;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            font-size: 30px;
+            white-space: nowrap;
+            /*줄바꿈방지*/
+            text-shadow: 4px 4px 5px #000;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            line-height: 273px;
+        }
+        
+        #tvset{            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 800px;
+            background: url(img/oldTVON.png) no-repeat center;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <!--애니메이션 박스-->
+    <div id="ani"></div>
+
+    <!--타이틀글자-->
+    <h1 class="tit">Speed is My Dream!</h1>
+
+    
+   <!--TV박스-->
+    <div id="tvset"></div>
+
+
+
+</body></html>
