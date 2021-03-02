@@ -5,7 +5,7 @@ let autoI;
 // 타임아웃용 전역변수
 let autoT;
 // 포스터상태 전역변수
-let ptsts = 1;//1-허용,0-불허용
+let ptsts = 1; //1-허용,0-불허용
 
 //////// 로드구역 ////////////////////////////////
 // addEventListener(이벤트명,함수) - JS내장함수
@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded",
             //console.log("나,왼쪽!");
 
             // 자동호출지우기(포스터 허용상태일때만 호출!)
-            if(ptsts) clearAuto();
+            if (ptsts) clearAuto();
 
             // 이미지변경함수 호출!
             chgImg(0); //전달값0
@@ -59,7 +59,7 @@ window.addEventListener("DOMContentLoaded",
             //console.log("나,오른쪽!");
 
             // 자동호출지우기(포스터 허용상태일때만 호출!)
-            if(ptsts) clearAuto();
+            if (ptsts) clearAuto();
 
             // 이미지변경함수 호출!
             chgImg(1); //전달값1
@@ -197,62 +197,62 @@ window.addEventListener("DOMContentLoaded",
 
 
 $(function () { /// jQB ///////////////////////
-    
+
     // 동영상요소
     let mv = $("#mv");
-    
+
     ///////////////////////////////////////////
     // 1. 영화포스터 클릭시 영화예고편 보여주기 ////
     // 대상선정: .gbox img
-    $(".gbox img").click(function(){
-        
+    $(".gbox img").click(function () {
+
         // 0. 포스터 자동넘김 지우기!
         clearInterval(autoI);
         // 0. 포스터 자동타임아웃 지우기!
         clearTimeout(autoT);
-        
-        
+
+
         // 1-0. 중앙의 포스터가 아닌 경우 중앙으로 오게하기!
         // 중앙인지 왼쪽인지 오른쪽인지 알아내기
-        
+
         // 포스터 순번 : index() 메서드 사용!
         let pseq = $(this).index();
-        console.log("포순:"+pseq);
-        
+        //console.log("포순:" + pseq);
+
         // pseq===1 왼쪽포스터일때 왼쪽이동버튼 클릭
-        if(pseq===1) $(".lb").trigger("click");
+        if (pseq === 1) $(".lb").trigger("click");
         // pseq===3 오른쪽포스터일때 오른쪽이동버튼 클릭
-        else if(pseq===3) $(".rb").trigger("click");
+        else if (pseq === 3) $(".rb").trigger("click");
         // pseq===0, pseq===4 양쪽포스터 클릭되지 않게함!
         // pseq===2 중앙포스터는 하단으로 작아진 상태면
         // 클릭되지 않게함!(ptsts가 0되기 전엔 실행됨!)
-        else if(pseq===0 || pseq===4 ||
-               (pseq===2 && ptsts===0)) 
-            return false;//아래쪽코드 실행말고 그냥돌아가!
+        else if (pseq === 0 || pseq === 4 ||
+            (pseq === 2 && ptsts === 0))
+            return false; //아래쪽코드 실행말고 그냥돌아가!
         // trigger(이벤트명) -  선택요소에 이벤트발생
-        
-        
+
+
         // 0. 포스터 상태값 변경하기!
         //(위의 분기문 아래에 써야함!)
         ptsts = 0;
         // 이동버튼 클릭시 clearAuto함수 호출제한!
-        
+
         //1-1. 영화포스터 네비 작아지게 하단이동 애니
         // 방법: transform: scale() 사용
         // css변경으로 애니메이션을 위해 transition사용
         // 대상: .gbox
         $(".gbox").css({
             top: "80%",
-            transform:"translate(-50%,-50%) scale(.4)",
-            transition:"all .6s ease-in-out"
-        });///////// css ///////////////////
-        
+            transform: "translate(-50%,-50%) scale(.4)",
+            transition: "all .6s ease-in-out"
+        }); ///////// css ///////////////////
+
         // 버튼도 축소이동 애니메이션하기
         $(".abtn").css({
             top: "80%",
-            transform:"translateY(-50%) scale(.5)",
-            transition:"all .6s ease-in-out"
-        });///// css ///////////////////////
+            transform: "translateY(-50%) scale(.5)",
+            transition: "all .6s ease-in-out"
+        }); ///// css ///////////////////////
         // 버튼위치 세부조정
         $(".lb").css({
             left: "20%"
@@ -260,30 +260,48 @@ $(function () { /// jQB ///////////////////////
         $(".rb").css({
             right: "20%"
         }); /// css //////
-        
-        
+
+
         // 1-2. 동영상 보이게 하고 data-mv 속성값으로 
         //     동영상 정보를 불러온다!
-        
+
         // 동영상정보(data-mv:동영상파일명)
         let mi = $(this).attr("data-mv");
-        console.log("동영상정보:"+mi);
-        
+        //console.log("동영상정보:" + mi);
+
         // 변경대상: #mv -> 변수 mv에 할당!
-        mv.attr("src","mv/"+mi+".mp4").fadeIn(300);
+        mv.attr("src", "mv/" + mi + ".mp4").fadeIn(300);
         // 동영상 src를 변경한 후 서서히 나타나게함!
-        
-        // 동영상 재생하기
-        mv.get(0).play();
-        
+
+        // 동영상 재생하기 ////////////
+        // 동영상이 로딩되어 준비되기전 play() 명령을 내리면
+        // 에러가 발생한다!
+        // 내용: DOMException: The play() request was interrupted by a new load request.
+        // play() 요청은 로드 요청에 의해 방해되었음!
+        // 이런 요청방해 에러를 없애려면 이벤트체크를 하나해야함!
+        // canplaythrough 이벤트!!!
+        // -> user agent 가 media를 재생할 수 있을때 발행함!
+        // 따라서 이 이벤트가 발생할때 play()하면 된다!!!
+
+        mv.on("canplaythrough", function () {
+            
+            // 동영상 볼륨 셋팅하기(처음볼륨조절): volume 속성
+            // volume값은 0~1까지 중간 소수점표현
+            $(this).get(0).volume = 0.2;//40%볼륨
+            
+            // 동영상 재생하기 //
+            $(this).get(0).play();
+        }); ////// canplaythrough //////////
+
+
         // 제이쿼리에서 video태그 요소를 선택하면
         // 미디어 요소를 위한 컬렉션을 생성하기 때문에
         // get(0)이라고 별도의 선택 메서드를 써야한다!
         // play() 메서드는 동영상을 재생하는 기능임!
-        
-    });//////////// click ////////////////
+
+    }); //////////// click ////////////////
     /////////////////////////////////////////
-    
+
     ////////////////////////////////////////////
     //// 2. 이동버튼 클릭시 중앙에 위치한 //////////
     ////////포스터의 예고편 재생하기 /////////////// 
@@ -291,32 +309,188 @@ $(function () { /// jQB ///////////////////////
     // 이미지 버튼이벤트 구현이 상단에 JS로 되어있지만
     // 별도의 기능을 위해 아래쪽에 다시 새롭게 만들어서
     // 구현해도 전혀 문제가 없다!
-    $(".abtn").click(function(){
-        
+    $(".abtn").click(function () {
+
         // 만약 아래로 작아진 상태가 아니면
         //즉, ptsts===1 이면 아래쪽 코드 실행안함!
-        if(ptsts) return false;// 돌아가!
-        
+        if (ptsts) return false; // 돌아가!
+
         //console.log("중앙포스터 영화상영!");
-        
+
         // 중앙포스터라면 몇번째 순번인가? 2번!!!
         // 중앙포스터의 data-mv값을 읽어온다!
         // 왜? 이것이 영화파일명이니까~!
         let mi = $(".gbox img").eq(2).attr("data-mv");
         //console.log("영화파일명:"+mi);
+
+        mv.attr("src", "mv/" + mi + ".mp4");
+
+        mv.on("canplaythrough", function () {
+            $(this).get(0).play();
+        }); ////// canplaythrough //////////
+
+
+    }); /////////// click ////////////////
+
+    /////////////////////////////////////////
+    ///////// 동영상 제어버튼 기능 구현 /////////
+    /////////////////////////////////////////
+
+    // 1. 동영상 제어버튼 숨기기/보이기 ///
+    // 컨트롤 공통 class : .ctrl
+    let ctrl = $(".ctrl");
+    $("#screen").hover(
+        function () { // over시 서서히 보임
+            ctrl.fadeIn(200);
+        },
+        function () { // out시 서서히 사라짐
+            ctrl.fadeOut(200);
+        }); ///// hover ///////////
+    
+    // 2. 동영상 제어버튼 오버/아웃시 이미지 변경하기 ///
+    // 이벤트 대상: .btngrp img
+    // 변경원리: 기존버튼의 src를 읽어와서
+    //          파일명의".png"를 "-1.png"로 변경함
+    // "-1.png"가 진한 이미지임!
+    
+    // 기존파일경로
+    let csrc;
+    
+    //////// hover 함수 ////////////
+    // replace(바꿀값,바뀔값)
+    $(".btngrp img").hover(
+        function() { // over
+            csrc = $(this).attr("src")
+            .replace(".png","-1.png");
+            //console.log("변경파일:"+csrc);
+            $(this).attr("src",csrc);
+        },
+        function() { // out
+            csrc = $(this).attr("src")
+            .replace("-1.png",".png");
+            //console.log("변경파일:"+csrc);
+            $(this).attr("src",csrc);
+        }); ///// hover ///////////
+    /////////////////////////////////////////
+    
+    //// play/stop 버튼 클릭시 비디오 컨트롤하기 /////
+    /// 이벤트 대상: .btngrp img
+    /// 구현원리: 재생상태이면 멈추고 멈춤상태이면 재생한다!
+    $(".btngrp img").click(function(){
+        // 구현포인트: 비디오가 재생상태인지 멈춤상태인지 알아내기!
+        let paused_sts = mv.get(0).paused;
+        // paused 속성은 현재 비디오가 멈춤상태이면 true값을 리턴!
+        //console.log("현재비디오가 멈춤상태인가? "+paused_sts);
         
-        // 해당 동영상 플레이하기!
-        mv.attr("src","mv/"+mi+".mp4")
-        .get(0).play();
+        // 1.비디오가 멈춤상태이면 재생하기
+        if(paused_sts){ 
+            
+            // 비디오 재생하기 : play() 메서드 사용
+            mv.get(0).play();
+            
+            // 버튼은 반대로 진한 멈춤버튼변경!
+            $(this).attr("src","images/vbt1-1.png");
+            
+            
+        } //////// if ///////////////////
+        
+        // 2.비디오가 재생상태이면 멈추기
+        else{ 
+            
+            // 비디오 멈추기 : pause() 메서드 사용!
+            mv.get(0).pause();
+            
+            // 버튼은 반대로 진한 재생버튼변경!
+            $(this).attr("src","images/vbt2-1.png");
+            
+            
+        } //////// else //////////////////
         
         
-    });/////////// click ////////////////
+    });//////////// click ////////////////
+    //////////////////////////////////////
+    
+    //////////// 음소거 기능 //////////////////////////////
+    // 이벤트 대상: .sound img
+    // 구현원리: 소리가 나는지 안나는지 상태에 따라 반대로 설정함
+    //////////////////////////////////////////////////////
+    $(".sound img").click(function(){
+        // 구현포인트: 소리안남 상태 알아내기
+        
+        // 1. 현재 소리상태
+        let sound = mv.get(0).muted;
+        // muted 속성: 
+        //  선택된 비디오의 소리가 안나면 true, 나면 false
+        // muted 속성에 값을 할당하면 소리안남 상태변경 가능!
+        console.log("소리가 안나니?"+sound);
+        
+        // 2. muted 로 소리설정하기
+        // - 현재 true/false값을 반대로 넣으면 된다!
+        // !(not)연산자로 true면 false, false면 true로 반대변경
+        mv.get(0).muted = !sound;
+        
+        // 3. 소리상태 이미지 변경하기 ////
+        // 현재 변경된 소리 상태는 sound 가 아니라 !sound임
+        if(!sound) { // 소리가 안나는 상태
+            $(this).attr("src","images/speaker-mute_blue.png");
+        } ////// if문 ///////////////////
+        else{ // 소리가 나는 상태
+            $(this).attr("src","images/speaker_blue.png");
+        } ////// else문 ////////////////
+        
+        
+    });/////////// click ///////////////////////
+    ////////////////////////////////////////////
     
     
-    
-    
-    
-    
+    //// 비디오 현재 진행바 기능(시간경과표시) /////////
+    // 사용할 이벤트: timeupdate 
+    //          - 비디오객체의 시간이 변경될때 발생
+    // on(이벤트, 시간) 메서드 사용!
+    mv.on("timeupdate", function(){
+        
+        // 구현목표: 비디오가 재생중일때 진행바가 움직이게 한다!
+        // 구현원리: 진행바의 진행비율을 %로 나타내야함!
+        // 계산법: 현재시간 / 전체시간 * 100 -> 백분율(%)
+        
+        // 1. 비디오 현재진행 시간 가져오기
+        let ctime = mv[0].currentTime;
+        // mv[0] === mv.get(0)
+        // currentTime 속성: 비디오의 현재시간
+        //console.log("현재시간:"+ctime);
+        
+        // 2. 비디오 전체재생시간 가져오기
+        let maxtime = mv[0].duration;
+        // duration 속성: 비디오 전체시간(초)
+        //console.log("전체시간:"+maxtime);
+        
+        // 3. 진행바 변경하기
+        // 현재진행시간이 0일 경우 전체시간이 안나오므로
+        // if문으로 이를 막아준다!(부모가 0되면 안된다!)
+        // !isNaN(전체시간) -> 숫자이면 들어가!
+        if(!isNaN(maxtime)){
+            
+            // 우리가 구하고자 하는 것은 백분율(%)이다
+            // 계산식: 현재시간 / 전체시간 *100
+            //      = ctime / maxtime *100
+            
+            // 퍼센트 진행율
+            let percent = ctime / maxtime *100;
+            console.log("진행율:"+percent);
+            
+            // 진행바의 width를 %값으로 변경!
+            $(".tBar").css({
+                width: percent + "%"
+            }); //// css /////////////
+            
+        } /////// if문 /////////////////////////
+        
+        
+        
+    });//////////// timeupdate 이벤트 함수 ///////////////
+    ////////////////////////////////////////////////////
+
+
 
 
     ///////////////////////////////////////////
