@@ -44,7 +44,7 @@
     <!--2-1.영화메뉴 페이지-->
     <section id="pg1" class="page">
         <!--스크린박스-->
-        <div id="screen">
+        <div id="screen" class="disableselect disabledrag">
 
             <!--동영상-->
             <video id="mv" src="mv/mv1.mp4"></video>
@@ -66,6 +66,12 @@
             <!--동영상 진행바-->
             <div class="pBar ctrl">
                 <div class="tBar"></div>
+            </div>
+            
+            <!--동영상 전체시간, 현재진행시간 표시-->
+            <div class="cTime ctrl">
+                <span class="current">01:20</span> /
+                <span class="duration">03:50</span>
             </div>
             
             

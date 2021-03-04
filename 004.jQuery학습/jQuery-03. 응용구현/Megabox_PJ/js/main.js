@@ -284,11 +284,11 @@ $(function () { /// jQB ///////////////////////
         // 따라서 이 이벤트가 발생할때 play()하면 된다!!!
 
         mv.on("canplaythrough", function () {
-            
+
             // 동영상 볼륨 셋팅하기(처음볼륨조절): volume 속성
             // volume값은 0~1까지 중간 소수점표현
-            $(this).get(0).volume = 0.2;//40%볼륨
-            
+            $(this).get(0).volume = 0.2; //40%볼륨
+
             // 동영상 재생하기 //
             $(this).get(0).play();
         }); ////// canplaythrough //////////
@@ -346,150 +346,296 @@ $(function () { /// jQB ///////////////////////
         function () { // out시 서서히 사라짐
             ctrl.fadeOut(200);
         }); ///// hover ///////////
-    
+
     // 2. 동영상 제어버튼 오버/아웃시 이미지 변경하기 ///
     // 이벤트 대상: .btngrp img
     // 변경원리: 기존버튼의 src를 읽어와서
     //          파일명의".png"를 "-1.png"로 변경함
     // "-1.png"가 진한 이미지임!
-    
+
     // 기존파일경로
     let csrc;
-    
+
     //////// hover 함수 ////////////
     // replace(바꿀값,바뀔값)
     $(".btngrp img").hover(
-        function() { // over
+        function () { // over
             csrc = $(this).attr("src")
-            .replace(".png","-1.png");
+                .replace(".png", "-1.png");
             //console.log("변경파일:"+csrc);
-            $(this).attr("src",csrc);
+            $(this).attr("src", csrc);
         },
-        function() { // out
+        function () { // out
             csrc = $(this).attr("src")
-            .replace("-1.png",".png");
+                .replace("-1.png", ".png");
             //console.log("변경파일:"+csrc);
-            $(this).attr("src",csrc);
+            $(this).attr("src", csrc);
         }); ///// hover ///////////
     /////////////////////////////////////////
-    
+
     //// play/stop 버튼 클릭시 비디오 컨트롤하기 /////
     /// 이벤트 대상: .btngrp img
     /// 구현원리: 재생상태이면 멈추고 멈춤상태이면 재생한다!
-    $(".btngrp img").click(function(){
+    $(".btngrp img").click(function () {
         // 구현포인트: 비디오가 재생상태인지 멈춤상태인지 알아내기!
         let paused_sts = mv.get(0).paused;
         // paused 속성은 현재 비디오가 멈춤상태이면 true값을 리턴!
         //console.log("현재비디오가 멈춤상태인가? "+paused_sts);
-        
+
         // 1.비디오가 멈춤상태이면 재생하기
-        if(paused_sts){ 
-            
+        if (paused_sts) {
+
             // 비디오 재생하기 : play() 메서드 사용
             mv.get(0).play();
-            
+
             // 버튼은 반대로 진한 멈춤버튼변경!
-            $(this).attr("src","images/vbt1-1.png");
-            
-            
+            $(this).attr("src", "images/vbt1-1.png");
+
+
         } //////// if ///////////////////
-        
+
         // 2.비디오가 재생상태이면 멈추기
-        else{ 
-            
+        else {
+
             // 비디오 멈추기 : pause() 메서드 사용!
             mv.get(0).pause();
-            
+
             // 버튼은 반대로 진한 재생버튼변경!
-            $(this).attr("src","images/vbt2-1.png");
-            
-            
+            $(this).attr("src", "images/vbt2-1.png");
+
+
         } //////// else //////////////////
-        
-        
-    });//////////// click ////////////////
+
+
+    }); //////////// click ////////////////
     //////////////////////////////////////
-    
+
     //////////// 음소거 기능 //////////////////////////////
     // 이벤트 대상: .sound img
     // 구현원리: 소리가 나는지 안나는지 상태에 따라 반대로 설정함
     //////////////////////////////////////////////////////
-    $(".sound img").click(function(){
+    $(".sound img").click(function () {
         // 구현포인트: 소리안남 상태 알아내기
-        
+
         // 1. 현재 소리상태
         let sound = mv.get(0).muted;
         // muted 속성: 
         //  선택된 비디오의 소리가 안나면 true, 나면 false
         // muted 속성에 값을 할당하면 소리안남 상태변경 가능!
-        console.log("소리가 안나니?"+sound);
-        
+        console.log("소리가 안나니?" + sound);
+
         // 2. muted 로 소리설정하기
         // - 현재 true/false값을 반대로 넣으면 된다!
         // !(not)연산자로 true면 false, false면 true로 반대변경
         mv.get(0).muted = !sound;
-        
+
         // 3. 소리상태 이미지 변경하기 ////
         // 현재 변경된 소리 상태는 sound 가 아니라 !sound임
-        if(!sound) { // 소리가 안나는 상태
-            $(this).attr("src","images/speaker-mute_blue.png");
+        if (!sound) { // 소리가 안나는 상태
+            $(this).attr("src", "images/speaker-mute_blue.png");
         } ////// if문 ///////////////////
-        else{ // 소리가 나는 상태
-            $(this).attr("src","images/speaker_blue.png");
+        else { // 소리가 나는 상태
+            $(this).attr("src", "images/speaker_blue.png");
         } ////// else문 ////////////////
-        
-        
-    });/////////// click ///////////////////////
+
+
+    }); /////////// click ///////////////////////
     ////////////////////////////////////////////
-    
-    
+
+
     //// 비디오 현재 진행바 기능(시간경과표시) /////////
     // 사용할 이벤트: timeupdate 
     //          - 비디오객체의 시간이 변경될때 발생
-    // on(이벤트, 시간) 메서드 사용!
-    mv.on("timeupdate", function(){
-        
+    // on(이벤트, 함수) 메서드 사용!
+    mv.on("timeupdate", function () {
+
         // 구현목표: 비디오가 재생중일때 진행바가 움직이게 한다!
         // 구현원리: 진행바의 진행비율을 %로 나타내야함!
         // 계산법: 현재시간 / 전체시간 * 100 -> 백분율(%)
-        
+
         // 1. 비디오 현재진행 시간 가져오기
         let ctime = mv[0].currentTime;
         // mv[0] === mv.get(0)
         // currentTime 속성: 비디오의 현재시간
         //console.log("현재시간:"+ctime);
-        
+
         // 2. 비디오 전체재생시간 가져오기
         let maxtime = mv[0].duration;
         // duration 속성: 비디오 전체시간(초)
         //console.log("전체시간:"+maxtime);
-        
+
         // 3. 진행바 변경하기
         // 현재진행시간이 0일 경우 전체시간이 안나오므로
         // if문으로 이를 막아준다!(부모가 0되면 안된다!)
         // !isNaN(전체시간) -> 숫자이면 들어가!
-        if(!isNaN(maxtime)){
-            
+        if (!isNaN(maxtime)) {
+
             // 우리가 구하고자 하는 것은 백분율(%)이다
             // 계산식: 현재시간 / 전체시간 *100
             //      = ctime / maxtime *100
-            
+
             // 퍼센트 진행율
-            let percent = ctime / maxtime *100;
-            console.log("진행율:"+percent);
-            
+            let percent = ctime / maxtime * 100;
+            //console.log("진행율:" + percent);
+
             // 진행바의 width를 %값으로 변경!
             $(".tBar").css({
                 width: percent + "%"
             }); //// css /////////////
-            
+
         } /////// if문 /////////////////////////
-        
-        
-        
-    });//////////// timeupdate 이벤트 함수 ///////////////
+
+    }); //////////// timeupdate 이벤트 함수 ///////////////
     ////////////////////////////////////////////////////
 
+    /*////////////////////////////////////////////////////
+        함수명: updateBar
+        기능: 타임바를 클릭또는 드래그시 비디오를 업데이트 변경함
+    */ ////////////////////////////////////////////////////
+    let updateBar = function (x) { // x - 마우스포인터 x좌표
+
+        //console.log("x:" + x + " / drag:" + timeDrag);
+        
+        // 1. 넘겨준 x좌표를 백분율(%)로 변환!(타임바 변경위해)
+        // 백분율 = x좌표 / .pBar의 가로 width *100
+        let percent = x / pbar.width() *100;
+        
+        // 2. 타임바 변경하기
+        $(".tBar").css({
+            width: percent + "%"
+        });////// css /////////////
+        
+        // 비디오전체시간(duration은 전체시간속성)
+        let maxtime = mv[0].duration;
+        
+        // 3. 비디오 시간 변경하기
+        // 위에서 구한 백분율(%)을 활용한다!
+        // 비디오현재시간(%) = 비디오현재시간 / 비디오전체시간 * 100
+        // 비디오현재시간 = 비디오현재시간(%) * 비디오전체시간 / 100
+        mv[0].currentTime = percent * maxtime / 100;
+        
+        // 비디오 현재시간 속성은 currentTime이다!
+        // 이퀄 왼쪽에 currentTime속성을 쓰고 할당하면 
+        // 비디오 실제 시간이 변경된다!!!
+        
+        // 시간이동시 동영상이 멈춤일때라도
+        // 다시 재생되므로 멈춤버튼으로 버튼을 변경해 준다!
+        $(".btngrp img").attr("src","images/vbt1.png");
+
+    }; /////// updateBar 함수 /////////////////////////////
+    //////////////////////////////////////////////////////    
+
+    ///////////////////////////////////////////////////
+    //진행바를 클릭하거나 드래그하면 타임라인 이동함수를 호출//
+    ///////////////////////////////////////////////////
+
+    /// 드래그 상태변수(true이면 드래그중)
+    let timeDrag = false;
+    /*
+    [ 드래그란 무엇인가? ]
+    - 마우스 왼쪽버튼을 누르고 마우스를 움직이면 드래그다!
+    mousedown + mousemove
+    - 드래그의 끝은? 마우스 왼쪽버튼을 떼는것!
+    mouseup
+    
+    - 보통 클릭은 "딸각" 이지만 구분할 수 있다!
+    mousedown -> "딸"
+    mouseup -> "각"
+    */
+
+    // 대상선정: .pBar(진행바 부모)
+    let pbar = $(".pBar");
+
+    //// 마우스 왼쪽버튼을 누를때 (드래그시작) ////////////////
+    pbar.mousedown(function (e) { // e-이벤트 전달변수
+
+        // 마우스 다운 즉, "딸" 하는 순간 드래그 시작!
+        timeDrag = true; // 드래그 상태값 변경(true-드래그중!)
+
+        // 타임바업데이트 함수 호출!
+        updateBar(e.offsetX);
+        // e.offsetX - 현재 클릭된 마우스포인터 위치의 x좌표값!
+
+    }); ////// mousedown 함수 /////////////////////////////
+    
+    //// 마우스 왼쪽버튼을 뗄때 (드래그해제) ///////////////////
+    pbar.mouseup(function(e){ // e-이벤트 전달변수
+        
+        // 마우스 업 즉, "각" 하는 순간 드래그 끝!
+        timeDrag = false;//드래그 상태값 변경(false-드래그끝)
+        
+        // 타임바 업데이트 함수 호출!
+        updateBar(e.offsetX);
+        
+    });/////// mouseup 함수 ////////////////////////////////
+    
+    //// 마우스가 .pBar 위에서 마우스 다운상태로 움직일때 ////////
+    pbar.mousemove(function(e){ //e-이벤트전달변수
+        
+        // 마우스 다운상태 일때만 타임바업데이트 함수호출
+        // 즉, timeDrag 변수가 true일때만 호출하면 된다!
+        if(timeDrag){
+            
+            // 타임업데이트 함수 호출!
+            updateBar(e.offsetX);
+            
+        } //////// if문 /////////////
+        
+    });//////// mousemove 함수 //////////////////
+    
+    ///// 드래그 상태 오작동 막기!!! ////////////////////////
+    /// .pBar 위에서 마우스 다운 상태로 영역을 벗어나면
+    /// timeDrag 상태값이 true이므로 다음에 마우스 다운이 아닌
+    /// 상태로 .pBar 들어오면 그대로 업데이트가 계속 호출된다!
+    /// 따라서 마우스가 .pBar를 벗어날때 timeDrag 변수값을
+    /// false로 변경해야 드래그 상태 오작동을 막을 수 있다!!!
+    //////////////////////////////////////////////////////
+    /// 마우스 포인터가 영역을 벗어날때 이벤트: mouseleave
+    pbar.mouseleave(function(){
+        
+        // 드래그상태값 변경!
+        timeDrag = false;
+        
+    }); ///// mouseleave 함수 //////////////////////////
+    
+    ////////////////////////////////////////////////////
+    ///// 비디오 시간 표시하기 ////////////////////////////
+    //// [ 비디오관련 이벤트 ] /////
+    // 1. timeupdate 이벤트: 비디오 태그가 재생 중 시간변경시 발생
+    // 2. loadedmetadata 이벤트: 비디오 기본정보 로딩완료시 발생
+    ////////////////////////////////////////////////////////
+    
+    ////////// 전체시간 찍기 /////////////////////////////
+    /// 비디오 기본정보 로드 완료시에 실행 //////////////////
+    mv.on("loadedmetadata", function(){
+        
+        // 전체시간 -> changeTime 시분초 변환함수호출!
+        let maxtime = mv[0].duration;
+        maxtime = Math.floor(maxtime);//소숫점 아래 버리기
+        maxtime = changeTime(maxtime);
+        
+        // 화면에 출력
+        $(".duration").text(maxtime);        
+        
+    });/////// loadedmetadata 함수 ///////////////////////
+    /////////////////////////////////////////////////////
+    
+    ///// 현재 진행시간 찍기 ///////////////////////////////
+    // 비디오 시간이 업데이트 될때 계속 찍어야함! /////////////
+    mv.on("timeupdate",function(){
+        
+        // 비디오 현재시간 -> changeTime 시분초 변환함수호출!
+        let cTime = mv[0].currentTime; 
+        cTime = Math.floor(cTime);//소숫점 아래 버리기
+        cTime = changeTime(cTime);
+        
+        // 화면에 출력!
+        $(".current").text(cTime);
+        
+    });/////// timeupdate 함수 ///////////////////////////
+    /////////////////////////////////////////////////////
+    
+    
 
 
 
@@ -547,3 +693,33 @@ $(function () { /// jQB ///////////////////////
 
 
 }); ///////////// jQB ////////////////////////
+
+/*///////////////////////////////////////
+	함수명: changeTime
+	기능: 초를 보내면 시분초 변환해주는 함수
+*/ ///////////////////////////////////////
+function changeTime(sec) { //sec 초단위값
+    "use strict";//엄격한 문법적용
+    var pad = function (x) {
+        return (x < 10) ? "0" + x : x;
+    };
+    var res; //결과값
+    if (sec < 3600) { // 한시간이 넘지 않으면 분,초만 필요함
+        res = pad(parseInt(sec / 60 % 60)) + ":" + pad(sec % 60);
+    } else { // 한시간이 넘으면 시,분,초가 모두 필요함
+        res = pad(parseInt(sec / (60 * 60))) + ":" + pad(parseInt(sec / 60 % 60)) + ":" + pad(sec % 60);
+
+    }
+    return res;
+} ///////////////// changeTime함수 ////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
