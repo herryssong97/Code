@@ -1,61 +1,61 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title> append()  </title>
-<!-- jQuery library -->
-<script src="jquery-1.7.2.min.js"></script>
-<script>
-	$(function(){/// jQB ///////////////////
-        /*
-        append(추가이동요소) 메서드
-        - 새로운 요소나 데이터를 추가하거나 기존요소를 맨 뒤로 이동
-        비교) JS 내장함수 appendChild와 유사함
-		*/
-        
-        
-		// 미션: #ans버튼을 클릭하면 자식요소 #container의 p태그에 "내가 좋아하는 배우는 아무개입니다."라고 써서 추가하시오.
-        
-        $("#ans").click(function(){
-            $("#container").append("<p>내가 좋아하는 배우는 박서준 입니다!</p>")
-        }); /////// click ////////////////////////
-        
-        // 맨뒤로가 버튼을 클릭하면 첫번째 p요소를 선택하여
-        // 맨뒤로 이동시킨다!
-        var cont = $("#container");
-        
-        $("#btngo").click(function(){
-            cont.append(cont.find("p").first());
-        }); /////// click ////////////////////////
-	
-	});//// jQB ///////////////////////////////////
-	//////////////////////////////////////////////
-	
-	
-	
-	
-	
-	
-	
-	</script>
-	
-	
-	
-	
+    <meta charset="utf-8">
+    <title> append() </title>
+    <!-- jQuery library -->
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        $(function() { /// jQB ///////////////////
+            /*
+            append(추가이동요소) 메서드
+            - 새로운 요소나 데이터를 추가하거나 기존요소를 맨뒤로 이동
+            비교) JS 내장함수 appendChild와 유사함
+            
+            */
+
+
+            // 미션: #ans 버튼을 클릭하면 #container의 자식 p태그에 "내가 좋아하는 배우는 아무개입니다."라고 써서 추가하시오.
+
+            $("#ans").click(function() {
+                $("#container")
+                    .append("<p>내가 좋아하는 배우는 김수현입니다!</p>");
+            }); //////// click /////////////
+            
+            // 맨뒤로가 버튼을 클릭하면 첫번째 p요소를 선택하여
+            // 맨뒤로 이동시킨다!
+            var cont = $("#container");
+            
+            $("#btngo").click(function(){
+                cont.append(cont.find("p").first());
+            });/////// click ///////////////
+
+
+
+        }); //// jQB ///////////////////////////////////
+        //////////////////////////////////////////////
+
+    </script>
+
+
+
+
 </head>
- 
+
 <body>
 
-<button id="btngo">맨뒤로가~!</button>
-<button id="ans">대답해~!</button>
-	
-<div id="container">
- <p>당신이 좋아하는 배우는 누구입니까?</p>
-</div>
-<!---------- jQuery code Start ---------->
-<script>
+    <button id="btngo">맨뒤로가~!</button>
+    <button id="ans">대답해~!</button>
 
-</script>
+    <div id="container">
+        <p>당신이 좋아하는 배우는 누구입니까?</p>
+    </div>
+    <!---------- jQuery code Start ---------->
+    <script>
+
+    </script>
 
 </body>
+
 </html>

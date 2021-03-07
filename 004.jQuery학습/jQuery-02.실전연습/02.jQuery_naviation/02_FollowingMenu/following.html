@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>따라다니는 애니매이션 마우스 포인터</title>
+    <title>따라다니는 애니메이션 마우스 포인터</title>
     <script src="jquery-1.7.2.min.js"></script>
     <script src="jquery-ui.min.js"></script>
     <script>
@@ -11,43 +11,43 @@
             // 커서이미지
             let myc = $("#myc");
 
-            // 포인터가 움직일 영역 : window
-            $(window).mousemove(function(e) { // e - 이벤트전달변수
+            // 포인터가 움직일 영역: window
+            $(window).mousemove(function(e) { //e-이벤트전달변수
 
                 // 마우스포인터 위치값
-                let posX = e.pageX;
+                let posX = e.pageX + 5; //아래쪽 클릭위해 약간이동!
                 let posY = e.pageY;
-                // console.log("x:y=" + posX + ":" + posY);
+                //console.log("x:y="+posX+":"+posY);
 
                 // 마우스포인터 위치에 이미지를 이동시킨다!
-                // 대상 : #myc
+                // 대상: #myc
                 myc.css({
                     top: posY + "px",
                     left: posX + "px"
-                }); //// css ///////////
+                }); ///// css /////////
 
-            }); //////// mousemove ///////////
+            }); ///////// mousemove //////////
 
-            // window에 마우스가 들어오면 커서보이고 
+            // window에 마우스가 들어오면 커서보이고 나가면 숨기기!
             $(window).hover(
                 function() { // over
                     myc.show();
                 },
                 function() { // out
                     myc.hide();
-                }); ///////// hover ///////////////
+                }); ///// hover ///////////
 
             // .stn>div 각 4개의 영역마다 마우스 오버시
             // 커서 이미지 변경하기!
-            // mouseenter 이벤트 : 요소의 경계선 안으로 들어갈 때 발생
+            // mouseenter 이벤트 : 요소의 경계선 안으로 들어갈때 발생
             // 참고) mouseleave 이벤트 : 요소의 경계선 밖으로 나갈때
             $(".stn>div").mouseenter(function() {
 
                 // 마우스 엔터 요소(div)의 순번
                 let idx = $(this).index();
-                // console.log("순번:"+idx);
+                //console.log("순번:"+idx);
 
-                // 커서 이미지 경로
+                // 커서이미지 경로
                 let isrc;
 
                 // 영역별 이미지 넣기
@@ -64,20 +64,18 @@
                     case 3:
                         isrc = "images/yoshi-cursor.gif";
                         break;
-                } /// switch case //////////////
-                
-                // 커서 이미지 변경하기
+                } /// switch case ////////
+
+                // 커서이미지 변경하기
                 myc.attr("src",isrc);
 
 
-
-
-            }); //////////// mouseenter //////////////
+            }); //////// mouseenter ///////////////
 
 
 
 
-        }); /////////// jQB ////////////////////
+        }); ////////// jQB //////////////////////
     </script>
     <style>
         html,
@@ -94,6 +92,7 @@
         .stn {
             display: flex;
             flex-wrap: wrap;
+            /*사이즈 넘치면 아랫줄로 변경설정*/
             width: 100%;
             height: 100%;
         }
@@ -101,7 +100,7 @@
         .stn>div {
             flex: 50%;
             /*구체적인 단위의 수치를 쓰면 flex-basis로 셋팅된다!
-            width 셋팅과 동일하다!*/
+            width셋팅과 동일하다!*/
             height: 50%;
             /*outline: 2px dashed red;*/
         }
@@ -146,7 +145,6 @@
 
     <!--따라다닐 커서 이미지-->
     <img src="images/13148a1.gif" alt="마우스포인터" id="myc">
-
 
 
 

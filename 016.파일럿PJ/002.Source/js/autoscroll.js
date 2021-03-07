@@ -9,7 +9,7 @@ let pno = 0;
 const totnum = 5;
 // 광스크롤 막기(0-허용,1-불허용)
 let psts = 0;
-// 윈도우높이값(이동시사용)
+// 전체 윈도우 높이값(페이지이동시 사용!)
 let winH = $(window).height();
 /////////////////////////////////////
 
@@ -77,15 +77,17 @@ $(function () { ///// jQB /////////////////
         let delta = e.detail ? e.detail : e.wheelDelta;
         // 변수에 유효한 설정이 적용되어 할당됨!
 
-        console.log("휠정보:" + delta);
-
+        //console.log("휠정보:" + delta);
+        
         ///// 파이어폭스 일때 델타값 방향 반대로 하기!//////
         // JS 내장함수 test()를 이용하여
         // navigator.userAgent - 현재 브라우저 정보읽어옴!
         // "Firefox"라는 정보가 있으면 test() 에서 true값 리턴함!
         // 그래서 if문 안으로 들어가서 처리함(부호반대로!)
-        console.log("브라우저정보:" + navigator.userAgent);
-        console.log("정보여부:" + (/Firefox/i.test(navigator.userAgent)));
+        
+        //console.log("브라우저정보:"+navigator.userAgent);
+        //console.log("정보여부:"+(/Firefox/i.test(navigator.userAgent)));
+        
         // 정규식.test(가져올값) -> 정규식에 쓴 문자 있으면 true
         /*
             [ 간단한 정규식 표현기호 ]
@@ -93,15 +95,13 @@ $(function () { ///// jQB /////////////////
             2. 모든 패턴 문자열을 찾을때 g라는 플래그문자를 사용함
             3. 대소문자 구분없이 찾을대 i라는 플래그문자를 사용함
             예) /,/g -> 모든 콤마를 찾아라!
-                /Firefox/i 
-                -> 모든"Firefox"라는 문자를 대소문자 관계없이 찾아라!
+            /Firefox/i 
+            -> 모든"Firefox"라는 문자를 대소문자 관계없이 찾아라!
         */
-
-
-        if (/Firefox/i.test(navigator.userAgent)) {
-            delta = -delta; //변수앞에 마이너스쓰면 부호가 반대됨!
+        if(/Firefox/i.test(navigator.userAgent)){
+            delta = -delta;//변수앞에 마이너스쓰면 부호가 반대됨!
         } ///////////// if /////////////////////////////////
-
+        
 
         // 2. 마우스휠 방향에 따라 페이지 번호 증감!
         if (delta < 0) { // -120 아랫방향 스크롤(다음페이지)
@@ -113,18 +113,19 @@ $(function () { ///// jQB /////////////////
             if (pno < 0) pno = 0; //첫번호고정!
         } /////////// else //////////////////////////////////
 
-        console.log("페이지번호:" + pno);
+        //console.log("페이지번호:"+pno);
 
         // 3. 이동할 페이지(.page)의 위치값 알아내기
         // -> 위치값은 클래스의 순번으로 알아냄-> pno 변수사용!
-        // let pgpos = $(".page").eq(pno).offset().top;
+        //let pgpos = $(".page").eq(pno).offset().top;
         // offset().top은 현재 선택요소의 top위치값을 숫자로 리턴함!
-
-        // 기존 위치값 읽어오기 변경!!!
-        // 전체 윈도우 높이값 (winH)에 페이지번호를 곱한다!!
+        
+        // 기존 위치값 읽어오기 변경!!!!
+        // 전체윈도우 높이값(winH)에 페이지번호를 곱한다!
         let pgpos = winH * pno;
-        // 이렇게 하는 이유? 페이지 위치값이 구해졌지만 이동시 SYNC문제(일치)로
+        // 이렇게 하는 이유? 페이지위치값이 구해졌지만 이동시 sync문제(일치)문제로
         // 값이 잘 반영되지 않을때 원페이지의 위치 이동을 이렇게 계산해서 이동함!
+        
 
         //console.log("이동위치:"+pgpos);
 

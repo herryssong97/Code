@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Welcome to Seoul Land!!!</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/main.js"></script>
 </head>
@@ -265,9 +267,9 @@
                 <!--1-2.운영시간박스-->
                 <div class="time">
                     <p class="today">
-                        <strong class="month">01</strong>월
-                        <strong class="date">20</strong>일
-                        (<b class="day">수</b>)
+                        <strong class="month"></strong>월
+                        <strong class="date"></strong>일
+                        (<b class="day"></b>)
                     </p>
                     <span class="timesec">
                         09:30 ~ 21:00
@@ -383,9 +385,9 @@
                     </ol>
                     <!--sns탭내용-->
                     <ol class="tabCont">
-                       <!--페이스북-->
+                        <!--페이스북-->
                         <li class="on">
-                           <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fseoullandpark%2F&tabs=timeline&width=298&height=165&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="298" height="165" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> 
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fseoullandpark%2F&tabs=timeline&width=298&height=165&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="298" height="165" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                         </li>
                         <!--블로그-->
                         <li>
@@ -395,7 +397,8 @@
                         </li>
                         <!--트위터-->
                         <li>
-                            <a class="twitter-timeline" href="https://twitter.com/TomCruise?ref_src=twsrc%5Etfw">Tweets by TomCruise</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <a class="twitter-timeline" href="https://twitter.com/TomCruise?ref_src=twsrc%5Etfw">Tweets by TomCruise</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         </li>
                         <!--인스타그램-->
                         <li>
@@ -409,16 +412,71 @@
     <!--4.하단영역-->
     <div id="info">
         <footer class="ibx clb info">
-            <div class="col-9 i1"></div>
-            <div class="col-3 i1"></div>
-            <div class="col-10 i2"></div>
-            <div class="col-2 i2"></div>
+            <div class="col-9 i1">
+                <!--정보링크-->
+                <ol class="link">
+                    <li>
+                        <a href="">회사소개</a>
+                    </li>
+                    <li>
+                        <a href="" class="em">인재채용</a>
+                    </li>
+                    <li>
+                        <a href="">고객센타</a>
+                    </li>
+                    <li>
+                        <a href="">제휴문의</a>
+                    </li>
+                    <li>
+                        <a href="" class="em">개인정보처리방침</a>
+                    </li>
+                    <li>
+                        <a href="">이메일무단수집거부</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-3 i1">
+                <!--SNS링크-->
+                <ol class="snsico">
+                    <li><a href="https://www.facebook.com/seoullandpark" target="_blank"><span class="bld">페이스북</span></a></li>
+                    <li><a href="https://story.kakao.com/ch/seoulland" target="_blank"><span class="bld">카카오스토리</span></a></li>
+                    <li><a href="https://www.instagram.com/today_seoulland/" target="_blank"><span class="bld">인스타그램</span></a></li>
+                    <li><a href="http://blog.naver.com/seoullandblog1" target="_blank"><span class="bld">블로그</span></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCAbIua3XTxwoJOw_toFg36Q?view_as=subscriber" target="_blank"><span class="bld">유튜브</span></a></li>
+                </ol>
+            </div>
+            <div class="col-10 i2">
+                <!--하단로고-->
+                <img src="images/logoB.png" alt="하단로고" class="blogo">
+                <!--회사주소-->
+                <address class="addr">
+                    주소 : 13829 경기도 과천시 광명로 181 (주)서울랜드 <span>|</span> 대표이사 최형기 <span>|</span> 사업자등록번호 138-81-04654 <span>|</span> 통신판매업신고번호 : 과천 제137호 <br>
+                    안내전화 02-509-6000 <span>|</span> 개인정보관리 책임자 마케팅1팀 김태형 <span>|</span> 운영자 이메일 webmaster@seoulland.co.kr
+
+                    <strong class="copy">Copyright(c) Seoulland all rights reserved.</strong>
+
+                </address>
+            </div>
+            <div class="col-2 i2">
+                <!--패밀리사이트-->
+                <select id="fslink">
+                    <option value="fs">
+                        Family Site
+                    </option>
+                    <option value="cal">
+                        캘리포니아 피자키친
+                    </option>
+                    <option value="rose">
+                        로즈힐
+                    </option>
+                </select>
+            </div>
         </footer>
     </div>
 
 
     <!--그리드뷰-->
-    <ul class="grid">
+    <!--<ul class="grid">
         <li></li>
         <li></li>
         <li></li>
@@ -431,7 +489,7 @@
         <li></li>
         <li></li>
         <li></li>
-    </ul>
+    </ul>-->
 
 
 

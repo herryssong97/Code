@@ -2,10 +2,10 @@
 /* 웹 다이어리 공통 CSS - common.css */
 
 /*공통 class*/
-.bld {
-    /*IR(배경이미지 설명 숨기기)*/
+.bld{/*IR(배경이미지설명숨기기)*/
     display: block;
     width: 0;
     height: 0;
     overflow: hidden;
 }
+

@@ -46,35 +46,39 @@
 
             // 만약 처음부터 계속 움직게 하려면 바깥에 인터발함수를 셋팅한다!
             autoI = setInterval(nextFrame, 50);
-            
-            /////////////////////////////////
+
+            //////////////////////////////////
             //// 글씨체, 글씨색 전환하기 ////////
-            /////////////////////////////////
-            
+            //////////////////////////////////
+
             // 글씨체 배열변수
-            let ff = ["Dancing Script","Pangolin","Permanent Marker"];
-            let fc = ["#ff00eb","#5e2dff","#22b100"];
+            let ff = ["Dancing Script", "Pangolin", "Permanent Marker"];
+            // 글씨색 배열변수
+            let fc = ["#ff00eb", "#5e2dff", "#22b100"];
+            // 글씨순번 변수
             let fseq = 0;
-            
+
             /// 타이틀 글씨체를 3초간격으로 변경한다
-            setInterval(function(){
-                
-                // 순번증가
+            setInterval(function() {
+
+                //순번증가
                 fseq++;
-                // 순번한계
-                if(fseq===3) fseq=0;
-                
-                // 변경적용
+                //순번한계
+                if (fseq === 3) fseq = 0;
+
+                //변경적용
                 $(".tit").css({
                     fontFamily: ff[fseq],
                     color: fc[fseq]
-                }); ///// css /////////
-                
-                
-            },3000); ///// 인터발 함수 /////
-            
-            
-            
+                }); //// css //////////
+
+
+
+            }, 3000); //// 인터발함수 /////
+
+
+
+
 
         }); ////////// jQB //////////////////////
     </script>
@@ -100,7 +104,7 @@
             background-color: #000;
         }
 
-        /*반투명 가림막 (가상요소*/
+        /*반투명 가림막(가상요소)*/
         #ani::after {
             content: "";
             display: block;
@@ -113,6 +117,8 @@
             opacity: .5;
         }
 
+
+
         #ani img {
             position: absolute;
             top: 50%;
@@ -120,22 +126,22 @@
             display: none;
             width: 100%;
         }
-        
+
         /*타이틀*/
-        .tit{
+        .tit {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             color: #ff00eb;
             margin: 0;
             padding: 0;
             font-weight: bold;
             font-size: 7vw;
-            white-space: nowrap;/*줄바꿈방지*/
+            white-space: nowrap;
+            /*줄바꿈방지*/
             text-shadow: 4px 4px 5px #000;
-            font-family: 'Dancing Script', cursive;;
-        
+            font-family: 'Dancing Script', cursive;
         }
     </style>
 </head>
@@ -146,6 +152,7 @@
 
     <!--타이틀글자-->
     <h1 class="tit">It's My Style!</h1>
+
 
 
 

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
-    <title>네비게이션 유형7 - 가로네비 서브없는 디자인형</title>
+    <title>네비게이션 유형7-
+        가로네비 서브없는 디자인형</title>
     <style>
         html,
         body {
             margin: 0;
             padding: 0;
         }
-        
+
         /*전체부모*/
         .gnb {
             width: 900px;
@@ -30,29 +30,30 @@
             width: 150px;
             height: 40px;
             box-sizing: border-box;
-            
         }
-
         /*li사이에 구분선 넣기
-        - li+li는 앞에 형제 li가 있는 li만 선택하므로 첫번째 li는 제외됨*/
+        - li+li는 앞에 형제 li가 있는 li만 선택하므로 
+        첫번째 li는 제외된다!*/
         .gnb li+li{
             border-left: 1px solid #777;
-        }        
+        }
         
-        /*첫번째 li에 둥근모서리 (왼쪽위아래)*/
+        /*첫번째 li의 a에 둥근모서리(왼쪽위아래)*/
         .gnb li:first-child a{
             border-radius: 5px 0 0 5px;
         }
-        /*마지막 li에 둥근 모서리 (오른쪽위아래)*/
+        
+        /*마지막 li의 a에 둥근모서리(오른쪽위아래)*/
         .gnb li:last-child a{
             border-radius: 0 5px 5px 0;
         }
         /*
             보더 한번에 4방향 셋팅하기
-            border-radius: 왼위 오위 오아래 왼아래;
+            border-radius: 왼위 오른위 오른아래 왼아래;
             - 왼쪽위부터 시계방향돌기!
         */
         
+
         .gnb a {
             display: block;
             width: 100%;
@@ -69,77 +70,87 @@
             /*CSS로 그라데이션 주기*/
             /*그라데이션은 예전에 무조건 이미지로 만듦*/
             /*그래서 배경이미지로 셋팅한다!*/
-            background-image: linear-gradient(to top, #6d6d6d, #d6d6d6);
-
-            /*선형그라데이션 연습*/
-            /*background-image: linear-gradient(45deg,red 20%,yellow 70%,blue);*/
-
-            /*원형그라데이션 연습*/
-            /*background-image: radial-gradient(circle at 80%,red 10%,yellow,green);*/
-
-            /*그림자 효과주기*/
-            text-shadow: 1px 1px 0 #ccc;
-            /*X축 Y축 blur 색*/
-        }
-
-        /*메뉴 li에 마우스 오버시 배경색,글자그림자 변경하기*/
-        .gnb li:hover a {
             background-image: linear-gradient(to bottom, #6d6d6d, #d6d6d6);
+            
+            /*선형 그라데이션 연습*/
+            /*background-image: linear-gradient(-30deg, red, yellow 30%,yellow 70%, blue);*/
+            
+            /*원형 그라데이션 연습*/
+            /*background-image: radial-gradient(farthest-side at 80% 80%,red 10%,yellow,green);*/
+            
+            /*그림자효과주기*/
+            text-shadow: 1px 1px 0 #ccc;
+            /*x축 y축 blur 색*/            
+        }
+        
+        /*메뉴 li에 마우스 오버시 
+        글자색,배경색,글자그림자 변경하기*/
+        .gnb li:hover a{
+            background-image: linear-gradient(to top, #6d6d6d, #d6d6d6);
             text-shadow: 0 1px 0 #777;
             color: #fff;
         }
+        
+        
+        
+/*           
+    [ CSS 그라디언트 주기 방법 ]
+            
+    1. 선형그라디언트
+            (참고: https://www.w3schools.com/css/css3_gradients.asp)
+        1) 균등분할 그라데이션
+        background-image: 
+                linear-gradient(방향,색1,색2,....);
+        2) 사용자 지정 영역 그라데이션
+        background-image: 
+                linear-gradient(방향,색1 몇%,색2 몇%,....);
+        3) 각도 지정 그라데이션
+        background-image: 
+                linear-gradient(각도,색1,색2,색3,...);
+            
+        - 옵션설명: 첫번째 설정값
+        > 방향 : to top, to bottom, to left, to right
+        > 각도 : 기울임 각도 설정(단위: deg)
 
-        /*
-                [ CSS 그라디언트 주기 방법]
-                1. 선형 그라디언트
-                    (참고: https://www.w3schools.com/css/css3_gradients.asp)
-                1) 균등분할 그라데이션
-                background-image: linear-gradient(방향,색1,색2,....);    
-                
-                2) 사용자 지정 영역 그라데이션
-                background-image: linear-gradient(방향,색1 몇%,색2 몇%,....);
-                
-                3) 각도 지정 그라데이션
-                background-immage: linear-gradient(각도,색1,색2,색3,...);
+    2. 원형그라디언트
+            (참고: https://www.w3schools.com/css/css3_gradients_radial.asp)
             
-                    - 옵션설명: 첫번째 설정값
-                    > 방향 : to top, to bottom, to left, to right
-                    > 각도 : 기울임 각도 설정 (단위: deg)
-            
-                2. 원형 그라디언트
-                1)기본형
-                background-image: radial-gradient(색1,색2,색3,...);
-                
-                2) 영역지정
-                background-image: radial-gradient(색1 몇%,색2 몇%,색3 몇%,...);
-                
-                3) 정원일 경우: circle 키워드 사용
-                background-image: radial-gradient(circle,색1,색2,색3,....);
-                
-                4) 영역옵션 지정형: 증심점 지정
-                background-image:
-                radial-gradient(옵션 at 가로위치 세로위치,색1,색2,색);
-                - 옵션: closet-side / farthest-side
-                - 가로위치, 세로위치 (중심점) - 단위는 px/%
-            */
+        1) 기본형: 중앙중심
+        background-image: 
+            radial-gradient(색1,색2,색3,....);
+
+        2) 영역지정형:
+        background-image: 
+            radial-gradient(색1 몇%,색2 몇%,색3 몇%,....);
+
+        3) 정원일 경우: circle 키워드 사용
+        background-image: 
+            radial-gradient(circle,색1,색2,색3,....);
+
+        4) 영역옵션 지정형: 중심점 지정
+        background-image: 
+            radial-gradient(옵션 at 가로위치 세로위치,색1,색2,색3,....);
+        - 옵션: closest-side / farthest-side
+                closest-corner / farthest-corner
+        - 가로위치, 세로위치 (중심점) - 단위는 px/%
+*/
+        
+        
     </style>
 </head>
 
 <body>
     <!--nav.gnb>ul>li*6>a-->
-
     <nav class="gnb">
         <ul>
             <li><a href="">HOME</a></li>
             <li><a href="">HTML5</a></li>
             <li><a href="">CSS3</a></li>
-            <li><a href="">JQuery</a></li>
+            <li><a href="">jQuery</a></li>
             <li><a href="">Mobile</a></li>
             <li><a href="">Profile</a></li>
         </ul>
     </nav>
-
-
 
 
 

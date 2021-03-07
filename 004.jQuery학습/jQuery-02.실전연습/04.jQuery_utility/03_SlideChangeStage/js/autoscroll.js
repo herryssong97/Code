@@ -82,8 +82,10 @@ $(function () { ///// jQB /////////////////
         // navigator.userAgent - 현재 브라우저 정보읽어옴!
         // "Firefox"라는 정보가 있으면 test() 에서 true값 리턴함!
         // 그래서 if문 안으로 들어가서 처리함(부호반대로!)
-        console.log("브라우저정보:"+navigator.userAgent);
-        console.log("정보여부:"+(/Firefox/i.test(navigator.userAgent)));
+        
+        //console.log("브라우저정보:"+navigator.userAgent);
+        //console.log("정보여부:"+(/Firefox/i.test(navigator.userAgent)));
+        
         // 정규식.test(가져올값) -> 정규식에 쓴 문자 있으면 true
         /*
             [ 간단한 정규식 표현기호 ]
@@ -91,11 +93,9 @@ $(function () { ///// jQB /////////////////
             2. 모든 패턴 문자열을 찾을때 g라는 플래그문자를 사용함
             3. 대소문자 구분없이 찾을대 i라는 플래그문자를 사용함
             예) /,/g -> 모든 콤마를 찾아라!
-                /Firefox/i 
-                -> 모든"Firefox"라는 문자를 대소문자 관계없이 찾아라!
+            /Firefox/i 
+            -> 모든"Firefox"라는 문자를 대소문자 관계없이 찾아라!
         */
-        
-        
         if(/Firefox/i.test(navigator.userAgent)){
             delta = -delta;//변수앞에 마이너스쓰면 부호가 반대됨!
         } ///////////// if /////////////////////////////////

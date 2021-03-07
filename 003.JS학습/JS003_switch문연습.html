@@ -18,7 +18,7 @@
             text-align: center;
             margin-bottom: 50px;
             padding: 20px;
-            background-color: #b50b0b;
+            background-color: #86ecff;
         }
 
         /*메인이미지*/
@@ -51,48 +51,44 @@
             // 3. 변경내용: 변경대상의 src속성을 변경하여 이미지 바꾸기
 
             // 이미지경로
-            /*var isrc;
-
-            if (num === 1) {
-                isrc = "images/ala1.jpg";
-            } /// if /////
-            else if (num === 2) {
-                isrc = "images/ala2.jpg";
-            } /// else if ////
-            else if (num === 3) {
-                isrc = "images/ala3.jpg";
-            } /// else if /////
-            else if (num === 4) {
-                isrc = "images/ala4.jpg";
-            } /// else if /////
-*/
-            // 이미지경로
-            var msg;
+            var isrc;
             
             // 제어문 switch case로 변경!
-            // case에 해당값은 데이터형까지 정확히 할것!
-            // 예컨데 문자형 숫자는 안됨 "1" 이런것
+            // case에 해당값은 데이터형까지 정확히할것!
+            // 예컨데 문자형 숫자는 안됨 "1" 이런것...
             
             switch(num){
-                    case 1:
-                    msg = "images/ala1.jpg";
+                case 1:
+                    isrc = "images/ala1.jpg";
                     break;
-                    
-                    case 2:
-                    msg = "images/ala2.jpg";
+                case 2:
+                    isrc = "images/ala2.jpg";
                     break;
-                    
-                    case 3:
-                    msg = "images/ala3.jpg";
+                case 3:
+                    isrc = "images/ala3.jpg";
                     break;
-                    
-                    case 4:
-                    msg = "images/ala4.jpg";
+                case 4:
+                    isrc = "images/ala4.jpg";
                     break;
             }
             
+            
+
+//            if (num === 1) {
+//                isrc = "images/ala1.jpg";
+//            } /// if /////
+//            else if (num === 2) {
+//                isrc = "images/ala2.jpg";
+//            } /// else if ////
+//            else if (num === 3) {
+//                isrc = "images/ala3.jpg";
+//            } /// else if /////
+//            else if (num === 4) {
+//                isrc = "images/ala4.jpg";
+//            } /// else if /////
+
             // 4. 이미지 요소에 src 적용하기
-            tg.src = msg;
+            tg.src = isrc;
 
         } ////////// chgImg함수 ////////////////////////////
         //////////////////////////////////////////////////

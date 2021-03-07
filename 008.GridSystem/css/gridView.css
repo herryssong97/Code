@@ -31,7 +31,7 @@
     width: 8.33%;
     /*12등분*/
     height: 100%;
-    background-color: #ffb4f1;
+    background-color: #00f;
     box-sizing: border-box;
     /*패딩,보더 포함 크기유지*/
     padding: 0 10px;
@@ -53,3 +53,9 @@
     3) content-box 는 컨텐트영역만 배경이미지 넣기
     */
 }
+
+
+
+
+
+

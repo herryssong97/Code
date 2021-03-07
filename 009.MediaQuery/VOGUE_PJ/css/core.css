@@ -1,14 +1,12 @@
 @charset "utf-8";
-
 /*core.css - 공통핵심*/
-
 @import url('https://fonts.googleapis.com/css?family=Play|Sunflower:300&display=swap');
 /*
 font-family: 'Play', sans-serif;
 font-family: 'Sunflower', sans-serif;
 */
 
-/*공통class*/
+/**************공통class********************/
 /*속박스*/
 .inbox{
     width: 1200px;
@@ -52,18 +50,11 @@ font-family: 'Sunflower', sans-serif;
     /*부모자격*/
 }
 
+/*IR(Image Replacement) class*/
 .bld {
-    /*IR(Image Replacement) class*/
-    display: none;
+    display: block;
     width: 0;
     height: 0;
     overflow: hidden;
 }
-
-
-
-
-
-
-
 

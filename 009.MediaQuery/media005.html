@@ -10,8 +10,8 @@
             margin: 0;
             padding: 0;
         }
-        
-        /*비율유지박스 공통class*/
+    
+        /*비율유지박스 공통클래스*/
         .rbx{
             position: relative;
             /*비율유지박스의 속박스부모*/
@@ -36,11 +36,11 @@
         .bx1{
             width: 50%;
             margin: 0 auto;
-            background: url(images/jeong3.jpg) no-repeat
-                top/cover;
+            background: url(images/jeong3.jpg) no-repeat top/cover;
         }
         
         /*타이틀 디자인*/
+        /*정중앙에 오는 글자 셋팅하기!*/
         .tit{
             position: relative;
             top: 50%;
@@ -49,22 +49,24 @@
             color: #fff;
             font-size: 42px;
             text-align: center;
-            text-shadow: 1px 0 #000,-1px 0 #000,0 1px #000,0 -1px #000;
+            text-shadow: 1px 0 #000,-1px 0 #000,
+                0 1px #000, 0 -1px #000;
             /*글자그림자로 테두리만들기*/
             
-            /*h1 기본없앰!*/
+            /*h1태그 기본없앰!*/
             margin: 0;
             padding: 0;
         }
         /*
-        [ 비율유지박스 구성하기 ]
-        1. 가로사이즈만 있는 block박스에 부모자격줌(relative)
-        2. 이 박스에 가상요소 before로 block설정 후 padding-top값을 %으로 설정
-        3. 이 박스의 자식요소 박스를 absolute로 밀착
+            [ 비율유지박스 구성하기 ]
+            1. 가로사이즈만 있는 block박스에 부모자격줌
+            2. 이 박스에 가상요소 before로 block설정 후 
+                padding-top값을 퍼센트 단위로 설정
+            3. 이 박스의 자식요소 박스를 absolute로 밀착
         */
         
-        /*미디어쿼리*/
-        /*1024px 이하에서 가로크기 100%, 글자크기 20px로 변경*/
+        /* 미디어쿼리 */
+        /* 1024px 이하에서 가로크기 100%, 글자크기 30px로 변경 */
         @media only screen and (max-width: 1024px){
             /*css재정의*/
             .bx1{
@@ -75,27 +77,27 @@
                 font-size: 30px;
             }
         }/*미디어쿼리 - 1024px이하*/
-        
+        /*
         [ 미디어쿼리로 디자인 재정의 시에 중요한 점 ]
         - 이미 설정된 선택자를 동일하게 사용하여 셋팅한다!
-        - 선택을 다른방식으로 하게되면 우선순위에 따라 적용 안될 수 있음
-        
-        
-        
-        
-        
+        - 선택을 다른방식으로 하게 되면 우선순위에 따라 적용 안될 수 있음
+        */
         
     </style>
 </head>
-
 <body>
-
-    <div class="rbx bx1">
-        <div class="ibx">
-            <h1 class="tit">이정재 스타일1</h1>
-        </div>
-    </div>
-
-
-
-</body></html>
+  
+  <div class="rbx bx1">
+      <div class="ibx">
+          <h1 class="tit">이정재 스타일1</h1>
+      </div>
+  </div>
+  
+  
+  
+  
+   
+   
+    
+</body>
+</html>

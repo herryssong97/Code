@@ -22,22 +22,24 @@
         
 		
 		// 미션: 풍선 이미지를 클릭하면 이미지가 터지는 이미지로 변경 후 이미지 태그를 제거하시오.
-				$(".container img").css({
-                    width:"200px",
-                    height:"260px"
-                }) ////// css /////////
-                .click(function(){
-                    // 1. 이미지를 터지는 이미지로 변경
-                    $(this).attr("src","balloon-burst.jpg")
-                    // 2. 변경된 이미지가 커지고
-                    .animate({
-                        width: "300px",
-                        height:"360px"
-                    },100,function(){ // 콜백함수 (애니후 실행)
-                        // 3. 풍선이 사라짐!
-                        $(this).remove();
-                    }); ///// animate /////
-                }); /////// click ////////
+        $(".container img").css({
+            width: "200px",
+            height: "260px"
+        }) ////// css ///////
+        .click(function(){
+           //1. 이미지를 터지는 이미지로 변경
+            $(this).attr("src","balloon-burst.jpg")
+            //2. 변경된 이미지가 커지고
+            .animate({
+                width: "300px",
+                height:"360px"
+            },100,function(){//콜백함수(애니후 실행)
+                //3. 풍선이 사라짐!
+                $(this).remove();
+            });/// animate ////
+        });///// click ///////////
+        
+				
 		
 		
 	});//////// jQB ////////////////////////////
@@ -61,3 +63,4 @@
 
 </body>
 </html>
+

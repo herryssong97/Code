@@ -13,17 +13,18 @@ $(document).ready(function(e) {
 	// transition: all .4s
     
     $("p,#nav li").click(function(){
-        // console.log("준비!");
+        //console.log("준비!");
         
-        $("p,#nav li").text("나야 나~!")
+        // 클릭된 나자신은? this 키워드!
+        $(this).text("나야나~!!!")
         .css({
-            color:"red",
             fontSize:"72px",
-            transition:"all .8s"
-        })
-            
+            color:"red",
+            transition:"all .4s"
+        });////// css ////////
         
-    }); ////// click ///////////////
+        
+    });/////// click ////////////
 	
 	
 	
@@ -43,9 +44,6 @@ $(document).ready(function(e) {
 
  <nav>
   <ul id="nav">
-   <li>One</li>
-   <li>Two</li>
-   <li>Three</li>
    <li>One</li>
    <li>Two</li>
    <li>Three</li>

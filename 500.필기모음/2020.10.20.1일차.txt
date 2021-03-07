@@ -32,7 +32,6 @@ https -> s는  security 보안접속 웹페이지
 - Beautify : 소스코드 자동줄맞춤 플러그인
 - Custom Work : 탭메뉴 플러그인
 - Brackets Snippets (by edc) : 소스코드 저장 플러그인
-- miniMap : 작은 코드 위치이동 툴
 
 : 확장기능관리자를 클릭하여 검색 후 설치함
 

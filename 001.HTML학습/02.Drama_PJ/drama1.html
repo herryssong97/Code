@@ -1,131 +1,120 @@
 <!doctype html>
 <html lang="ko">
+    <head>
+    <meta charset="utf-8">
+    <title>월화드라마</title>
+    <style>
+        /*
+        
+        선택자 {
+            속성명: 값;
+        }
+        
+        */
+        table {
+            /*마진: 위아래 양쪽*/
+            margin: 30px auto;
+            /*마영오(박스중앙정렬)*/
+            /*경계선*/
+            border: 7px solid #ccc;
+            /*
+                border: 두께 종류 색상;
+            */
+        }
 
-<head>
-	<meta charset="utf-8">
-	<title>월화드라마</title>
-	<style>
-		table {
-			/*마진 : 위아래 양쪽*/
-			margin: 30px auto;
-			/*마영오 (박스중앙정렬) */
-			/*경계선*/
-			border: 7px solid #ccc;
-			/*
-				border : 두께 종류 색상;
-			*/
-		}
-			td {
-
-				padding: 10px;/*패딩*/
-				line-height: 45px;/*줄간격*/
-			}
-		
-		/* 클래스를 이용한 디자인 */
-		.num{
-			color: red;
-		}
-		.brc{
-			color: blue;
-		}
-		
-		
-	</style>
+        td {
+            padding: 10px;
+            /*패딩*/
+            line-height: 45px;
+            /*줄간격*/
+        }
+    </style>
 </head>
 
 <body>
-	<!--1.상단부분-->
-	<div style="text-align: center;">
-		<!--1-1. 타이틀-->
-		<h1>최신드라마 - 월화드라마</h1>
-		<!--1-2. 메뉴-->
-		<h2>
-			<a href="drama1.html">월화드라마</a> |
-			<a href="drama2.html">수목드라마</a> |
-			<a href="drama3.html">주말드라마</a> |
-			<a href="drama4.html">동물농장</a>
-		</h2>
-	</div>
+    <!--1. 상단부분-->
+    <div style="text-align: center;">
+        <!--1-1.타이틀-->
+        <h1>최신드라마 - 월화드라마</h1>
+        <!--1-2.메뉴-->
+        <h2>
+            <a href="drama1.html">
+                월화드라마
+            </a> |
+            <a href="drama2.html">
+                수목드라마
+            </a>
+        </h2>
+    </div>
 
-	<!--2. 컨텐트 부분-->
-	<div>
-		<!--드라마테이블-->
-		<!--테이블구성 : 2행 4열-->
-		<table>
-		
-		
-			<tr>
-				<td>
-					<a href="https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&pkid=57&os=11820031&query=%EC%B2%AD%EC%B6%98%EA%B8%B0%EB%A1%9D">
-						<img src="images/d1.jpg" alt="청춘기록">
-					</a>
-				</td>
-				<td>
-					<b>청춘기록</b> <br>
-					<a href="" class="brc">tvN</a> (월, 화) 오후 09:00 <br>
-					<span class="num">7.8%</span> 닐슨코리아 (10.20.) <br>
-					<button>구독 41,609</button>
-					<button style="color: palevioletred" onclick="window.open().location.href='http://www.naver.com';">♡</button>
+    <!--2. 컨텐츠 부분-->
+    <div>
+        <!--드라마테이블-->
+        <!--테이블구성: 2행 4열-->
+        <table>
+            <tr>
+                <td>
+                    <a href="">
+                        <img src="images/d1.jpg" alt="청춘기록">
+                    </a>
+                </td>
+                <td>
+                    <b>청춘기록</b> <br>
+                    tvN (월, 화) 오후 09:00 <br>
+                    7.8% 닐슨코리아 (10.20.) <br>
+                    <button>구독 41,609</button>
 
-				</td>
-				<td>
-					<a href="https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&pkid=57&os=14332172&query=%EB%B9%84%EB%B0%80%EC%9D%98%20%EB%82%A8%EC%9E%90">
-						<img src="images/d2.jpg" alt="비밀의 남자">
-					</a>
-				</td>
-				<td>
-					<b>비밀의 남자</b> <br>
-					<a href="" class="brc">KBS2</a> (월~금) 오후 07:50 <br>
-					<span class="num">15.5%</span> 닐슨코리아 (10.22.) <br>
-					<button>구독 7,405</button>
-					<button style="color: palevioletred">♡</button>
+                </td>
+                <td>
+                    <a href="">
+                        <img src="images/d2.jpg" alt="좀비탐정">
+                    </a>
+                </td>
+                <td>
+                    <b>좀비탐정</b> <br>
+                    KBS2 (월, 화) 오후 09:30 <br>
+                    2.6% 닐슨코리아 (10.20.) <br>
+                    <button>구독 6,891</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="">
+                        <img src="images/d3.jpg" alt="18어게인">
+                    </a>
+                </td>
+                <td>
+                    <b>18 어게인</b> <br>
+                    JTBC (월, 화) 오후 09:30 <br>
+                    3.2% 닐슨코리아 (10.20.) <br>
+                    <button>구독 27,519</button>
+                </td>
+                <td>
+                    <a href="">
+                        <img src="images/d4.jpg" alt="나의 위험한 아내">
+                    </a>
+                </td>
+                <td>
+                    <b>나의 위험한 아내</b> <br>
+                    MBN (월, 화) 오후 11:00 <br>
+                    2.4% 닐슨코리아 (10.20.) <br>
+                    <button>구독 2,885</button>
 
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&pkid=57&os=16083921&query=%EB%88%84%EA%B0%80%20%EB%AD%90%EB%9E%98%EB%8F%84">
-						<img src="images/d3.jpg" alt=" 누가 뭐래도">
-					</a>
-				</td>
-				<td>
-					<b>누가 뭐래도</b> <br>
-					<a href="" class="brc">KBS1</a> (월~금) 오후 08:30 <br>
-					<span class="num">18.4%</span> 닐슨코리아 (10.22.) <br>
-					<button>구독 792</button>
-					<button style="color: palevioletred">♡</button>
-
-				</td>
-				<td>
-					<a href="https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&pkid=57&os=14286462&query=%EC%A2%80%EB%B9%84%ED%83%90%EC%A0%95">
-						<img src="images/d4.jpg" alt="좀비탐정">
-					</a>
-				</td>
-				<td>
-					<b>좀비탐정</b> <br>
-					<a href="" class="brc">KBS2</a> (월, 화) 오후 09:30 <br>
-					<span class="num">2.6%</span> 닐슨코리아 (10.20.) <br>
-					<button>구독 6,891</button>
-					<button style="color: palevioletred">♡</button>
-
-				</td>
-			</tr>
-		</table>
+                </td>
+            </tr>
+        </table>
 
 
 
 
-		<!--
-			table 요소 : 행과 열로 정렬해야하는 데이터를 보여주기 위한 요소
-			- tr 요소 : 행을 구분하는 요소(table row)
-			- td 요소 : 데이터를 담는 요소(table data)
-			
-		-->
+        <!--
+               table 요소 : 행과 열로 정렬해야하는 데이터를 보여주기 위한 요소
+               - tr 요소 : 행을 구분하는 요소(table row)
+               - td 요소 : 데이터를 담는 요소(table data)
+               
+           -->
 
-
-	</div>
-
-
+    </div>
 
 
 

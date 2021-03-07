@@ -5,52 +5,52 @@
 <title> Traversal- prev </title>
 <!-- jQuery library -->
 <script src="jquery-1.7.2.min.js"></script>
-<script src="jquery-ui-1.8.23.custom.min.js">
-    </script>
-    <!--색상애니메이션은 jQuery -->
+<script src="jquery-ui-1.8.23.custom.min.js"></script>
+<!--색상애니메이션은 jQuery UI가 필요하다!-->
 <script>
-    
 $(document).ready(function(e) {
     /*
-	prev() - 선택요소의 이전형제요소를 선택함!
-    prevAll() - 이전형제요소 전부를 선택함!
-    */
+    prev() - 선택요소의 이전형제요소를 선택함!
+    prevAll() - 이전형제요소 전부를 선택함
+	*/
+    
 	// 미션: 마지막 p태그를 클릭하면 0.5초 간격으로 이전 형제요소의 배경색을 차례로 넣으시오.
 	// animate({CSS설정},시간,이징,함수) 사용.
 	// first(), last() 사용
     
     $("#container>p").last().click(function(){
-        console.log("나야나!");
+        //console.log("나야나!");
         $(this) // 클릭된 마지막 p태그
         .animate({
             backgroundColor:"red"
         },500)
         .prev() // 이전p태그
-        .delay(500)
-        .animate ({
-            backgroundColor:"orange"
+        .delay(500) // 0.5초 지연
+        .animate({
+            backgroundColor:"green"
         },500)
-        .prev() // 이전 p태그
-        .delay(1000) //1초 지연
+        .prev() // 이전p태그
+        .delay(1000) // 1초 지연
         .animate({
             backgroundColor:"yellow"
-        },500) ///////// animate /////////
+        },500)
         .prev() // 이전 div태그
         .find("p") // 자식 p태그
         .delay(1500) //1.5초 지연
         .animate({
             backgroundColor:"lime"
-        },500); ///////// animate /////////
+        },500);////// animate ///////
         
-    }); //// click ///////////////////
+    });//////// click //////////////////
     
     // 추가미션:
-    // #container 아래 마지막 div의 마지막 p태그를
-    // 클릭하면p태그 이전 형제 p태그 모두 배경색을
-    // yellow로 변경하고 크기는 가로, 세로 200px로 변경애니매이션 하시오!
+    ///#container 아래 마지막 div의 마지막 p태그를
+    // 클릭하면 p태그 이전 형제 p태그 모두 배경색을
+    // yellow로 변경하고 크기는 가로 ,세로 200px로
+    // 변경 애니메이션 하시오!
     // prevAll() 사용!
     $("#container>div").last().find("p").last()
-        .click(function(){
+    .click(function(){
         console.log("나두야!");
         $(this)
         .prevAll()
@@ -58,10 +58,9 @@ $(document).ready(function(e) {
             backgroundColor:"yellow",
             width:"200px",
             height:"200px"
-        },1000); //// animate //////
-    }); /////////////////// click ////////////////////
+        },1000);//// animate /////
+    });//////////// click /////////////////
 	
-    
 	
 });//jQuery실행구역
 </script>
@@ -82,7 +81,7 @@ $(document).ready(function(e) {
     <p>p</p>
     <p>p:나를클릭해!</p>
     
-    <div class = "sub">
+    <div class="sub">
         <p>p</p>
         <p>p</p>
         <p>p</p>

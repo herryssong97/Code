@@ -1,73 +1,134 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>토글버튼</title>
-    <script src="jquery-1.7.2.min.js"></script>
+    <meta charset="utf-8">
+    <title> addClass_removeClasss </title>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
     <script>
-    $(function(){ /// jQB ///////////////////
-        
-        $(".ham").click(function(){
-            $(this).toggleClass("on");
-            //이미 셋팅된 class "on"을 
-            //있으면 지우고 없으면 넣는다!
-        });////// click ////////////
-        
-        
-    });///////// jQB ////////////////////////
-    
+        $(function() { /// jQB ///
+            /*
+            [ 제이쿼리 class 컨트롤 메서드 ]
+            
+            1. addClass(클래스명)
+            - 선택요소에 class를 추가하는 메서드
+            
+            2. removeClass(클래스명)
+            - 선택요소의 특정 class를 제거하는 메서드
+            - 클래스명을 쓰지 않으면 모든 class를 제거함!
+                
+            3. toggleClass(클래스명)
+            - 선택요소에 특정 class가 있으면 넣고 없으면 지움
+            
+            ※ JS와 비교
+            - classList 속성과 유사함!
+            1) add(클래스명) - 클래스추가
+            2) remove(클래스명) - 클래스제거
+            3) toggle(클래스명) - 클래스추가/제거
+            
+			*/
+
+            // 미션: img태그를 클릭하면 img의 class를 랜덤으로 변경하시오.(type1~type5 의 class중 하나)
+            
+            var temp = 0;//랜덤수 임시저장
+            
+            $("img").click(function(){
+                
+                // 랜덤수 만들기
+                // 1~5 사이의 수
+                var rdn = Math.ceil(Math.random()*5);
+                console.log("랜덤수:"+rdn);
+                
+                // 중복 랜덤방지
+                while(rdn === temp){
+                    rdn = Math.ceil(Math.random()*5);
+                    console.log("랜덤다시:"+rdn);
+                }///// while 문 ////////////
+                
+                // 확정된 랜덤수 임시변수에 넣기(다음에 사용!)
+                temp = rdn;
+                
+                // 클래스 넣기
+                $(this)
+                    .removeClass()//모든class지우기
+                    .addClass("type"+rdn);//랜덤class넣기
+                
+                
+            });//////// click ///////////
+            
+            
+            /// #my 이미지를 클릭하면 .pos클래스 넣고 빼기
+            // toggleClass()를 사용!
+            $(".my").click(function(){
+                // class 토글기능
+                $(this).toggleClass("pos");
+                // .pos가 있으면 빼고 없으면 넣는다!
+            });////////// click /////////////
+
+
+
+        }); /////// jQB ////////////////////////////
+
     </script>
+
+
     <style>
-        .ham{
-            position: relative;
-            /*부모자격*/
-            width: 60px;
-            height: 40px;
-            /*outline: 1px solid red;*/
+        img {
+            padding: 15px;
+            background: #666;
+            transition: all .8s ease-in-out;
         }
-        .ham span{
-            position: absolute;
-            width: 100%;
-            height: 10px;
-            background-color: #000;
-            /*트랜지션*/
-            transition: all .4s;
+
+        img.type1 {
+            background-image: linear-gradient(45deg,#d752ff,#42ffc5);
         }
-        .ham span:nth-child(1){
-            top: 0;
+
+        img.type2 {
+            background-image: linear-gradient(45deg,#8eff52,#ff7542);
         }
-        .ham span:nth-child(2){
-            top: 15px;
-            left: 0; /*초기값필요!*/
+
+        img.type3 {
+            background-image: linear-gradient(45deg,#deff52,#6e42ff);
         }
-        .ham span:nth-child(3){
-            top: 30px;
+
+        img.type4 {
+            background-image: linear-gradient(45deg,#ffaf52,#428bff);
+        }
+
+        img.type5 {
+            background-image: linear-gradient(45deg,#ff5252,#fff842);
         }
         
-        /*.ham에 class="on"을 줄경우 span변경하기*/
-        /*첫번째 span 막대 : 중앙이동하여 회전함*/
-        .ham.on span:nth-child(1){
-            top: 15px;
-            transform: rotate(45deg);
+        .my{
+            position: absolute;
+            top: 30%;
+            left: 0;
+            transition: left 2s ease-in-out;
         }
-        /*가운데 span 막대 : 중앙에서 사라짐*/
-        .ham.on span:nth-child(2){
-            width: 0%;
-            left: 50%;
-        }        
-        /*마지막째 span 막대 : 중앙이동하여 회전함*/
-        .ham.on span:nth-child(3){
-            top: 15px;
-            transform: rotate(-45deg);
+        .pos{
+            left: 70%;
         }
-    
+
     </style>
 </head>
+
 <body>
-    <div class="ham">
-        <span></span>
-        <span></span>
-        <span></span>
+    <img src="th1.jpg" alt="">
+    <img src="th2.jpg" alt="">
+    <img src="th3.jpg" alt="">
+    
+    <div class="my">
+        <img src="th1.jpg" alt="">
     </div>
+
+    <!---------- jQuery code Start ---------->
+
+    <script>
+
+
+
+    </script>
+
 </body>
+
 </html>

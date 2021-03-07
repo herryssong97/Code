@@ -5,7 +5,7 @@
     <title> Sliding Captions 갤러리 </title>
     <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
     <script>
-        $(function() { //// jQB //////////////////////////
+        $(function() { /// jQB //////////////////////
 
             // 설명글 숨기기
             $(".thumbs em").hide();
@@ -24,40 +24,38 @@
                 $("#largeImg img").attr("src", isrc);
 
                 // 3. 이미지 설명글 읽어오기
-                // 위치 : 선택된 a요소의 다음(next)형제요소
+                // 위치: 선택된 a요소의 다음(next)형제요소
                 let itxt = $(this).next().text();
                 console.log("설명글:" + itxt);
-
-                // 4. 이미지 설명박스 만들기
+                
+                // 4. 이미지 설명 박스 만들기
                 // 미리 #caption박스 지우기(하나만 남기려고!)
                 $("#caption").remove();
                 
                 $("#largeImg")
                     .append('<div id="caption"></div>');
                 
-                // 5. 설명박스에 내용넣기
+                //5. 설명박스에 내용넣기
                 $("#caption").text(itxt);
                 
-                // 6. 박스의 높이값 구하기(높이값 만큼 top값 설정)
+                //6. 박스의 높이값 구하기(높이값 만큼 top값 설정)
                 let cH = $("#caption").innerHeight();
                 console.log("높이값:"+cH);
-                
-               /* 
+                /*
                 [ 선택요소의 높이값 구하는 메서드 ]
-                1) height() -> 순수높이값(패딩,보더 제외한 높이값)
+                1) height() -> 순수높이값(패딩,보더 제외한 높이)
                 2) innerHeight() -> 패딩을 포함한 내부높이값
-                3) outerHeight() -> 보더(마진)포함된 총 높이값
+                3) outerHeight() -> 보더(마진)포함 총 높이값
                     outerHeight(true) -> 마진까지 포함된 높이값
                     
                 ※ width 도 동일함!
                     - width(), innerWidth(), outerWidth()
                 */
                 
-                
-                // 7. 설명박스 높이값 만큼 위로 올라오기 애니매이션
+                //7. 설명박스 높이값 만큼 위로 올라오기 애니메이션
                 $("#caption").animate({
                     top: -cH + "px"
-                },300); ////// animate /////////
+                },300);////// animate //////
 
 
 
@@ -66,9 +64,10 @@
 
 
 
-        }); /////////////////////////////////////////////
-    </script>
 
+
+        }); ///////////// jQB //////////////////////
+    </script>
     <style type="text/css">
         body {
             margin: 20px auto;
@@ -132,7 +131,6 @@
 
     <div id="largeImg">
         <img src="images/pic1.jpg" alt="image1">
-        <div id="caption"></div>
     </div>
 
 

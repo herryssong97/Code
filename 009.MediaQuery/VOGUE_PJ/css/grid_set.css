@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 /*grid_set.css*/
 
 
@@ -63,8 +62,8 @@
     /*옆으로 흐르기*/
     padding: 10px;
     box-sizing: border-box;
-    /*크기유지 - 보더,패딩 내부에 생김*/
-    /*outline: 2px dotted red;*/
+    /*크기유지-보더,패딩 내부에 생김*/
+    /*outline: 2px dotted blue;*/
 }
 
 /*float해제를 위한 class*/

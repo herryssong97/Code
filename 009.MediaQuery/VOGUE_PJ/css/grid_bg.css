@@ -1,7 +1,5 @@
 @charset "utf-8";
-
 /*grid_bg.css*/
-
 ul.grid{
   position: fixed;
   top: 0;
@@ -26,7 +24,7 @@ ul.grid{
   float: left;
   width: 8.333%;/*100/12*/
   height: 100%;
-  background-color: #f2c6a6;
+  background-color: #edcfcf;
   box-sizing: border-box;/*박스크기유지*/
   padding: 0 10px;
   background-clip: content-box;/*내용만배경색!*/

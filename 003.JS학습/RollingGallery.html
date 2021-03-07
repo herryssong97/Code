@@ -43,18 +43,19 @@
             /*block처럼 디자인적용되며
             inline처럼 한줄에 온다!*/
         }
-
+        
         /*이미지텍스트박스*/
-        .imgtxt {
+        .imgtxt{
             text-align: center;
             color: red;
             text-shadow: 1px 1px 1px #777;
         }
-
+        
         /*자동넘김 버튼박스*/
-        .btns {
+        .btns{
             text-align: center;
         }
+        
     </style>
     <script>
         ////// 전역변수구역 //////////////
@@ -67,15 +68,15 @@
             "눈사람이 가짜인데 진짜같아 보여요~",
             "이 양은 보통양이 아니고 복제양 돌리예요~",
             "잉꼬 한쌍이 영화를 찍어요~"
-        ]; ///// 이미지 문구 배열 ///////
-
+        ];///// 이미지 문구 배열 ///////
+        
         /// 메시지별 글자색상 셋팅! ////
         var tcolor = [
             "red", "orange", "yellow", "green",
             "blue", "navy", "purple"
         ]; //// 메시지 글자 색상 //////
-
-
+        
+        
         /*//////////////////////////////////////////////
             함수명: chgImg
             기능: 이동버튼 클릭시 해당순번의 이미지가 연속나옴
@@ -103,23 +104,23 @@
             // 2. 방향분기
             // 오른쪽버튼 ///////////////////////////
             if (dir) { // dir만 쓰면 1일때, 즉, true임!
-
+                
                 console.log("오른쪽이양!");
                 // 이미지번호 증가
                 num++; //1씩증가
                 // 이미지번호 한계값(처음으로 롤링!)
                 if (num === 8) num = 1;
-
+                
             } //// if /////////////
             // 왼쪽버튼 ////////////////////////////
             else {
-
+                
                 console.log("왼쪽이양!");
                 // 이미지번호 감소
                 num--; //1씩감소
                 // 이미지번호 한계값(마지막으로 롤링!)
                 if (num === 0) num = 7;
-
+                
             } //// else //////////
 
             // 이미지번호 찍기
@@ -129,25 +130,25 @@
             // 대상: #mbox img
             var tg = document.querySelector('#mbox img');
             // 이미지 src 변경하기
-            tg.setAttribute("src", "images/img" + num + ".jpg");
-
+            tg.setAttribute("src", "images/img"+num+".jpg");
+            
             // 4. 추가변경 - 이미지문구넣기
             // 변경대상: .imgtxt
-            var imgtxt = document.querySelector('.imgtxt');
-
+            var imgtxt =  document.querySelector('.imgtxt');
+            
             // 텍스트 변경하기
-            imgtxt.innerText = txt[num - 1];
+            imgtxt.innerText = txt[num-1];
             // 이미지번호보다 1작게 배열번호를 만들어서 넣어준다!
-
+            
             // 텍스트 색상변경하기
-            imgtxt.style.color = tcolor[num - 1];
+            imgtxt.style.color = tcolor[num-1];
 
 
         } ////// chgImg 함수 /////////////////////////////
         /////////////////////////////////////////////////
         /////////////////////////////////////////////////
-
-
+        
+        
         /*//////////////////////////////////////////////
             함수명: autoSlide
             전달변수: gubun(자동넘김:1,멈춤:0)
@@ -161,68 +162,67 @@
                     3. 멈춤은 자동넘김을 담은 전역변수를
                     지워줌으로 멈추게한다.
                     (clearInterval함수사용, 전역변수 autoI)
-        */ //////////////////////////////////////////////
-
+        *///////////////////////////////////////////////
+        
         // 인터발용변수
-        var autoI;
-
-        function autoSlide(gubun) { // gubun - 자동넘김:1, 멈춤:0
-
+        var autoI;// 아무값도 할당안하면 undefined 데이터형 상태임!
+        
+        function autoSlide(gubun){// gubun - 자동넘김:1, 멈춤:0
+            
             // 1. 함수호출 확인
-            console.log("자동이야!" + gubun);
-
+            console.log("자동이야!"+gubun);
+            
             // 2. 버튼 구분하여 작동하기
             // (1) 자동넘김버튼
-            if (gubun) {
-                // console.log("autoI변수:"+autoI);
-
-                // 만약 변수가 할당되지 않으면 undefined라는 값으로 찍힌다
-                // 이것을 if문에 사용하면 false가 나옴
+            if(gubun){
+                //console.log("autoI변수:"+autoI);
+                
+                // 만약 변수가 할당되지 않으면 undefined라는 값을 찍힌다
+                // 이것을 if문에 사용하면 false나옴
                 // 따라서 할당되지 않았을때만 실행하면
                 // 여러번 자동넘김 버튼을 클릭해도
-                // 인터발함수를 한번만 실행할 수 있다!
-
+                // 인터발 함수를 한번만 실행할 수 있다!
+                
                 // 할당되지 않은 변수 autoI에 NOT연산자를 붙이면
                 // !autoI 는 false가 나면 true로 바꾸라는 말
                 // 따라서 if문은 false일때 실행된다는 말!!!
-
-                if (!autoI) // false일때만 아래 문장을 실행해!!
-                    autoI = setInterval("chgImg(1)", 2000);
                 
-                // console.log("autoI변수:"+autoI);
+                if(!autoI) // false일때만 아래 문장을 실행해!!!
+                    autoI = setInterval("chgImg(1)",2000);
+                
+                //console.log("autoI변수:"+autoI);
                 // 2초 간격으로 오른쪽으로 넘어가는 값의 함수호출을함
                 // 인터발함수를 변수에 넣는 이유:
                 // 멈추게 하려면 변수에 넣어야함!
             } ///// if ///////////////////////
             // (2) 멈춤버튼
-            else {
+            else{
                 clearInterval(autoI);
                 // 지금 변수에 들어가 활동하는 인터발함수를 지운다!
                 
                 // 인터발함수의 실행을 autoI라는 변수의 할당여부로
                 // 실행되게 해 놨기 때문에 autoI라는 변수를
                 // undefined / null / false
-                // 위의 셋 중 하나로 리셋해줘야한다!
+                // 위의 셋중 하나로 리셋해줘야한다!
                 
-                autoI = undefined; // null / false
+                autoI = undefined;// null / false
                 
-                // undefined 나 null도 데이터형 중 하나이다
-                // undefined는 정의되지 않은 값이라는 의미의 데이터이다
-                // null은 빈 값이라는 의미의 데이터형이다
+                // undefined 나 null 도 데이터형 중 하나이다
+                // undefined는 "정의되지 않은 값" 이라는 의미의 데이터형
+                // null  "빈값"이라는 의미의 데이터형
                 // 위의 2가지 값은 if문에 들어가면 false로 판단된다!
                 
-                
             } ////// else ////////////////////
-
-
+            
+            
         } ////// autoSlide 함수 /////////////////////////////
         /////////////////////////////////////////////////
         /////////////////////////////////////////////////
-
-
-
-
-
+        
+        
+        
+        
+        
 
         /* 
         [ 요소를 선택하는 새로운 방법! ]
@@ -279,18 +279,18 @@
             <img src="images/right_btn.png" alt="오른쪽이동버튼">
         </a>
     </div>
-
+    
     <!--이미지별 설명 텍스트 출력박스-->
     <h2 class="imgtxt">노랑잉꼬가 먹이를 꼭꼭 찍어먹어요~</h2>
-
+    
     <!--자동넘김 버튼박스-->
     <div class="btns">
         <button class="start" onclick="autoSlide(1)">자동넘김</button>
         <button class="stop" onclick="autoSlide(0)">멈춤</button>
     </div>
-
-
-
-
+    
+    
+    
+    
 
 </body></html>

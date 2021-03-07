@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--lang속성은 메인언어 속성(언어별코드가 있음)-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>네이버 요약뉴스 - 경제</title>
+    <style>
+        div {
+            /*div는 블록요소다*/
+            width: 700px;
+            margin: 0 auto;
+            /*마진: 위아래는 0, 양쪽은 자동(auto)*/
+            /*크기를 가진 블록박스가 중앙에 온다*/
+        }
+
+
+        /*CSS주석*/
+        /*        
+        [css 셋팅법]
+        선택요소명 {
+            속성명 : 값;
+        }
+        */
+    </style>
+</head>
+
+<body>
+
+    <!--1.상단부분-->
+    <div>
+        <!--1-1.큰제목-->
+        <h1>네이버 요약 뉴스 - 경제</h1>
+        <!--h1요소는 한문서안에 하나만 사용하도록 하자-->
+
+        <!--1-2.메뉴-->
+        <h2>
+            <a href="index.html">
+                <img src="images/logo.png" alt="네이버로고" style="width:50px; vertical-align: middle;">
+                <!--style 속성 : 모든 요소에 사용가능
+                - 속성명:값;
+                - CSS속성을 변경 셋팅할 수 있다
+                - CSS 인라인 셋팅(코딩)이라고 함-->
+            </a>
+            <a href="sub1.html">정치</a> |
+            <a href="sub2.html">경제</a> |
+            <a href="sub3.html">사회</a> |
+            <a href="sub4.html">IT/과학</a> |
+            <a href="sub5.html">TV/연예</a>
+        </h2>
+
+        <hr>
+        <!--hr은 수평선(horizontal)-->
+    </div>
+    <!--
+        div 요소 : 내용을 구분하는 블록요소
+        (블록요소란 다른 내용을 옆에 오지 못하게 막아준다. 랩핑했다고 함)
+    -->
+
+
+    <!--2.중앙내용-->
+    <div>
+        <!--2-1.신문사로고-->
+        <a href="http://www.hankyung.com/" target="_blank">
+            <img src="images/alogo2.png" alt="한국경제로고">
+        </a>
+        <!--2-2.기사제목-->
+        <h2>"서울 전세살이 포기합니다"…3040 세입자들의 한탄</h2>
+
+        <!--2-3.기사사진-->
+        <figure>
+            <!--기사이미지-->
+            <img src="images/apic2.jpg" alt="기사사진" style="width:100%;">
+            <!--이미지설명-->
+            <figcaption>
+                <small>문재인 정부 들어 서울 중소형 아파트값 66% 올라…서민 살집 사라져 사진=연합뉴스</small>
+            </figcaption>
+        </figure>
+
+        <p><q>2년 전 전세보증금으로는 상급지는 당연하고 같은 지역 내에서 이사하는 것도 꿈도 못 꿔요. 서울 인근에선 마땅히 이사할 곳을 찾지 못해 경기도 쪽에서 전세를 찾고 있습니다.</q></p>
+
+        <p>서울 송파구에 전세를 살고 있는 세입자 허모 씨(34)는 이같이 말했다. 그는 내년 초 전세 아파트 계약 만료일에 앞서 하남에서 전셋집을 알아볼 계획이다. 집주인이 실거주 의사를 밝혀왔기 때문이다. 허씨의 직장은 서울 잠실에 있지만 현재 전셋집인 송파구 아파트의 전세보증금(5억원 중반대) 내에서 집을 구하려면 외곽으로 밀려날 수 밖에 없다. 허씨가 현재 사는 집의 전세 호가는 최근 8억원대까지 오른데다 그마저도 매물이 거의 없다.</p>
+
+        <p>그는 <q>지금 살고 있는 아파트에는 매물이 하나도 없고, 있다 해도 전세보증금이 2년 사이에 너무 많이 올라 경기도까지 눈을 돌리게 됐다</q>고 말했다. 그나마 허씨가 알아본 경기도 하남시도 전셋값이 만만치 않다. 전용 84㎡의 <em>전셋값이 6억원을 훌쩍 넘으면서</em> 보증금을 받아서 더 보태서 이사를 가야할 형편이다.</p>
+
+        <p>정부가 최근 임차인들의 ‘상급지 이동’ 때문에 전세가격이 불안해졌다고 주장을 한 데 대해 시장 현황을 반영하지 못했다는 지적이 나오고 있다. 최근 서울 등 수도권 아파트 임대차 시장에선 전세매물이 잠기고 가격이 폭등하고 있어서다. 오히려 울며 겨자먹기로 상급지에서 하급지로 이동하는 세입자들이 늘었다.</p>
+
+        <hr>
+        <!--구분선-->
+
+        <h3>경제뉴스</h3>
+        <ol>
+            <li>
+                <a href="https://news.naver.com/main/ranking/read.nhn?mid=etc&sid1=111&rankingType=popular_day&oid=025&aid=0003045722&date=20201022&type=1&rankingSeq=1&rankingSectionId=101" target="_blank">
+                    [속보] CJ대한통운 "택배분류에 4000명 투입, 근무
+                </a>
+            </li>
+            <li>
+                <a href="https://news.naver.com/main/ranking/read.nhn?mid=etc&sid1=111&rankingType=popular_day&oid=009&aid=0004679789&date=20201022&type=1&rankingSeq=2&rankingSectionId=101" target="_blank">
+                    [단독] 목동 전 단지에 붉은 휘장…"죽기 전에 재
+                </a>
+            </li>
+            <li>
+                <a href="https://news.naver.com/main/ranking/read.nhn?mid=etc&sid1=111&rankingType=popular_day&oid=001&aid=0011963099&date=20201022&type=1&rankingSeq=3&rankingSectionId=101" target="_blank">
+                    CJ대한통운, 택배기사 사망 사과…"4천명 투입해 근
+                </a>
+            </li>
+        </ol>
+
+
+
+    </div>
+    <!--3.하단부분-->
+    <div>
+        <hr>
+        <!--구분선-->
+        <!--주소-->
+        <address>
+            서울시 강동구 천호동 동원빌딩 5층
+            <br>
+            <!--br은 개행(break)-->
+            대표: Tom Brace Parker
+            <br>
+            Tel: 02-333-3333
+        </address>
+
+    </div>
+
+</body></html>
