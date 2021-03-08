@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CGV PJ</title>
+    <!--외부 CSS불러오기-->
+    <link rel="stylesheet" href="css/main.css">
+    <!--
+        자바스크립트 구역: script 요소
+        - 스크립트 태그 내부는 자바스크립트 문법구역이다!
+        - 인터널방식의 스크립트 삽입을 페이지 내부에 한다.
+        - type="text/javascript" 라는 속성을 과거엔 필수요소 였는데
+            지금은 기본으로 js가 설정되어서 안 써도 된다!
+    -->
+    <script>
+        //JS한줄주석
+        /*JS여러줄주석*/
+        // 호출시에만 실행되는 코드구역이 있음
+        // 이름하여 함수.....영어로 function
+        // 형식: function 함수명(){구현코드}
+        // 호출: 함수이름과 넘길값이 있다면 같이 보낸다
+        //      함수명() → 소괄호를 반드시 한다!!
+        //      예) 멍멍("고기")
+        // 함수는 이벤트와 연결되어 호출된다!!
+        // 예컨데 click 이벤트는 onclick 이라는 속성으로 요소에서 사용할 수 있다
+        // 그 값으로 함수를 호출해보자!!
+        function 멍멍(먹이) { // 먹이 - 전달값을 담는 그릇역할
+            alert("왈왈!!" + 먹이);
+            // alert(메시지) - 경고창 띄우기
+
+
+            // 전체문서 document
+            // 하위 .(점)
+            // 아이디에 의한 요소명 getElementById(아이디명)
+            // 하위속성 .(점)
+            // 속성명 src
+            // 이퀄 → "같다"는 의미가 아님!!!
+            // 이퀄은 오른쪽의 값이 왼쪽에 들어감을 뜻함!!!!!!!!
+            document.getElementById("ifr").src =
+                "https://www.youtube.com/embed/" + 먹이 + "?autoplay=1&loop=1&playlist=" + 먹이;
+
+
+
+        } //// 멍멍 함수 ////////////////
+
+
+        /*
+        
+            유튜브 옵션 파라미터:
+            - 물음표 뒤에 붙여서 보내면 옵션이 적용됨
+            autoplay=1 : 자동플레이
+            controls=0 : 하단 컨트롤바 없앰
+            start=60 : 시작시간(초)
+            end=70 : 끝시간(초)
+            loop=1 : 계속 반복재생
+            playlist=동영상id : 반복재생시 플레이동영상 지정
+            
+            [ 유튜브 옵션 원문 ]
+            https://developers.google.com/youtube/player_parameters?hl=ko
+        
+        */
+    </script>
+
+</head>
+
+<body>
+
+    <!--A. 상단영역-->
+    <header id="top" class="part">
+        <!--1. 전체타이틀-->
+        <h1 class="tit">Christmas Popsongs</h1>
+        <!--1-2. 좌측상단 전구 이미지-->
+        <img class="lb" src="images/light1.png" alt="전구이미지">
+        
+        <!--2. 전체메뉴(GNB)-->
+        <nav class="gnb">
+            <ul>
+                <li>
+                    <a href="">Rock</a>
+                    <!--서브메뉴-->
+                    <div class="smenu">
+                    <ol>
+                        <li>
+                            <a href="">
+                                Heavy metal
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                               Puck rock
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                Alternative rock
+                            </a>
+                        </li>
+                    </ol>
+                    </div>
+
+                <li>
+                    <a href="">Pop</a>
+                    <!--서브메뉴-->
+                    <div class="smenu">
+                    <ol>
+                        <li>
+                            <a href="">
+                                synthpop
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                               dancepop
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                               Kpop
+                            </a>
+                        </li>
+                    </ol>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="">R&amp;B</a>
+                </li>
+
+                <li>
+                    <a href="">Electronic</a>
+                    <!--서브메뉴-->
+                    <div class="smenu">
+                    <ol>
+                        <li>
+                            <a href="">
+                                Electronica
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                               EDM
+                            </a>
+                    </ol>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!--
+            html문서에 특수문자 출력하기
+            & 엠퍼센트 → &amp;
+            < 여는꺽쇠 → &lt;
+            > 닫는꺽쇠 → &gt;
+            공백 → &nbsp;
+            
+            그 밖에 특수문자를 문자표에서 선택하여 넣는 방법도 있음
+            (ㅁ+한자키, ㄱ+한자키 등)   
+    -->
+
+    <!--B. 메인영역-->
+    <main id="cont" class="part">
+        <!--3. 스크린-->
+        <div id="screen">
+            <iframe id="ifr" src="https://www.youtube.com/embed/ollqlWr1z8U?autoplay=1" allow="autoplay"></iframe>
+            <!--
+                iframe으로 유튜브 동영상 페이지 가져오기
+                   
+                    - src 불러올 페이지 경로
+                    유투브 경로 구성:
+                    https://www.youtube.com/embed/동영상id
+                    
+                    - 유튜브 경로 맨 끝 동영상id뒤에 아래와 같이
+                    ?autoplay=1
+                    추가해 주면 동영상 로드 시 자동플레이옵션 선택
+                    
+                    - allow 속성 추가!
+                    allow="autoplay" 자동재생 허용옵션 반드시 써준다(그래야 자동재생이 된다!)
+                    
+                    [ 자동재생 제한사항! ]
+                    - 소리가 나는 경우 자동재생 불허용
+                    - 사용자가 동영상을 클릭하여 요청하였을때만 자동재생이 적용된다
+                    
+            -->
+        </div>
+        <div class="lb1 star">
+            <!--<img src="images/lb2-1.png" alt="전구이미지2-1">-->
+        </div>
+            <div class="lb2 star">
+            <!--<img src="images/lb2-1.png" alt="전구이미지2-2">-->
+        </div>
+        <!--4. 영화선택메뉴-->
+        <nav class="mlist">
+            <ul>
+                <li onclick="멍멍('qLyQdJQNhSQ')"><!--1HGetdu0XPc_아리아나그란데버전-->
+                    <img src="images/c1.jpg" alt="머라이어캐리">
+                    <!--노래정보-->
+                    <ol class="stxt">
+                        <li>All I Want for Christmas Is You</li>
+                        <li>Mariah Carey</li>
+                        <li>1994</li>
+                        <li>03:54</li>
+                    </ol>
+                </li>
+
+                <li onclick="멍멍('UiPkheJRt_Q')">
+                    <img src="images/c2.jpg" alt="바비헬름즈">
+                    <!--노래정보-->
+                    <ol class="stxt">
+                        <li>Jingle Bell <br> Rock</li>
+                        <li>Bobby Helms</li>
+                        <li>1957</li>
+                        <li>02:10</li>
+                    </ol>
+                </li>
+                <li onclick="멍멍('9ywUQKD4mx0')">
+                    <img src="images/c3.jpg" alt="아리아나그란데">
+                    <!--노래정보-->
+                    <ol class="stxt">
+                        <li>Santa <br> Tell Me</li>
+                        <li>Ariana Grande</li>
+                        <li>2013</li>
+                        <li>03:24</li>
+                    </ol>
+                </li>
+
+                <li onclick="멍멍('J_QGZspO4gg')">
+                    <img src="images/c4.jpg" alt="시아">
+                    <!--노래정보-->
+                    <ol class="stxt">
+                        <li>Snow <br> man</li>
+                        <li>Sia</li>
+                        <li>2018</li>
+                        <li>02:45</li>
+                    </ol>
+                </li>
+            </ul>
+        </nav>
+
+
+
+    </main>
+
+    <!--C. 하단영역-->
+    <footer id="info" class="part">
+        <!--5. 좌측하단글씨-->
+       <p>Christmas Pop Songs</p>
+        <!--6. SNS 아이콘-->
+        <ul class="sns">
+            <li>
+                <a href="https://www.facebook.com/Christmasjoytime/" target="_blank">
+                    <span class="bld">페이스북 바로가기</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/christmas" target="_blank">
+                    <span class="bld">트위터 바로가기</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/explore/tags/christmas/" target="_blank">
+                    <span class="bld">인스타그램 바로가기</span>
+                </a>
+            </li>
+        </ul>
+    </footer>
+
+
+
+
+    <!--
+    [ html5 - 레이아웃 요소들 ]
+    
+    태그요소의 의미를 부여하여 레이아웃을 정의함
+    - 의미를 부여한 것을 "시멘틱"이라고 함
+    - 시멘틱 요소는 의미가 있는 요소를 말한다
+    - 검색엔진이 데이터를 수집할 때 (크롤링 할 때)
+        시멘틱 요소로 분석이 가능하다
+        좀 더 분석적이고 정교한 내용분류를 해서 검색 내용이 구체적이 될 수 있다!
+        예) 호텔 사이트의 주요한 네비게이션을 분석한다고 할 때
+            호텔 사이트 분류의 nav태그를 수집하여 분석한다!
+        
+<header> -문서 또는 섹션의 헤더를 정의합니다.
+<nav> -탐색 링크 세트 정의
+<section> -문서의 섹션을 정의
+<article> -독립적이고 독립적 인 콘텐츠 정의
+<aside> -콘텐츠 이외의 콘텐츠 정의
+    (예 : 사이드 바)
+<footer> -문서 또는 섹션의 바닥 글을 정의합니다.
+<main> - 문서의 중요 컨텐츠를 정의
+        (주의: 한 문서안에 단 한번만 사용
+        다른 요소의 하위요소로 사용불가!)
+<hgroup> - h1~h6까지 머릿글 태그를 묶어주는 콘텐츠를 정의
+-->
+
+
+</body></html>

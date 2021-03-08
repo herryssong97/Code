@@ -7,6 +7,7 @@
     <script src="js/jquery-3.5.0.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/linksys.js"></script>
+    <script src="js/login.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
             <h2 class="tit">로그인</h2>
             <!--로그인박스-->
             <div id="login">
-                <form action="process.php" method="post" class="logF">
+                <form action="process/loginSet.php" method="post" class="logF">
                     <!--아이디박스-->
                     <div class="minput">
                         <label for="mid">아이디</label>
