@@ -16,7 +16,7 @@ $mpw = $_POST["mpw"];
 # 비밀번호를 입력한 것과 비교하여 검사 결과를 낸다!
 
 # 어떻게 비밀번호를 비교할 것인가???
-# DB에 입력된 비번은 해시암호와된 비번이므로
+# DB에 입력된 비번은 해시암호화된 비번이므로
 # 단순 문자 비교를 하면 절대로 같을 수 없다!!!
 
 # php 에서 해시암호화 문자 비교 메서드가 있음!
@@ -30,7 +30,7 @@ $mpw = $_POST["mpw"];
 // 쿼리문 만들기
 $sql = "SELECT `mid`,`mpw`,`name`,`auth` FROM `member` WHERE `mid` = '$mid'";
 
-//echo $sql;
+//echo " / 쿼리문 : ".$sql;
 
 # DB연결하기
 include "dbcon.inc";
@@ -43,7 +43,7 @@ $res = $conn->query($sql);
 # $res->num_rows 결과레코드 개수를 담은 속성
 $cnt = $res->num_rows;
 
-//echo "레코드개수: $cnt";
+//echo " / 레코드개수: $cnt";
 
 # 2.레코드 개수가 1인 경우 비밀번호 비교하기
 if($cnt){
@@ -52,19 +52,53 @@ if($cnt){
     # 결과집합의 레코드를 이름으로 가져온다!
     $row = $res->fetch_assoc();
 
-    //echo $row["mpw"];
+    //echo " / DB비밀번호 : ".$row["mpw"];
     
     # 비번비교하기
     # password_verify(입력된비번, DB해시비번)
     
-    echo password_verify($mpw,$row["mpw"]);
+    //echo " / 비번검증 : ".
+    //    password_verify($mpw,$row["mpw"]);
+    
+    # 비번검증
+    $allow = password_verify($mpw,$row["mpw"]);
+    ###################################
+    # 비번검증 결과 통과시 세션을 시작하고 #
+    # 세션변수에 개인정보할당
+    if($allow){
+        
+        # 세션연결하기 : 사용자의 로그인 상태를 기록함!
+        session_start();// 세션이 시작됨!
+        # DB에서 가져온 값 세션변수에 할당하기!
+        # $_SESSION[변수명] - 서버세션변수에 기록!
+        
+        # 사용자 아이디
+        $_SESSION["mid"] = $mid;
+        # 사용자 이름
+        $_SESSION["name"] = $row["name"];
+        # 사용자 권한
+        $_SESSION["auth"] = $row["auth"];
+        
+        # 성공시
+        echo "ok";
+        
+    } /////// if //////////////////////
+    
+    # 비밀번호 불통과시 ##################
+    else{
+        
+        echo "again";
+        
+    } /////// else /////////////////////
+    
+    
     
 } ////////// if문 //////////////////////
 
 # 3.레코드가 없는 경우
 else{
     
-    echo "레코드가 없습니다!";
+    echo "no";
     
 } ////////// else문 /////////////////////
 
