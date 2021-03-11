@@ -537,7 +537,52 @@ h3 {
     display: inline;
 }
 
+/******** 2. 큐레이션 페이지: typed 플러그인 **********/
+.type-wrap{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 620px;
+    height: 300px;
+    font: bold 20px/50px "맑은 고딕";
+    color: #fff;
+    text-shadow: 0 0 3px #777;
+    padding: 20px;
+    /*outline: 3px dotted lime;*/
+}
+/*플러그인 문구에 태그를 사용할 수 없으므로
+css에서 가상요소 첫번째줄만 적용하는 코딩이 필요!*/
+.type-wrap::first-line{
+    color: powderblue;
+    font-size: 40px;
+    line-height: 100px;
+}
 
+/************* 3. 영화관 페이지 : 스와이퍼 플러그인 ***********/
+/*스와이퍼 전체박스*/
+.swiper-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 250px;
+    height: 370px;
+    box-shadow: 0 0 10px 5px #fff;
+}
+/*스와이퍼 개별리스트*/
+.swiper-slide{
+    display: flex;
+    /*원래 flex는 부모박스에 잡지만
+    swiper는 자식요소에 셋팅한다!*/
+    justify-content: center;
+    align-content: center;
+}
+/*스와이퍼 이미지*/
+.swiper-slide img{
+    width: 100%;
+    height: 100%;
+}
 
 
 
