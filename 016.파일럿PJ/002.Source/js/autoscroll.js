@@ -78,16 +78,16 @@ $(function () { ///// jQB /////////////////
         // 변수에 유효한 설정이 적용되어 할당됨!
 
         //console.log("휠정보:" + delta);
-        
+
         ///// 파이어폭스 일때 델타값 방향 반대로 하기!//////
         // JS 내장함수 test()를 이용하여
         // navigator.userAgent - 현재 브라우저 정보읽어옴!
         // "Firefox"라는 정보가 있으면 test() 에서 true값 리턴함!
         // 그래서 if문 안으로 들어가서 처리함(부호반대로!)
-        
+
         //console.log("브라우저정보:"+navigator.userAgent);
         //console.log("정보여부:"+(/Firefox/i.test(navigator.userAgent)));
-        
+
         // 정규식.test(가져올값) -> 정규식에 쓴 문자 있으면 true
         /*
             [ 간단한 정규식 표현기호 ]
@@ -98,10 +98,10 @@ $(function () { ///// jQB /////////////////
             /Firefox/i 
             -> 모든"Firefox"라는 문자를 대소문자 관계없이 찾아라!
         */
-        if(/Firefox/i.test(navigator.userAgent)){
-            delta = -delta;//변수앞에 마이너스쓰면 부호가 반대됨!
+        if (/Firefox/i.test(navigator.userAgent)) {
+            delta = -delta; //변수앞에 마이너스쓰면 부호가 반대됨!
         } ///////////// if /////////////////////////////////
-        
+
 
         // 2. 마우스휠 방향에 따라 페이지 번호 증감!
         if (delta < 0) { // -120 아랫방향 스크롤(다음페이지)
@@ -119,26 +119,33 @@ $(function () { ///// jQB /////////////////
         // -> 위치값은 클래스의 순번으로 알아냄-> pno 변수사용!
         //let pgpos = $(".page").eq(pno).offset().top;
         // offset().top은 현재 선택요소의 top위치값을 숫자로 리턴함!
-        
+
         // 기존 위치값 읽어오기 변경!!!!
         // 전체윈도우 높이값(winH)에 페이지번호를 곱한다!
         let pgpos = winH * pno;
         // 이렇게 하는 이유? 페이지위치값이 구해졌지만 이동시 sync문제(일치)문제로
         // 값이 잘 반영되지 않을때 원페이지의 위치 이동을 이렇게 계산해서 이동함!
-        
+
 
         //console.log("이동위치:"+pgpos);
 
         // 4. 실제 이동위치로 스크롤 애니메이션 이동하기
         $("html,body").stop().animate({
             scrollTop: pgpos + "px"
-        }, 1200, "easeInOutQuint"); /// animate ///
+        }, 1200, "easeInOutQuint", pageAction);
+        /// animate ///
+        /// 스크롤이동 애니메이션 후 페이지액션함수 호출!
 
 
         // 5. 메뉴변경하기 - 페이지 순번과 동일함!
         // GNB네비게이션 클래스 넣기
-        $(".gnb li").eq(pno).addClass("on")
-            .siblings().removeClass("on");
+        if (pno === 0) { // 첫페이지에서는 클래스 전부 지우기
+            $("#gnb li").removeClass("on");
+        } ///////// if ////////////////
+        else { // 다른 페이지에서는 해당 페이지에 맞게 클래스 넣기
+            $(".gnb li").eq(pno).addClass("on")
+                .siblings().removeClass("on");
+        } //////// else ///////////////
 
         // 블릿네비게이션 클래스 넣기
         $(".bnav li").eq(pno).addClass("on")
@@ -151,7 +158,64 @@ $(function () { ///// jQB /////////////////
     //////////////////////////////////////////////////////
 
 
-
+    /// 등장액션 초기화함수 호출!
+    initSet();
 
 
 }); ///////// jQB ///////////////////////
+
+
+/*//////////////////////////////////////////////
+    함수명: initSet
+    기능: 각 페이지의 등장액션을 위한 초기셋팅하기
+*/ //////////////////////////////////////////////
+function initSet() {
+
+    console.log("등장액션초기화!");
+    // 전체공통
+    // 대상: 이미지와 a요소
+    // 변경내용: top:100px, opacity:0, rotate(15deg)
+    // 단, transform-origin: left top 즉, 기준값 왼쪽,위로 변경
+    $(".imgc img, .txtc h3 a").css({
+        transform: "rotate(15deg)",
+        transformOrigin: "left top", //축변경(center에서 변경함!)
+        top: "100px",
+        opacity: 0
+    }); ///////// css /////////////////////
+
+
+} ////// initSet 함수 /////////////////////////////
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////
+    함수명: pageAction
+    기능: 페이지별 액션을 셋팅한다
+*/ //////////////////////////////////////////////
+function pageAction() {
+
+    // 액션을 실행할 페이지는 pno가 1,2,3일때만
+    if (pno > 0 && pno < 4) {
+
+        console.log("액션!" + pno);
+        // 1. 각 페이지별 등장액션
+        $(".page").eq(pno)
+            .find(".imgc img, .txtc h3 a").css({
+                transform: "rotate(0deg)",
+                top: "0px",
+                opacity: 1,
+                transition: "all 1.5s ease-in-out"
+            }); ///////// css ////////////////////
+
+        // 2. 글자는 0.5초 늦게 나오게 셋팅변경
+        $(".page").eq(pno)
+            .find(".txtc h3 a").css({
+                transitionDelay: ".5s"
+            }); ///////// css ///////////
+
+
+    } ////// if ///////////////////////////
+
+} ////// pageAction 함수 /////////////////////////////
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////

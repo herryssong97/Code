@@ -54,6 +54,7 @@ select:focus {
     padding: 30px 51px;
     box-sizing: border-box;
     /*마진,패딩포함박스*/
+    display: none;/*처음에 안보임*/
 }
 
 /*리스트 ul*/
@@ -153,7 +154,40 @@ select:focus {
     color: green;
 }
 
+/*약관동의박스*/
+#conf{
+    width: 700px;
+    height: 600px;
+    margin: 20px auto 80px;
+    /*마진 3개쓰면 위 양쪽 아래순*/
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+/*약관동의 기본 css재정의*/
+.terms_p{
+    border: none;
+    border-radius: 10px;
+}
 
+/*동의,비동의 버튼박스*/
+.YNbox{
+    text-align: center;
+}
+/*동의,비동의 버튼*/
+.YNbox>button{
+    width: 113px;
+    height: 40px;
+    border: 1px solid #737373;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    background-image: linear-gradient(to bottom, #ddd, #555);
+    margin: 0 20px;
+    cursor: pointer;
+}
 
 
 
